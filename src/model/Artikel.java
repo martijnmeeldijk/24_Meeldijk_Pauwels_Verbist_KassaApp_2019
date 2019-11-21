@@ -70,5 +70,9 @@ public class Artikel {
         }
         this.voorraad = voorraad;
     }
-    
+
+    @Override
+    public String toString(){
+        return code+" "+omschrijving+" "+artikelgroep+" "+verkoopprijs+" "+voorraad;
+    }
 }

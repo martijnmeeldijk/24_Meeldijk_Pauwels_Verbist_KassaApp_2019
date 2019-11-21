@@ -8,8 +8,13 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class ArtikelLezer {
-    private HashMap read(String filename) throws FileNotFoundException {
-        HashMap<Integer, Artikel> artikels = new HashMap<>();
+    private HashMap<Integer, Artikel> artikels;
+
+    public ArtikelLezer() {
+        this.artikels =new HashMap<>();
+    }
+
+    public HashMap read(String filename) throws FileNotFoundException {
 
         File file = new File(filename);
         Scanner scanner = new Scanner(file);
@@ -24,6 +29,10 @@ public class ArtikelLezer {
             int voorraad= Integer.parseInt(linescanner.next());
 
             Artikel artikel = new Artikel(code,omschrijving,artikelgroep,verkoopprijs,voorraad);
+
+            //effe testen
+            System.out.println(artikel.toString());
+
             artikels.put(code,artikel);
         }
 

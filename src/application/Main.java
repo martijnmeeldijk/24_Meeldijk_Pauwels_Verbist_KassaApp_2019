@@ -1,9 +1,12 @@
 package application;
 	
+import database.ArtikelLezer;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import view.KassaView;
 import view.KlantView;
+
+import java.io.FileNotFoundException;
 
 public class Main extends Application {
 	@Override
@@ -12,7 +15,9 @@ public class Main extends Application {
 		KlantView klantView = new KlantView();
 	}
 	
-	public static void main(String[] args) {
-		launch(args);
+	public static void main(String[] args) throws FileNotFoundException {
+		ArtikelLezer lezer = new ArtikelLezer();
+		lezer.read("artikel.txt");
+		//launch(args);
 	}
 }
