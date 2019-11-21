@@ -1,6 +1,6 @@
 package database;
 
-import com.sun.tools.jdeprscan.scan.Scan;
+//import com.sun.tools.jdeprscan.scan.Scan;
 import model.Artikel;
 
 import java.io.*;
