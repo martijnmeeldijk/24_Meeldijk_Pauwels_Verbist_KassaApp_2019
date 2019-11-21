@@ -30,9 +30,6 @@ public class ArtikelLezer {
 
             Artikel artikel = new Artikel(code,omschrijving,artikelgroep,verkoopprijs,voorraad);
 
-            //effe testen
-            System.out.println(artikel.toString());
-
             artikels.put(code,artikel);
         }
 
