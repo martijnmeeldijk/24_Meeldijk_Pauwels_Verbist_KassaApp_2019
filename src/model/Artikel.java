@@ -9,11 +9,11 @@ public class Artikel {
     private final static int btw = 6;
 
     public Artikel(int code, String omschrijving, String artikelgroep, double verkoopprijs, int voorraad) {
-        this.code = code;
-        this.omschrijving = omschrijving;
-        this.artikelgroep = artikelgroep;
-        this.verkoopprijs = verkoopprijs;
-        this.voorraad = voorraad;
+        setCode(code);
+        setOmschrijving(omschrijving);
+        setArtikelgroep(artikelgroep);
+        setVerkoopprijs(verkoopprijs);
+        setVoorraad(voorraad);
     }
 
     public int getCode() {
@@ -21,6 +21,9 @@ public class Artikel {
     }
 
     public void setCode(int code) {
+        if(code<0){
+            throw new IllegalArgumentException("code mag niet negatief zijn");
+        }
         this.code = code;
     }
 
@@ -29,6 +32,9 @@ public class Artikel {
     }
 
     public void setOmschrijving(String omschrijving) {
+        if(omschrijving==null || omschrijving.length()==0){
+            throw new IllegalArgumentException("omschrijving mag niet leeg zijn of null zijn");
+        }
         this.omschrijving = omschrijving;
     }
 
@@ -37,6 +43,9 @@ public class Artikel {
     }
 
     public void setArtikelgroep(String artikelgroep) {
+        if(artikelgroep==null || artikelgroep.length()==0){
+            throw new IllegalArgumentException("artikelgroep mag niet leeg zijn of null zijn");
+        }
         this.artikelgroep = artikelgroep;
     }
 
@@ -45,6 +54,9 @@ public class Artikel {
     }
 
     public void setVerkoopprijs(double verkoopprijs) {
+        if(verkoopprijs<0){
+            throw new IllegalArgumentException("verkoopsprijs mag niet 0 zijn");
+        }
         this.verkoopprijs = verkoopprijs;
     }
 
@@ -53,6 +65,9 @@ public class Artikel {
     }
 
     public void setVoorraad(int voorraad) {
+        if(verkoopprijs<0){
+            throw new IllegalArgumentException("voorraad mag niet 0 zijn");
+        }
         this.voorraad = voorraad;
     }
     
