@@ -6,6 +6,7 @@ public class Artikel {
     private String artikelgroep;
     private double verkoopprijs;
     private int voorraad;
+    private final static int btw = 6;
 
     public Artikel(int code, String omschrijving, String artikelgroep, double verkoopprijs, int voorraad) {
         this.code = code;
