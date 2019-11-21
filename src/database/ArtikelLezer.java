@@ -14,19 +14,20 @@ public class ArtikelLezer {
         File file = new File(filename);
         Scanner scanner = new Scanner(file);
         while(scanner.hasNextLine()){
-            Artikel artikel = new Artikel();
             Scanner linescanner = new Scanner(scanner.nextLine());
             linescanner.useDelimiter(",");
 
-            int code = Integer.valueOf(linescanner.next());
-            String omschrijving;
-            String artikelgroep;
-            double verkoopprijs;
-            int voorraad;
+            int code = Integer.parseInt(linescanner.next());
+            String omschrijving = linescanner.next();
+            String artikelgroep = linescanner.next();
+            double verkoopprijs = Double.parseDouble(linescanner.next());
+            int voorraad= Integer.parseInt(linescanner.next());
 
-
-
+            Artikel artikel = new Artikel(code,omschrijving,artikelgroep,verkoopprijs,voorraad);
+            artikels.put(code,artikel);
         }
+
+        return artikels;
     }
 
 }

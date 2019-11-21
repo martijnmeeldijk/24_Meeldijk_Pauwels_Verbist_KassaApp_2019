@@ -55,4 +55,5 @@ public class Artikel {
     public void setVoorraad(int voorraad) {
         this.voorraad = voorraad;
     }
+    
 }
