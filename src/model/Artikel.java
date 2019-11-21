@@ -70,4 +70,5 @@ public class Artikel {
         }
         this.voorraad = voorraad;
     }
+    
 }
