@@ -16,8 +16,6 @@ public class Main extends Application {
 	}
 	
 	public static void main(String[] args) throws FileNotFoundException {
-		ArtikelLezer lezer = new ArtikelLezer();
-		lezer.read("artikel.txt");
-		//launch(args);
+		launch(args);
 	}
 }
