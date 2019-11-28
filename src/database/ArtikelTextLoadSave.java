@@ -14,10 +14,15 @@ public class ArtikelTextLoadSave extends TekstLoadSaveTemplate{
     public void setFilename(String filename){
         this.filename = filename;
     }
-    public HashMap<Integer, Artikel> load() throws FileNotFoundException {
+    public HashMap<Integer, Artikel> load(){
         // code , omschrijving, artikelgroep, verkoopprijs, voorraad \n
         File file = new File(filename);
-        Scanner scanner = new Scanner(file);
+        Scanner scanner = null;
+        try {
+            scanner = new Scanner(file);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
         while(scanner.hasNextLine()){
             Scanner linescanner = new Scanner(scanner.nextLine());
             linescanner.useDelimiter(",");
@@ -35,21 +40,26 @@ public class ArtikelTextLoadSave extends TekstLoadSaveTemplate{
 
         return artikels;
     }
-    public void save() throws IOException {
+    public void save(HashMap<Integer, Artikel> artikels){
+        try {
+            BufferedWriter writer = null;
 
-        BufferedWriter writer = new BufferedWriter(new FileWriter(filename));
-        for(Integer a : artikels.keySet()){
-            Artikel artikel = artikels.get(a);
-            int code = artikel.getCode();
-            String omschrijving = artikel.getOmschrijving();
-            String artikelgroep = artikel.getArtikelgroep();
-            double verkoopprijs = artikel.getVerkoopprijs();
-            int voorraad= artikel.getVoorraad();
+            writer = new BufferedWriter(new FileWriter(filename));
 
-            writer.write(code + ","+ omschrijving+ ","+ artikelgroep+ ","+ verkoopprijs+ ","+ voorraad +"\n");
+            for(Integer a : artikels.keySet()){
+                Artikel artikel = artikels.get(a);
+                int code = artikel.getCode();
+                String omschrijving = artikel.getOmschrijving();
+                String artikelgroep = artikel.getArtikelgroep();
+                double verkoopprijs = artikel.getVerkoopprijs();
+                int voorraad= artikel.getVoorraad();
+
+                writer.write(code + ","+ omschrijving+ ","+ artikelgroep+ ","+ verkoopprijs+ ","+ voorraad +"\n");
         }
-
-        writer.close();
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }
