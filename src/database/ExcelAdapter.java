@@ -17,7 +17,7 @@ public class ExcelAdapter implements LoadSaveStrategy {
         excelPlugin= new ExcelPlugin();
     }
 
-    //@Override
+    @Override
         public HashMap<Integer, Artikel> load(){
             File file = new File("");
             try {
@@ -37,12 +37,11 @@ public class ExcelAdapter implements LoadSaveStrategy {
         artikelInLijst.add(artikel.getOmschrijving());
         artikelInLijst.add(String.valueOf(artikel.getVoorraad()));
         artikelInLijst.add(String.valueOf(artikel.getVerkoopprijs()));
-        return artikelInLijst
+        return artikelInLijst;
         }
 
         @Override
         public void save(HashMap<Integer, Artikel> artikels) {
-        //TODO ArrayList<ArrayList<String>> artikels
             ArrayList<ArrayList<String>>items= new ArrayList<ArrayList<String>>();
             for(Integer key: artikels.keySet()){
                 items.add(geefArray(artikels.get(key)));
