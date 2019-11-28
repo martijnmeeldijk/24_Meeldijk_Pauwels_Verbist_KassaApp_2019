@@ -15,6 +15,7 @@ public class ArtikelDbInMemory implements ArtikelDbStrategy {
 
     @Override
     public void save(HashMap<Integer, Artikel> artikels) {
+        loadSaveStrategy.save(artikels);
     }
 
     public void setStrategy(LoadSaveStrategy loadSaveStrategy){
