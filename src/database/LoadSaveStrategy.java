@@ -7,6 +7,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public interface LoadSaveStrategy {
-    public HashMap<Integer, Artikel> load(String filename) throws FileNotFoundException;
-    public void save(String filename, ArrayList<ArrayList<String>>artikels);
+    public HashMap<Integer, Artikel> load() throws FileNotFoundException;
+    public void save(HashMap<Integer, Artikel> artikels);
 }

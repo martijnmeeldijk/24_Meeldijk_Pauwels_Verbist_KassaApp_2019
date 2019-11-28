@@ -7,6 +7,7 @@ import java.util.HashMap;
 
 public class ArtikelDbInMemory implements ArtikelDbStrategy {
     LoadSaveStrategy loadSaveStrategy;
+
     @Override
     public HashMap<Integer, Artikel> load(String filename) throws FileNotFoundException {
         return null;
@@ -14,7 +15,10 @@ public class ArtikelDbInMemory implements ArtikelDbStrategy {
 
     @Override
     public void save() {
+    }
 
+    public void setStrategy(LoadSaveStrategy loadSaveStrategy){
+        this.loadSaveStrategy = loadSaveStrategy;
     }
 
 }
