@@ -11,5 +11,6 @@ public abstract class TekstLoadSaveTemplate {
     public abstract  HashMap<Integer, Artikel> load() throws FileNotFoundException;
     public abstract void save() throws IOException;
     public abstract void setFilename(String filename);
+    //public abstract boolean hook();
 
 }

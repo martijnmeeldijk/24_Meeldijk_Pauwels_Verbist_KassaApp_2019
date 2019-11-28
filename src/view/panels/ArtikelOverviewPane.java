@@ -13,11 +13,11 @@ import javafx.scene.layout.GridPane;
 import model.Artikel;
 
 
-public class ProductOverviewPane extends GridPane {
+public class ArtikelOverviewPane extends GridPane {
 	private TableView<Artikel> table;
 	
 	
-	public ProductOverviewPane() {
+	public ArtikelOverviewPane() {
 		this.setPadding(new Insets(5, 5, 5, 5));
         this.setVgap(5);
         this.setHgap(5);

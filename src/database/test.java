@@ -8,7 +8,7 @@ import java.util.HashMap;
 
 public class test {
     public static void main(String[] args) throws FileNotFoundException {
-        ArtikelLoadSave lezer = new ArtikelLoadSave();
+        ArtikelTextLoadSave lezer = new ArtikelTextLoadSave();
         lezer.setFilename("src/bestanden/artikel");
         HashMap<Integer, Artikel> map = lezer.load();
         for(Object i:map.keySet()){

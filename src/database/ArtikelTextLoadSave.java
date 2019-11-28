@@ -7,9 +7,9 @@ import java.io.*;
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class ArtikelLoadSave extends TekstLoadSaveTemplate{
+public class ArtikelTextLoadSave extends TekstLoadSaveTemplate{
     private HashMap<Integer, Artikel> artikels;
-    public ArtikelLoadSave() {
+    public ArtikelTextLoadSave() {
         this.artikels =new HashMap<>();
     }
     public void setFilename(String filename){
