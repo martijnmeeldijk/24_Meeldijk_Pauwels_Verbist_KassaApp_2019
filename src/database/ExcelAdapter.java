@@ -18,7 +18,7 @@ public class ExcelAdapter implements LoadSaveStrategy {
     }
 
     //@Override
-        public HashMap<Integer, Artikel> load() throws FileNotFoundException {
+        public HashMap<Integer, Artikel> load(){
             File file = new File("");
             try {
                 excelPlugin.read(file);
@@ -30,12 +30,27 @@ public class ExcelAdapter implements LoadSaveStrategy {
             return null;
         }
 
-        //@Override
+        public ArrayList<String> geefArray(Artikel artikel){
+        ArrayList<String>artikelInLijst= new ArrayList<>();
+        artikelInLijst.add(String.valueOf(artikel.getCode()));
+        artikelInLijst.add(artikel.getArtikelgroep());
+        artikelInLijst.add(artikel.getOmschrijving());
+        artikelInLijst.add(String.valueOf(artikel.getVoorraad()));
+        artikelInLijst.add(String.valueOf(artikel.getVerkoopprijs()));
+        return artikelInLijst
+        }
+
+        @Override
         public void save(HashMap<Integer, Artikel> artikels) {
         //TODO ArrayList<ArrayList<String>> artikels
+            ArrayList<ArrayList<String>>items= new ArrayList<ArrayList<String>>();
+            for(Integer key: artikels.keySet()){
+                items.add(geefArray(artikels.get(key)));
+            }
+
             File file = new File("filename");
-            /*try {
-                excelPlugin.write(file,artikels);
+            try {
+                excelPlugin.write(file,items);
             } catch (BiffException e) {
                 e.printStackTrace();
             } catch (IOException e) {
@@ -43,7 +58,5 @@ public class ExcelAdapter implements LoadSaveStrategy {
             } catch (WriteException e) {
                 e.printStackTrace();
             }
-
-             */
         }
     }
