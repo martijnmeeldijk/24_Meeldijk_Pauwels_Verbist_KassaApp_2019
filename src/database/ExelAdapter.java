@@ -10,15 +10,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class ExelAdapter {
-
-    public class ExcelLoadSave implements LoadSaveStrategie{
+public class ExelAdapter implements LoadSaveStrategie{
         ExcelPlugin excelPlugin;
-        public ExcelLoadSave() {
-            excelPlugin= new ExcelPlugin();
-        }
 
-        @Override
+    public ExelAdapter() {
+        excelPlugin= new ExcelPlugin();
+    }
+
+    @Override
         public HashMap<Integer, Artikel> load(String filename) throws FileNotFoundException {
             File file = new File(filename);
             try {
@@ -45,5 +44,3 @@ public class ExelAdapter {
             }
         }
     }
-
-}
