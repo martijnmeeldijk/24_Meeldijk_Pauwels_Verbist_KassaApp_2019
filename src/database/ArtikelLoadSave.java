@@ -7,15 +7,17 @@ import java.io.*;
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class AltikelLoadSave implements TekstLoadSaveTemplate{
+public class ArtikelLoadSave extends TekstLoadSaveTemplate{
     private HashMap<Integer, Artikel> artikels;
-
-    public AltikelLoadSave() {
+    private String filename;
+    public ArtikelLoadSave() {
         this.artikels =new HashMap<>();
     }
-
-    public HashMap<Integer, Artikel> load(String filename) throws FileNotFoundException {
-
+    public setFilename(String filename){
+        this.filename = filename;
+    }
+    public HashMap<Integer, Artikel> load() throws FileNotFoundException {
+        // code , omschrijving, artikelgroep, verkoopprijs, voorraad \n
         File file = new File(filename);
         Scanner scanner = new Scanner(file);
         while(scanner.hasNextLine()){
@@ -35,11 +37,16 @@ public class AltikelLoadSave implements TekstLoadSaveTemplate{
 
         return artikels;
     }
-    public void save(String filename) throws IOException {
-        String str = "Hello";
+    public void save() throws IOException {
+
         BufferedWriter writer = new BufferedWriter(new FileWriter(filename));
         for(Integer a : artikels.keySet()){
-
+            Artikel artikel = artikels.get(a);
+            int code = ;
+            String omschrijving = linescanner.next();
+            String artikelgroep = linescanner.next();
+            double verkoopprijs = Double.parseDouble(linescanner.next());
+            int voorraad= Integer.parseInt(linescanner.next());
         }
 
         writer.close();
