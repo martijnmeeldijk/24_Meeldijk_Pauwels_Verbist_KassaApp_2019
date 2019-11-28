@@ -10,6 +10,7 @@ import java.io.FileNotFoundException;
 public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
+		System.out.println("hier");
 		KassaView kassaView = new KassaView();
 		KlantView klantView = new KlantView();
 	}

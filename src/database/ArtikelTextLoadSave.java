@@ -7,12 +7,10 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class ArtikelTextLoadSave extends TekstLoadSaveTemplate{
+    public String filename = "../bestanden/artikel.txt";
     private HashMap<Integer, Artikel> artikels;
     public ArtikelTextLoadSave() {
         this.artikels =new HashMap<>();
-    }
-    public void setFilename(String filename){
-        this.filename = filename;
     }
     public HashMap<Integer, Artikel> load(){
         // code , omschrijving, artikelgroep, verkoopprijs, voorraad \n

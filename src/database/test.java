@@ -8,8 +8,9 @@ import java.util.HashMap;
 
 public class test {
     public static void main(String[] args) throws FileNotFoundException {
+
         ArtikelTextLoadSave lezer = new ArtikelTextLoadSave();
-        lezer.setFilename("src/bestanden/artikel");
+        System.out.println(lezer.filename);
         HashMap<Integer, Artikel> map = lezer.load();
         for(Object i:map.keySet()){
             System.out.println(map.get(i).toString());
@@ -17,10 +18,7 @@ public class test {
         map.put(22, new Artikel(23, "bla1", "test1", 21, 1));
         map.put(20, new Artikel(24, "bla", "test", 20, 3));
 
-        try {
-            lezer.save();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+       lezer.save(map);
+
     }
 }
