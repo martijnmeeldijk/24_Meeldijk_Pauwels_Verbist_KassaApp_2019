@@ -1,5 +1,5 @@
 package database;
 
 public class ArtikelDbContext {
-    private ArtikelDbStrategie artikelDbStrategie;
+    private ArtikelDbStrategy artikelDbStrategy;
 }

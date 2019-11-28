@@ -10,10 +10,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class ExelAdapter implements LoadSaveStrategie{
+public class ExcelAdapter implements LoadSaveStrategy {
         ExcelPlugin excelPlugin;
 
-    public ExelAdapter() {
+    public ExcelAdapter() {
         excelPlugin= new ExcelPlugin();
     }
 
