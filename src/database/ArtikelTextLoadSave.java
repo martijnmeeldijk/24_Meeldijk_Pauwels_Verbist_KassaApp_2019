@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class ArtikelTextLoadSave extends TekstLoadSaveTemplate{
-    public String filename = "../bestanden/artikel.txt";
+    public String filename = "src/bestanden/artikel.txt";
     private HashMap<Integer, Artikel> artikels;
     public ArtikelTextLoadSave() {
         this.artikels =new HashMap<>();
@@ -40,7 +40,7 @@ public class ArtikelTextLoadSave extends TekstLoadSaveTemplate{
     }
     public void save(HashMap<Integer, Artikel> artikels){
         try {
-            BufferedWriter writer = null;
+            BufferedWriter writer;
 
             writer = new BufferedWriter(new FileWriter(filename));
 
