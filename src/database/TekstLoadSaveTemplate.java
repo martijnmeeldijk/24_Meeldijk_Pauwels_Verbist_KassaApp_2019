@@ -8,8 +8,8 @@ import java.util.HashMap;
 
 public abstract class TekstLoadSaveTemplate implements LoadSaveStrategy{
     protected String filename;
-    public abstract  HashMap<Integer, Artikel> load() throws FileNotFoundException;
-    public abstract void save() throws IOException;
+    public abstract  HashMap<Integer, Artikel> load();
+    public abstract void save(HashMap<Integer, Artikel> artikels);
     //public abstract boolean hook();
 
 }
