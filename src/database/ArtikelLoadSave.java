@@ -47,9 +47,8 @@ public class ArtikelLoadSave extends TekstLoadSaveTemplate{
             double verkoopprijs = artikel.getVerkoopprijs();
             int voorraad= artikel.getVoorraad();
 
-            writer.write(code + ","+ omschrijving+ ","+ artikelgroep+ ","+ verkoopprijs+ ","+ voorraad);
+            writer.write(code + ","+ omschrijving+ ","+ artikelgroep+ ","+ verkoopprijs+ ","+ voorraad +"\n");
         }
-
 
         writer.close();
     }
