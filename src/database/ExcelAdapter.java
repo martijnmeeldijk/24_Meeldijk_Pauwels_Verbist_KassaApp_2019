@@ -19,7 +19,7 @@ public class ExcelAdapter implements LoadSaveStrategy {
 
     @Override
         public HashMap<Integer, Artikel> load(){
-            File file = new File("");
+            File file = new File("bestanden/artikel.xls");
             try {
                 excelPlugin.read(file);
             } catch (BiffException e) {
@@ -47,7 +47,7 @@ public class ExcelAdapter implements LoadSaveStrategy {
                 items.add(geefArray(artikels.get(key)));
             }
 
-            File file = new File("filename");
+            File file = new File("bestanden/artikel.xls");
             try {
                 excelPlugin.write(file,items);
             } catch (BiffException e) {

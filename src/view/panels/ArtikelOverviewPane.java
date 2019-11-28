@@ -1,5 +1,4 @@
 package view.panels;
-
 import database.ArtikelTextLoadSave;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -15,8 +14,6 @@ import javafx.scene.layout.GridPane;
 import model.Artikel;
 
 import java.io.FileNotFoundException;
-
-
 public class ArtikelOverviewPane extends GridPane {
 	private TableView<Artikel> table;
 	ArtikelTextLoadSave artikelTextLoadSave = new ArtikelTextLoadSave();
@@ -27,7 +24,7 @@ public class ArtikelOverviewPane extends GridPane {
         this.setHgap(5);
 		try {
 			table.setItems((ObservableList<Artikel>) artikelTextLoadSave.load());
-		} catch (FileNotFoundException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		this.add(new Label("Artikelen:"), 0, 0, 1, 1);
