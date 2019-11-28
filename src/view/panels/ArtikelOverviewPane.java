@@ -23,7 +23,7 @@ public class ArtikelOverviewPane extends GridPane {
         this.setHgap(5);
         
 		this.add(new Label("Artikelen:"), 0, 0, 1, 1);
-		
+		this.add(table,0,1,1,1);
 		
 	}
 	
