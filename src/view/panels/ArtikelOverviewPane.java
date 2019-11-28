@@ -21,7 +21,7 @@ public class ArtikelOverviewPane extends GridPane {
 		this.setPadding(new Insets(5, 5, 5, 5));
         this.setVgap(5);
         this.setHgap(5);
-        
+        //table.set
 		this.add(new Label("Artikelen:"), 0, 0, 1, 1);
 		this.add(table,0,1,1,1);
 		

@@ -2,7 +2,6 @@ package database;
 
 //import com.sun.tools.jdeprscan.scan.Scan;
 import model.Artikel;
-
 import java.io.*;
 import java.util.HashMap;
 import java.util.Scanner;
