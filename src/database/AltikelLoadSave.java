@@ -35,8 +35,14 @@ public class AltikelLoadSave implements TekstLoadSaveTemplate{
 
         return artikels;
     }
-    public void save(){
+    public void save(String filename) throws IOException {
+        String str = "Hello";
+        BufferedWriter writer = new BufferedWriter(new FileWriter(filename));
+        for(Integer a : artikels.keySet()){
 
+        }
+
+        writer.close();
     }
 
 }
