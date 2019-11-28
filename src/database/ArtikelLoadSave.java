@@ -9,11 +9,10 @@ import java.util.Scanner;
 
 public class ArtikelLoadSave extends TekstLoadSaveTemplate{
     private HashMap<Integer, Artikel> artikels;
-    private String filename;
     public ArtikelLoadSave() {
         this.artikels =new HashMap<>();
     }
-    public setFilename(String filename){
+    public void setFilename(String filename){
         this.filename = filename;
     }
     public HashMap<Integer, Artikel> load() throws FileNotFoundException {
@@ -42,12 +41,15 @@ public class ArtikelLoadSave extends TekstLoadSaveTemplate{
         BufferedWriter writer = new BufferedWriter(new FileWriter(filename));
         for(Integer a : artikels.keySet()){
             Artikel artikel = artikels.get(a);
-            int code = ;
-            String omschrijving = linescanner.next();
-            String artikelgroep = linescanner.next();
-            double verkoopprijs = Double.parseDouble(linescanner.next());
-            int voorraad= Integer.parseInt(linescanner.next());
+            int code = artikel.getCode();
+            String omschrijving = artikel.getOmschrijving();
+            String artikelgroep = artikel.getArtikelgroep();
+            double verkoopprijs = artikel.getVerkoopprijs();
+            int voorraad= artikel.getVoorraad();
+
+            writer.write(code + ","+ omschrijving+ ","+ artikelgroep+ ","+ verkoopprijs+ ","+ voorraad);
         }
+
 
         writer.close();
     }

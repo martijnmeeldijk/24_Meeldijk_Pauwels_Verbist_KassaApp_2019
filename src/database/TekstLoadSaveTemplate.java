@@ -7,7 +7,9 @@ import java.io.IOException;
 import java.util.HashMap;
 
 public abstract class TekstLoadSaveTemplate {
-    public abstract  HashMap<Integer, Artikel> load(String filename) throws FileNotFoundException;
-    public abstract void save(String filename) throws IOException;
+    protected String filename;
+    public abstract  HashMap<Integer, Artikel> load() throws FileNotFoundException;
+    public abstract void save() throws IOException;
+    public abstract void setFilename(String filename);
 
 }
