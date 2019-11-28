@@ -1,6 +1,5 @@
 package application;
 	
-import database.ArtikelLezer;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import view.KassaView;

@@ -7,14 +7,14 @@ import java.io.*;
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class ArtikelLezer {
+public class AltikelLoadSave implements TekstLoadSaveTemplate{
     private HashMap<Integer, Artikel> artikels;
 
-    public ArtikelLezer() {
+    public AltikelLoadSave() {
         this.artikels =new HashMap<>();
     }
 
-    public HashMap read(String filename) throws FileNotFoundException {
+    public HashMap<Integer, Artikel> load(String filename) throws FileNotFoundException {
 
         File file = new File(filename);
         Scanner scanner = new Scanner(file);
@@ -34,6 +34,9 @@ public class ArtikelLezer {
         }
 
         return artikels;
+    }
+    public void save(){
+
     }
 
 }
