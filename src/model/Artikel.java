@@ -15,6 +15,13 @@ public class Artikel {
         setVerkoopprijs(verkoopprijs);
         setVoorraad(voorraad);
     }
+    public static Artikel MaakArtikel(String code, String omschrijving, String artikelgroep, String verkoopprijs, String voorraad) {
+        return new Artikel(Integer.parseInt(code), omschrijving,artikelgroep,
+                Double.parseDouble(verkoopprijs), Integer.parseInt(voorraad));
+    }
+
+
+
 
     public int getCode() {
         return code;
@@ -70,6 +77,8 @@ public class Artikel {
         }
         this.voorraad = voorraad;
     }
+
+
 
     @Override
     public String toString(){

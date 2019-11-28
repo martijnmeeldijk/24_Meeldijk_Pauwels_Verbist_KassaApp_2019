@@ -4,6 +4,7 @@ import model.Artikel;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class test {
@@ -17,13 +18,17 @@ public class test {
         }
         map.put(22, new Artikel(23, "bla1", "test1", 21, 1));
         map.put(20, new Artikel(24, "bla", "test", 20, 3));
-/*
-<<<<<<< Updated upstream
-       lezer.save(map);
-=======
+        lezer.save(map);
 
-            lezer.save(map);
->>>>>>> Stashed changes
-*/
+        ExcelAdapter excelAdapter= new ExcelAdapter();
+        HashMap<Integer, Artikel> test;
+        test= excelAdapter.load();
+        if(test == null){
+            System.out.println("test is null");
+        }
+        test.put(22, new Artikel(23, "bla1", "test1", 21, 1));
+        test.put(20, new Artikel(24, "bla", "test", 20, 3));
+        excelAdapter.save(test);
+
     }
 }

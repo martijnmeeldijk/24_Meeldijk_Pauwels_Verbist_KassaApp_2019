@@ -19,15 +19,23 @@ public class ExcelAdapter implements LoadSaveStrategy {
 
     @Override
         public HashMap<Integer, Artikel> load(){
-            File file = new File("bestanden/artikel.xls");
+            HashMap<Integer,Artikel>artikels= new HashMap<>();
+            File file = new File("src/bestanden/artikel.xls");
             try {
-                excelPlugin.read(file);
+                ArrayList<ArrayList<String>> excelLijst=excelPlugin.read(file);
+                for(ArrayList<String> artikel: excelLijst){
+                    Integer code = Integer.parseInt(artikel.get(0));
+                    Artikel artikel1= Artikel.MaakArtikel(artikel.get(0),artikel.get(1),artikel.get(2),artikel.get(3),artikel.get(4));
+                    artikels.put(code,artikel1);
+                }
+                System.out.println(excelLijst);
             } catch (BiffException e) {
                 e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            return null;
+
+        return artikels;
         }
 
         public ArrayList<String> geefArray(Artikel artikel){
@@ -47,7 +55,7 @@ public class ExcelAdapter implements LoadSaveStrategy {
                 items.add(geefArray(artikels.get(key)));
             }
 
-            File file = new File("bestanden/artikel.xls");
+            File file = new File("src/bestanden/artikel.xls");
             try {
                 excelPlugin.write(file,items);
             } catch (BiffException e) {
