@@ -14,7 +14,7 @@ public class test {
         for(Object i:map.keySet()){
             System.out.println(map.get(i).toString());
         }
-        map.put(20, new Artikel(23, "bla1", "test1", 21, 1));
+        map.put(22, new Artikel(23, "bla1", "test1", 21, 1));
         map.put(20, new Artikel(24, "bla", "test", 20, 3));
 
         try {
