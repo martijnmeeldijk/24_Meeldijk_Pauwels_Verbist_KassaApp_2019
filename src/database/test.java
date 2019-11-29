@@ -6,10 +6,11 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 
 public class test {
     public static void main(String[] args){
-
         ArtikelTextLoadSave lezer = new ArtikelTextLoadSave();
         HashMap<Integer, Artikel> map = lezer.load();
         for(Object i:map.keySet()){
@@ -27,6 +28,5 @@ public class test {
 
         test.put(20, new Artikel(24, "bla", "test", 20, 3));
         excelAdapter.save(test);
-
     }
 }
