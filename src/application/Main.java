@@ -1,5 +1,6 @@
 package application;
 	
+import controller.KassaViewController;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import view.KassaView;
@@ -11,7 +12,8 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		System.out.println("hier");
-		KassaView kassaView = new KassaView();
+		KassaViewController kassaViewController= new KassaViewController();
+		KassaView kassaView = new KassaView(kassaViewController);
 		KlantView klantView = new KlantView();
 	}
 	

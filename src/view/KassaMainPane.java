@@ -2,6 +2,7 @@ package view;
 
 
 import controller.ArtikelOverviewController;
+import controller.KassaViewController;
 import database.ArtikelDbStrategy;
 import database.ArtikelTextLoadSave;
 import javafx.scene.control.Tab;
@@ -11,7 +12,6 @@ import view.panels.ArtikelOverviewPane;
 
 public class KassaMainPane extends BorderPane {
 	public KassaMainPane(){
-
 	    TabPane tabPane = new TabPane();
         Tab kassaTab = new Tab("Kassa");
         ArtikelOverviewController artikelOverviewController= new ArtikelOverviewController();

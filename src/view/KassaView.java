@@ -1,5 +1,6 @@
 package view;
 
+import controller.KassaViewController;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -14,7 +15,11 @@ public class KassaView extends GridPane {
 	private Label label = new Label("test");
 
 
-	public KassaView(){			
+	public KassaView(KassaViewController kassaViewController){
+		//voor mvc patroon
+		kassaViewController.setKassaView(this);
+
+
 		stage.setTitle("KASSA VIEW");
 		stage.setResizable(false);		
 		stage.setX(20);
