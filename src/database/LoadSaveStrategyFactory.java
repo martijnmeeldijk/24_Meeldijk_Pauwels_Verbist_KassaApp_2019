@@ -3,6 +3,18 @@ package database;
 import java.lang.reflect.InvocationTargetException;
 
 public class LoadSaveStrategyFactory {
+    private static LoadSaveStrategyFactory unique;
+
+    private LoadSaveStrategyFactory() {
+    }
+
+    public static LoadSaveStrategyFactory getInstance(){
+        if (unique == null) {
+            unique = new LoadSaveStrategyFactory();
+        }
+        return unique;
+    }
+
     public LoadSaveStrategy createArtikelDbStrategy(String name) {
         LoadSaveStrategy strategy;
         try{
