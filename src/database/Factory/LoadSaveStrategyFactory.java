@@ -20,7 +20,7 @@ public class LoadSaveStrategyFactory {
     public LoadSaveStrategy createArtikelDbStrategy(String name) {
         LoadSaveStrategy strategy;
         try{
-            Class strategyClass = Class.forName("src.database."+name);
+            Class strategyClass = Class.forName("database."+name);
             Object strategyObject = strategyClass.getConstructor().newInstance();
             strategy = (LoadSaveStrategy) strategyObject;
         }catch (ClassNotFoundException | InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {

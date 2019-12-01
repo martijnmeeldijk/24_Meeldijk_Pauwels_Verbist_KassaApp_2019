@@ -19,10 +19,11 @@ public class ArtikelDbStrategyFactory {
     public ArtikelDbStrategy createArtikelDbStrategy(String name) {
         ArtikelDbStrategy strategy;
         try{
-            Class strategyClass = Class.forName("src.database."+name);
+            Class strategyClass = Class.forName("database."+name);
             Object strategyObject = strategyClass.getConstructor().newInstance();
             strategy = (ArtikelDbStrategy) strategyObject;
         }catch (ClassNotFoundException | InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
+            System.out.println(e.getCause());
             throw new IllegalArgumentException("Error trying to make strategy for "+name);
         }
         return  strategy;

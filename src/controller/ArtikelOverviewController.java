@@ -15,8 +15,7 @@ import java.util.HashMap;
 public class ArtikelOverviewController implements Observer {
     private ArtikelOverviewPane artikelOverviewPane;
     public static Comparator<Artikel> omschrijvingcomperator = new OmschrijvingComparable();
-    ArtikelDbStrategy artikelDbStrategy=new ExcelAdapter();
-    ArtikelDbContext artikelDbContext= new ArtikelDbContext(artikelDbStrategy);
+    ArtikelDbContext artikelDbContext= new ArtikelDbContext();
     DataInMemory data = new DataInMemory(artikelDbContext);
     public ArtikelOverviewController() {
 

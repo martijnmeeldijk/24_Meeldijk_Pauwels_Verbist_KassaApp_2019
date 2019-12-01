@@ -1,5 +1,6 @@
 package database;
 
+import database.Factory.ArtikelDbStrategyFactory;
 import model.Artikel;
 
 import java.io.FileNotFoundException;
@@ -11,7 +12,7 @@ import java.util.List;
 
 public class test {
     public static void main(String[] args){
-        ArtikelTextLoadSave lezer = new ArtikelTextLoadSave();
+        /*ArtikelTextLoadSave lezer = new ArtikelTextLoadSave();
         HashMap<Integer, Artikel> map = lezer.load();
         for(Object i:map.keySet()){
           //  System.out.println(map.get(i).toString());
@@ -27,6 +28,10 @@ public class test {
         System.out.println(test);
 
         test.put(20, new Artikel(24, "bla", "test", 20, 3));
-        excelAdapter.save(test);
+        excelAdapter.save(test);*/
+        ArtikelDbStrategyFactory.getInstance().createArtikelDbStrategy("ArtikelDbInMemory");
+
+        ArtikelDbContext context = new ArtikelDbContext();
+        System.out.println(context.load());
     }
 }
