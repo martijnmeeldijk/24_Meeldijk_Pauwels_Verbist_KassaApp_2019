@@ -11,6 +11,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.BorderPane;
 import view.panels.ArtikelOverviewPane;
+import view.panels.KassaOverviewPane;
 
 public class KassaMainPane extends BorderPane {
 
@@ -18,7 +19,9 @@ public class KassaMainPane extends BorderPane {
         ArtikelOverviewController artikelOverviewController= new ArtikelOverviewController();
 
 	    TabPane tabPane = new TabPane();
-        Tab kassaTab = new Tab("Kassa");
+	    KassaViewController kassaViewController= new KassaViewController();
+        KassaOverviewPane kassaOverviewPane=new KassaOverviewPane(kassaViewController);
+        Tab kassaTab = new Tab("Kassa", kassaOverviewPane);
         // artikeloverviewpane moet niet gewoon een new artikeltextloadsave() object aanmaken! het is om te testen
         ArtikelOverviewPane artikelOverviewPane = new ArtikelOverviewPane(artikelOverviewController);
         Tab artikelTab = new Tab("Artikelen",artikelOverviewPane);

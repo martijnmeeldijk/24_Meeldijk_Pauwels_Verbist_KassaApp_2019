@@ -2,16 +2,17 @@ package controller;
 
 import javafx.scene.control.Label;
 import view.KassaView;
+import view.panels.KassaOverviewPane;
 
 import java.awt.*;
 
 public class KassaViewController implements Observer {
-    private KassaView kassaView;
+    private KassaOverviewPane kassaOverviewPane;
     private Label label= new Label("ja het werkt");
 
-    public void setKassaView(KassaView kassaView) {
-        this.kassaView = kassaView;
-        kassaView.setLabel(label);
+    public void setKassaView(KassaOverviewPane kassaOverviewPane) {
+        this.kassaOverviewPane = kassaOverviewPane;
+        //kassaOverviewPane.setLabel(label);
     }
 
     @Override

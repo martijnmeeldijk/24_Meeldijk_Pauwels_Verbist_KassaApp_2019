@@ -1,33 +1,54 @@
 package view.panels;
+
 import controller.ArtikelOverviewController;
-import database.DataInMemory;
-import javafx.collections.FXCollections;
+import controller.KassaViewController;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import model.Artikel;
 import model.OmschrijvingComparable;
 
 import java.util.Comparator;
-import java.util.HashMap;
 
-public class ArtikelOverviewPane extends GridPane {
+public class KassaOverviewPane extends GridPane {
 	private TableView<Artikel> table;
 	private ObservableList<Artikel>list;
-	private Label label= new Label("bla");
 	public static Comparator<Artikel> omschrijvingcomperator = new OmschrijvingComparable();
 
-	public void setList(ObservableList<Artikel> list) {
-		this.list = list;
-	}
+	public KassaOverviewPane(KassaViewController kassaViewController) {
+		Label label1 = new Label("Code:");
+		TextField textField = new TextField ();
+		VBox vb = new VBox();
+		vb.getChildren().addAll(label1, textField);
+		vb.setSpacing(10);
+
+		textField.setOnKeyPressed(new EventHandler<KeyEvent>()
+		{
+			@Override
+			public void handle(KeyEvent ke)
+			{
+				if (ke.getCode().equals(KeyCode.ENTER))
+				{
+					System.out.println(textField.getText());
+					System.out.println("test");
+				}
+			}
+		});
 
 
-	public ArtikelOverviewPane(ArtikelOverviewController artikelOverviewController) {
-		// dit stelt voor de meegegeven controller deze view in
-		artikelOverviewController.setArtikelOverviewPane(this);
+
+
+
+		/// dit stelt voor de meegegeven controller deze view in
+		kassaViewController.setKassaView(this);
 		this.setPadding(new Insets(10, 10, 10, 10));
 		Label lblHeading = new Label("artikels");
 		lblHeading.setFont(new Font("Arial", 20));
@@ -54,7 +75,8 @@ public class ArtikelOverviewPane extends GridPane {
 		colVoorraad.setMinWidth(100);
 		colVoorraad.setCellValueFactory(new PropertyValueFactory<Artikel, Integer>("voorraad"));
 		table.getColumns().addAll(colcode,colOmschrijving,colArtikelgroep, colVerkoopprijs,colVoorraad);
-		this.getChildren().addAll(lblHeading, table);
+		vb.getChildren().add(table);
+		this.getChildren().addAll(vb);
 	}
 
 	public void displayErrorMessage(String errorMessage){
@@ -64,9 +86,7 @@ public class ArtikelOverviewPane extends GridPane {
 		alert.show();
 	}
 
-	public void refresh(){
-		table.refresh();
-	}
+
 }
 	
 	

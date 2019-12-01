@@ -17,11 +17,8 @@ public class KassaView extends GridPane {
 
 	public KassaView(KassaViewController kassaViewController){
 		//voor mvc patroon
-		kassaViewController.setKassaView(this);
-
-
 		stage.setTitle("KASSA VIEW");
-		stage.setResizable(false);		
+		stage.setResizable(false);
 		stage.setX(20);
 		stage.setY(20);
 		Group root = new Group();
@@ -30,8 +27,6 @@ public class KassaView extends GridPane {
 		borderPane.prefHeightProperty().bind(scene.heightProperty());
 		borderPane.prefWidthProperty().bind(scene.widthProperty());
 		root.getChildren().add(borderPane);
-		this.add(label,6,6,1,1);
-		root.getChildren().add(label);
 		stage.setScene(scene);
 		stage.sizeToScene();
 
