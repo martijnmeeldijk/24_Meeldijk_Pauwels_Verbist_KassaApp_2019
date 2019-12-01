@@ -1,4 +1,5 @@
 package view.panels;
+import controller.ArtikelOverviewController;
 import database.ArtikelDbStrategy;
 import database.ArtikelTextLoadSave;
 import javafx.collections.FXCollections;
@@ -20,8 +21,12 @@ import java.util.HashMap;
 public class ArtikelOverviewPane extends GridPane {
 	private TableView<Artikel> table;
 	ArtikelDbStrategy artikelTextLoadSave;
-	
-	public ArtikelOverviewPane(ArtikelDbStrategy artikelDbStrategy) {
+
+
+	public ArtikelOverviewPane(ArtikelDbStrategy artikelDbStrategy, ArtikelOverviewController artikelOverviewController) {
+		// dit stelt voor de meegegeven controller deze view in
+		artikelOverviewController.setArtikelOverviewPane(this);
+		
 		this.artikelTextLoadSave = artikelDbStrategy;
 		this.setPadding(new Insets(10, 10, 10, 10));
 		Label lblHeading = new Label("artikels");
