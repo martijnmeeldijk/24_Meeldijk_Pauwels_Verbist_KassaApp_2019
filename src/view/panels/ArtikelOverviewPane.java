@@ -66,10 +66,6 @@ public class ArtikelOverviewPane extends GridPane {
 		colVoorraad.setMinWidth(100);
 		colVoorraad.setCellValueFactory(new PropertyValueFactory<Artikel, Integer>("voorraad"));
 		table.getColumns().addAll(colcode,colOmschrijving,colArtikelgroep, colVerkoopprijs,colVoorraad);
-		//Button button = new Button("Add dummy film");
-		//button.setOnAction(new AddDummyFilmHandler());
-		//Button button2 = new Button("Update price of selected movie\n or doubleclick on movie row");
-		//button2.setOnAction(new UpdatePriceHandler());
 		this.getChildren().addAll(lblHeading, table);
 	}
 
