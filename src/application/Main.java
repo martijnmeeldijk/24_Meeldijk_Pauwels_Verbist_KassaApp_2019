@@ -11,7 +11,6 @@ import java.io.FileNotFoundException;
 public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
-		System.out.println("hier");
 		KassaViewController kassaViewController= new KassaViewController();
 		KassaView kassaView = new KassaView(kassaViewController);
 		KlantView klantView = new KlantView();
