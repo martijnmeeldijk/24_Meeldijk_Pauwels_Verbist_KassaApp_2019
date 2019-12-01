@@ -1,4 +1,6 @@
-package database;
+package database.Factory;
+
+import database.LoadSaveStrategy;
 
 import java.lang.reflect.InvocationTargetException;
 

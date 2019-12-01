@@ -1,4 +1,6 @@
-package database;
+package database.Factory;
+
+import database.ArtikelDbStrategy;
 
 import java.lang.reflect.InvocationTargetException;
 
