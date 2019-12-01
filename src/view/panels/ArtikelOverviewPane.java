@@ -26,7 +26,6 @@ public class ArtikelOverviewPane extends GridPane {
 	public ArtikelOverviewPane(ArtikelDbStrategy artikelDbStrategy, ArtikelOverviewController artikelOverviewController) {
 		// dit stelt voor de meegegeven controller deze view in
 		artikelOverviewController.setArtikelOverviewPane(this);
-		
 		this.artikelTextLoadSave = artikelDbStrategy;
 		this.setPadding(new Insets(10, 10, 10, 10));
 		Label lblHeading = new Label("artikels");

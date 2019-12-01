@@ -17,6 +17,5 @@ public class ArtikelOverviewController implements Observer {
 
     @Override
     public void update() {
-
     }
 }
