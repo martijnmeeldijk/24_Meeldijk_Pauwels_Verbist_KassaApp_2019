@@ -3,11 +3,14 @@ package database;
 import java.lang.reflect.InvocationTargetException;
 
 public class ArtikelDbStrategyFactory {
-    private static ArtikelDbStrategyFactory unique = new ArtikelDbStrategyFactory();
+    private static ArtikelDbStrategyFactory unique;
 
     private ArtikelDbStrategyFactory(){}
 
     public static ArtikelDbStrategyFactory getInstance(){
+        if (unique == null) {
+            unique = new ArtikelDbStrategyFactory ();
+        }
         return unique;
     }
 
