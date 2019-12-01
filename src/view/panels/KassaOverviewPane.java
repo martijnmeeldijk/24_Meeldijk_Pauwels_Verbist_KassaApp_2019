@@ -19,34 +19,25 @@ import model.OmschrijvingComparable;
 import java.util.Comparator;
 
 public class KassaOverviewPane extends GridPane {
+	private KassaViewController kassaViewController;
 	private TableView<Artikel> table;
 	private ObservableList<Artikel>list;
+	private Label prijs;
+	private Label prijswaarde;
 	public static Comparator<Artikel> omschrijvingcomperator = new OmschrijvingComparable();
 
 	public KassaOverviewPane(KassaViewController kassaViewController) {
+		prijswaarde=new Label("0.0");
+		prijs=new Label("prijs: ");
+		HBox prijsbox=new HBox();
+		prijsbox.getChildren().addAll(prijs,prijswaarde);
+
+		this.kassaViewController=kassaViewController;
 		Label label1 = new Label("Code:");
 		TextField textField = new TextField ();
 		VBox vb = new VBox();
-		vb.getChildren().addAll(label1, textField);
+		vb.getChildren().addAll(label1,prijsbox, textField);
 		vb.setSpacing(10);
-
-		textField.setOnKeyPressed(new EventHandler<KeyEvent>()
-		{
-			@Override
-			public void handle(KeyEvent ke)
-			{
-				if (ke.getCode().equals(KeyCode.ENTER))
-				{
-					System.out.println(textField.getText());
-					System.out.println("test");
-				}
-			}
-		});
-
-
-
-
-
 		/// dit stelt voor de meegegeven controller deze view in
 		kassaViewController.setKassaView(this);
 		this.setPadding(new Insets(10, 10, 10, 10));
@@ -77,7 +68,19 @@ public class KassaOverviewPane extends GridPane {
 		table.getColumns().addAll(colcode,colOmschrijving,colArtikelgroep, colVerkoopprijs,colVoorraad);
 		vb.getChildren().add(table);
 		this.getChildren().addAll(vb);
+		textField.setOnKeyPressed(new EventHandler<KeyEvent>()
+		{
+			@Override
+			public void handle(KeyEvent ke)
+			{
+				if (ke.getCode().equals(KeyCode.ENTER))
+				{
+					kassaViewController.verwerkInput(Integer.parseInt(textField.getText()));
+				}
+			}
+		});
 	}
+
 
 	public void displayErrorMessage(String errorMessage){
 		Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -86,7 +89,18 @@ public class KassaOverviewPane extends GridPane {
 		alert.show();
 	}
 
+	public void setList(ObservableList<Artikel> list) {
+		this.list = list;
+		table.setItems(list);
+	}
 
+	public ObservableList<Artikel> getList() {
+		return list;
+	}
+
+	public void setPrijs(String prijs) {
+		this.prijswaarde.setText(prijs);
+	}
 }
 	
 	

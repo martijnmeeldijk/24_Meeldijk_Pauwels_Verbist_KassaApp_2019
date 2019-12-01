@@ -8,8 +8,8 @@ public class DataInMemory {
     private ArtikelDbContext artikelDbContext;
     private HashMap<Integer, Artikel>artikels;
 
-    public DataInMemory(ArtikelDbContext artikelDbContext) {
-        this.artikelDbContext = artikelDbContext;
+    public DataInMemory() {
+        this.artikelDbContext = new ArtikelDbContext();
         artikels= artikelDbContext.load();
     }
 

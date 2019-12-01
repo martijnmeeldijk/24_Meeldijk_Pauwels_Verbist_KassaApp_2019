@@ -15,15 +15,16 @@ import java.util.HashMap;
 public class ArtikelOverviewController implements Observer {
     private ArtikelOverviewPane artikelOverviewPane;
     public static Comparator<Artikel> omschrijvingcomperator = new OmschrijvingComparable();
-    ArtikelDbContext artikelDbContext= new ArtikelDbContext();
-    DataInMemory data = new DataInMemory(artikelDbContext);
+    DataInMemory data = new DataInMemory();
     public ArtikelOverviewController() {
 
     }
 
+
     public void setArtikelOverviewPane(ArtikelOverviewPane artikelOverviewPane) {
         this.artikelOverviewPane = artikelOverviewPane;
         update();
+
     }
 
     private ObservableList<Artikel> getList(){
