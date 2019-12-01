@@ -13,14 +13,19 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import model.Artikel;
+import model.OmschrijvingComparable;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 
 public class ArtikelOverviewPane extends GridPane {
 	private TableView<Artikel> table;
 	ArtikelDbStrategy artikelTextLoadSave;
+	public static Comparator<Artikel> omschrijvingcomperator = new OmschrijvingComparable();
+
 
 
 	public ArtikelOverviewPane(ArtikelDbStrategy artikelDbStrategy, ArtikelOverviewController artikelOverviewController) {
@@ -31,12 +36,19 @@ public class ArtikelOverviewPane extends GridPane {
 		Label lblHeading = new Label("artikels");
 		lblHeading.setFont(new Font("Arial", 20));
 		table = new TableView<Artikel>();
+		//
+		//
+		// alles hieronder moet naar controller
 		ObservableList<Artikel>artikels= FXCollections.observableArrayList();
 		HashMap<Integer,Artikel>hashartikels=artikelDbStrategy.load();
 		for(int key:hashartikels.keySet()){
 			artikels.add(hashartikels.get(key));
 		}
+		artikels.sort(omschrijvingcomperator);
 
+		// alles hierboven moet naar controller
+		//
+		//
 		table.setItems(artikels);
 		table.setRowFactory( tv -> {
 			TableRow<Artikel> row = new TableRow<>();
