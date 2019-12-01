@@ -25,10 +25,9 @@ public class ExcelAdapter implements LoadSaveStrategy {
                 ArrayList<ArrayList<String>> excelLijst=excelPlugin.read(file);
                 for(ArrayList<String> artikel: excelLijst){
                     Integer code = Integer.parseInt(artikel.get(0));
-                    Artikel artikel1= Artikel.MaakArtikel(artikel.get(0),artikel.get(1),artikel.get(2),artikel.get(3),artikel.get(4));
+                    Artikel artikel1= Artikel.MaakArtikel(artikel.get(0),artikel.get(2),artikel.get(1),artikel.get(3),artikel.get(4));
                     artikels.put(code,artikel1);
                 }
-                //System.out.println(excelLijst);
             } catch (BiffException e) {
                 e.printStackTrace();
             } catch (IOException e) {
@@ -41,9 +40,9 @@ public class ExcelAdapter implements LoadSaveStrategy {
         public ArrayList<String> geefArray(Artikel artikel){
         ArrayList<String>artikelInLijst= new ArrayList<>();
         artikelInLijst.add(String.valueOf(artikel.getCode()));
-        artikelInLijst.add(artikel.getArtikelgroep());
         artikelInLijst.add(artikel.getOmschrijving());
-        artikelInLijst.add(String.valueOf(artikel.getVerkoopprijs()));
+            artikelInLijst.add(artikel.getArtikelgroep());
+            artikelInLijst.add(String.valueOf(artikel.getVerkoopprijs()));
             artikelInLijst.add(String.valueOf(artikel.getVoorraad()));
 
             return artikelInLijst;

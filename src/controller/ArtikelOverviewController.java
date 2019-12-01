@@ -26,14 +26,6 @@ public class ArtikelOverviewController implements Observer {
         update();
     }
 
-    /*
-    ObservableList<Artikel>artikels= FXCollections.observableArrayList();
-		HashMap<Integer,Artikel>hashartikels=data.getArtikels();
-		for(int key:hashartikels.keySet()){
-			artikels.add(hashartikels.get(key));
-		}
-		artikels.sort(omschrijvingcomperator);
-     */
     private ObservableList<Artikel> getList(){
         ObservableList<Artikel>artikels= FXCollections.observableArrayList();
         HashMap<Integer,Artikel>hashartikels=data.getArtikels();
