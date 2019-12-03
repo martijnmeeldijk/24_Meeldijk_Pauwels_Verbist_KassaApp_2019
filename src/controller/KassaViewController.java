@@ -8,12 +8,13 @@ import view.panels.KassaOverviewPane;
 
 public class KassaViewController implements Observer {
     private KassaOverviewPane kassaOverviewPane;
-    Bestelling bestelling;
+    private Bestelling bestelling;
+
     public KassaViewController(Bestelling bestelling) {
         this.bestelling=bestelling;
     }
 
-    public void berekenPrice(){
+    private void berekenPrice(){
         double totaal=0.0;
         for(Artikel artikel:bestelling.getArtikels()){
             totaal+=artikel.getVerkoopprijs();
@@ -40,6 +41,8 @@ public class KassaViewController implements Observer {
     public Bestelling getBestelling() {
         return bestelling;
     }
+
+
 
     @Override
     public void update() {

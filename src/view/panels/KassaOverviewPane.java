@@ -26,36 +26,46 @@ public class KassaOverviewPane extends GridPane {
 	public static Comparator<Artikel> omschrijvingcomperator = new OmschrijvingComparable();
 
 	public KassaOverviewPane(KassaViewController kassaViewController) {
+		/// dit stelt voor de meegegeven controller deze view in
+		this.kassaViewController=kassaViewController;
+		this.kassaViewController.setKassaView(this);
+
+		//layout
+		this.setPadding(new Insets(10, 10, 10, 10));
+
+		//display inputveld code en totaalprijs
+		HBox prijsbox=new HBox();
 		prijswaarde=new Label("0.0");
 		prijs=new Label("prijs: ");
-		HBox prijsbox=new HBox();
 		prijsbox.getChildren().addAll(prijs,prijswaarde);
-
-		this.kassaViewController=kassaViewController;
 		Label label1 = new Label("Code:");
 		TextField textField = new TextField ();
+
+		//voeg inputveld code en totaalprijs toe
 		VBox vb = new VBox();
-		vb.getChildren().addAll(label1,prijsbox, textField);
+		vb.getChildren().addAll(label1,textField,prijsbox);
 		vb.setSpacing(10);
-		/// dit stelt voor de meegegeven controller deze view in
-		kassaViewController.setKassaView(this);
-		this.setPadding(new Insets(10, 10, 10, 10));
+
+		//creeer titel
 		Label lblHeading = new Label("artikels");
 		lblHeading.setFont(new Font("Arial", 20));
-		table = new TableView<Artikel>();
 
+		//creeer tabel
+		table = new TableView<Artikel>();
 		table.setItems(kassaViewController.getBestelling().getArtikels());
+
+		//creeer kolommen
 		TableColumn<Artikel, Integer> colcode = new TableColumn<Artikel, Integer>("code");
 		colcode.setMinWidth(100);
 		colcode.setCellValueFactory(new PropertyValueFactory<Artikel, Integer>("code"));
 
-		TableColumn<Artikel, String> colArtikelgroep = new TableColumn<Artikel, String>("artikelgroep");
-		colArtikelgroep.setMinWidth(100);
-		colArtikelgroep.setCellValueFactory(new PropertyValueFactory<Artikel, String>("artikelgroep"));
-
 		TableColumn<Artikel, String> colOmschrijving = new TableColumn<Artikel, String>("Omschrijving");
 		colOmschrijving.setMinWidth(300);
 		colOmschrijving.setCellValueFactory(new PropertyValueFactory<Artikel, String>("Omschrijving"));
+
+		TableColumn<Artikel, String> colArtikelgroep = new TableColumn<Artikel, String>("artikelgroep");
+		colArtikelgroep.setMinWidth(100);
+		colArtikelgroep.setCellValueFactory(new PropertyValueFactory<Artikel, String>("artikelgroep"));
 
 		TableColumn<Artikel, Double> colVerkoopprijs = new TableColumn<Artikel, Double>("verkoopprijs");
 		colVerkoopprijs.setMinWidth(100);
@@ -64,10 +74,15 @@ public class KassaOverviewPane extends GridPane {
 		TableColumn<Artikel, Integer> colVoorraad = new TableColumn<Artikel, Integer>("voorraad");
 		colVoorraad.setMinWidth(100);
 		colVoorraad.setCellValueFactory(new PropertyValueFactory<Artikel, Integer>("voorraad"));
+
+		//voeg kolommen toe aan tabel
 		table.getColumns().addAll(colcode,colOmschrijving,colArtikelgroep, colVerkoopprijs,colVoorraad);
-		vb.getChildren().add(table);
+
+		//voeg titel en tabel toe
+		vb.getChildren().addAll(lblHeading,table);
 		this.getChildren().addAll(vb);
 
+		//registreer input
 		textField.setOnKeyPressed(ke -> {
 			if (ke.getCode().equals(KeyCode.ENTER))
 			{
