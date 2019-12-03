@@ -26,7 +26,7 @@ public class KlantOverviewController implements Observer {
 
     @Override
     public void update() {
-        //System.out.println("klantoverview controller updated");
+        //check of dit null is voor tijdens het opstarten van de applicatie
         if(klantOverviewPane!=null){
             klantOverviewPane.setArtikels(getList());
             berekenPrice();
@@ -35,7 +35,6 @@ public class KlantOverviewController implements Observer {
     }
     public void berekenPrice(){
         double totaal=0.0;
-
         for(Artikel artikel:getList()){
             totaal+=artikel.getVerkoopprijs() * artikel.getAantal();
         }
