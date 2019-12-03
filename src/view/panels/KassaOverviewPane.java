@@ -51,29 +51,29 @@ public class KassaOverviewPane extends GridPane {
 		lblHeading.setFont(new Font("Arial", 20));
 
 		//creeer tabel
-		table = new TableView<Artikel>();
+		table = new TableView<>();
 		table.setItems(kassaViewController.getArtikels());
 
 		//creeer kolommen
-		TableColumn<Artikel, Integer> colcode = new TableColumn<Artikel, Integer>("code");
+		TableColumn<Artikel, Integer> colcode = new TableColumn<>("code");
 		colcode.setMinWidth(100);
-		colcode.setCellValueFactory(new PropertyValueFactory<Artikel, Integer>("code"));
+		colcode.setCellValueFactory(new PropertyValueFactory<>("code"));
 
-		TableColumn<Artikel, String> colOmschrijving = new TableColumn<Artikel, String>("Omschrijving");
+		TableColumn<Artikel, String> colOmschrijving = new TableColumn<>("Omschrijving");
 		colOmschrijving.setMinWidth(300);
-		colOmschrijving.setCellValueFactory(new PropertyValueFactory<Artikel, String>("Omschrijving"));
+		colOmschrijving.setCellValueFactory(new PropertyValueFactory<>("Omschrijving"));
 
-		TableColumn<Artikel, String> colArtikelgroep = new TableColumn<Artikel, String>("artikelgroep");
+		TableColumn<Artikel, String> colArtikelgroep = new TableColumn<>("artikelgroep");
 		colArtikelgroep.setMinWidth(100);
-		colArtikelgroep.setCellValueFactory(new PropertyValueFactory<Artikel, String>("artikelgroep"));
+		colArtikelgroep.setCellValueFactory(new PropertyValueFactory<>("artikelgroep"));
 
-		TableColumn<Artikel, Double> colVerkoopprijs = new TableColumn<Artikel, Double>("verkoopprijs");
+		TableColumn<Artikel, Double> colVerkoopprijs = new TableColumn<>("verkoopprijs");
 		colVerkoopprijs.setMinWidth(100);
-		colVerkoopprijs.setCellValueFactory(new PropertyValueFactory<Artikel, Double>("verkoopprijs"));
+		colVerkoopprijs.setCellValueFactory(new PropertyValueFactory<>("verkoopprijs"));
 
-		TableColumn<Artikel, Integer> colVoorraad = new TableColumn<Artikel, Integer>("voorraad");
+		TableColumn<Artikel, Integer> colVoorraad = new TableColumn<>("voorraad");
 		colVoorraad.setMinWidth(100);
-		colVoorraad.setCellValueFactory(new PropertyValueFactory<Artikel, Integer>("voorraad"));
+		colVoorraad.setCellValueFactory(new PropertyValueFactory<>("voorraad"));
 
 		//voeg kolommen toe aan tabel
 		table.getColumns().addAll(colcode,colOmschrijving,colArtikelgroep, colVerkoopprijs,colVoorraad);
@@ -86,16 +86,26 @@ public class KassaOverviewPane extends GridPane {
 		textField.setOnKeyPressed(ke -> {
 			if (ke.getCode().equals(KeyCode.ENTER))
 			{
-				try{kassaViewController.verwerkInput(Integer.parseInt(textField.getText()));}
+				try{kassaViewController.addArtikkel(Integer.parseInt(textField.getText()));}
 				catch (Exception e){
 					displayErrorMessage("niet bestaande code");
 				}
 				textField.clear();
 			}
 		});
+
+		//verwijder item uit tabel bij dubbelklik
+		table.setRowFactory( tv -> {
+			TableRow<Artikel> row = new TableRow<>();
+			row.setOnMouseClicked(event -> {
+				if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
+					int code = row.getItem().getCode();
+					kassaViewController.removeArtikkel(code);
+				}
+			});
+			return row ;
+		});
 	}
-
-
 
 	public void displayErrorMessage(String errorMessage){
 		Alert alert = new Alert(Alert.AlertType.INFORMATION);

@@ -14,7 +14,7 @@ public class KassaViewController implements Observer {
         this.bestelling=bestelling;
     }
 
-    private void berekenPrice(){
+    private void price(){
         double totaal=0.0;
         for(Artikel artikel:bestelling.getArtikels()){
             totaal+=artikel.getVerkoopprijs();
@@ -28,10 +28,20 @@ public class KassaViewController implements Observer {
         this.kassaOverviewPane = kassaOverviewPane;
     }
 
-    public void verwerkInput(int code){
+    public void addArtikkel(int code){
         if(bestelling.itemBestaat(code)){
             bestelling.addArtikel(code);
-            berekenPrice();
+            price();
+        }
+        else {
+            kassaOverviewPane.displayErrorMessage("niet bestaande code");
+        }
+    }
+
+    public void removeArtikkel(int code){
+        if(bestelling.itemBestaat(code)){
+            bestelling.removeArtikel(code);
+            price();
         }
         else {
             kassaOverviewPane.displayErrorMessage("niet bestaande code");

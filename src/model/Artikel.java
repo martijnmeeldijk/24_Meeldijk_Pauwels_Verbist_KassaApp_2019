@@ -27,14 +27,11 @@ public class Artikel {
         return null;
     }
 
-
-
-
     public int getCode() {
         return code;
     }
 
-    public void setCode(int code) {
+    private void setCode(int code) {
         if(code<0){
             throw new IllegalArgumentException("code mag niet negatief zijn");
         }
@@ -45,7 +42,7 @@ public class Artikel {
         return omschrijving;
     }
 
-    public void setOmschrijving(String omschrijving) {
+    private void setOmschrijving(String omschrijving) {
         if(omschrijving==null || omschrijving.length()==0){
             throw new IllegalArgumentException("omschrijving mag niet leeg zijn of null zijn");
         }
@@ -68,7 +65,7 @@ public class Artikel {
         this.aantal = aantal;
     }
 
-    public void setArtikelgroep(String artikelgroep) {
+    private void setArtikelgroep(String artikelgroep) {
         if(artikelgroep==null || artikelgroep.length()==0){
             throw new IllegalArgumentException("artikelgroep mag niet leeg zijn of null zijn");
         }
@@ -79,7 +76,7 @@ public class Artikel {
         return verkoopprijs;
     }
 
-    public void setVerkoopprijs(double verkoopprijs) {
+    private void setVerkoopprijs(double verkoopprijs) {
         if(verkoopprijs<0){
             throw new IllegalArgumentException("verkoopsprijs mag niet 0 zijn");
         }
@@ -90,7 +87,7 @@ public class Artikel {
         return voorraad;
     }
 
-    public void setVoorraad(int voorraad) {
+    private void setVoorraad(int voorraad) {
         if(verkoopprijs<0){
             throw new IllegalArgumentException("voorraad mag niet 0 zijn");
         }
