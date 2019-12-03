@@ -16,24 +16,21 @@ import java.util.HashMap;
 
 public class ArtikelOverviewPane extends GridPane {
 	private TableView<Artikel> table;
-	private ObservableList<Artikel>list;
-	private Label label= new Label("bla");
+	private ArtikelOverviewController artikelOverviewController;
 	public static Comparator<Artikel> omschrijvingcomperator = new OmschrijvingComparable();
-
-	public void setList(ObservableList<Artikel> list) {
-		this.list = list;
-	}
 
 
 	public ArtikelOverviewPane(ArtikelOverviewController artikelOverviewController) {
 		// dit stelt voor de meegegeven controller deze view in
+		this.artikelOverviewController=artikelOverviewController;
 		artikelOverviewController.setArtikelOverviewPane(this);
+
 		this.setPadding(new Insets(10, 10, 10, 10));
 		Label lblHeading = new Label("artikels");
 		lblHeading.setFont(new Font("Arial", 20));
 		table = new TableView<Artikel>();
 
-		table.setItems(list);
+		table.setItems(artikelOverviewController.getList());
 		TableColumn<Artikel, Integer> colcode = new TableColumn<Artikel, Integer>("code");
 		colcode.setMinWidth(100);
 		colcode.setCellValueFactory(new PropertyValueFactory<Artikel, Integer>("code"));

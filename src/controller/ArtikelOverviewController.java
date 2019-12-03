@@ -4,22 +4,20 @@ import database.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Artikel;
+import model.Bestelling;
 import model.OmschrijvingComparable;
-import model.Subject;
 import view.panels.ArtikelOverviewPane;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 
 public class ArtikelOverviewController implements Observer {
     private ArtikelOverviewPane artikelOverviewPane;
     public static Comparator<Artikel> omschrijvingcomperator = new OmschrijvingComparable();
-    DataInMemory data = new DataInMemory();
-    public ArtikelOverviewController() {
-
+    Bestelling bestelling;
+    public ArtikelOverviewController(Bestelling bestelling) {
+        this.bestelling=bestelling;
     }
-
 
     public void setArtikelOverviewPane(ArtikelOverviewPane artikelOverviewPane) {
         this.artikelOverviewPane = artikelOverviewPane;
@@ -27,9 +25,9 @@ public class ArtikelOverviewController implements Observer {
 
     }
 
-    private ObservableList<Artikel> getList(){
+    public ObservableList<Artikel> getList(){
         ObservableList<Artikel>artikels= FXCollections.observableArrayList();
-        HashMap<Integer,Artikel>hashartikels=data.getArtikels();
+        HashMap<Integer,Artikel>hashartikels=bestelling.getDataInMemory().getArtikels();
         for(int key:hashartikels.keySet()){
             artikels.add(hashartikels.get(key));
         }
@@ -37,9 +35,13 @@ public class ArtikelOverviewController implements Observer {
         return artikels;
     }
 
+    public Bestelling getBestelling() {
+        return bestelling;
+    }
+
+
     @Override
     public void update() {
-        System.out.println("ArtikelOverviewController: updated");
-        artikelOverviewPane.setList(getList());
+        //artikelOverviewPane.setList(getList());
     }
 }

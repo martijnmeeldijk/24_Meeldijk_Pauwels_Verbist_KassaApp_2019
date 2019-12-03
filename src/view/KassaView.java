@@ -7,15 +7,15 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import model.Bestelling;
 
 import java.awt.*;
 
 public class KassaView extends GridPane {
 	private Stage stage = new Stage();
-	private Label label = new Label("test");
 
 
-	public KassaView(KassaViewController kassaViewController){
+	public KassaView(Bestelling bestelling){
 		//voor mvc patroon
 		stage.setTitle("KASSA VIEW");
 		stage.setResizable(false);
@@ -23,10 +23,12 @@ public class KassaView extends GridPane {
 		stage.setY(20);
 		Group root = new Group();
 		Scene scene = new Scene(root, 750, 500);
-		BorderPane borderPane = new KassaMainPane();
+		BorderPane borderPane = new KassaMainPane(bestelling);
 		borderPane.prefHeightProperty().bind(scene.heightProperty());
 		borderPane.prefWidthProperty().bind(scene.widthProperty());
 		root.getChildren().add(borderPane);
+
+
 		stage.setScene(scene);
 		stage.sizeToScene();
 
@@ -34,7 +36,4 @@ public class KassaView extends GridPane {
 
 	}
 
-	public void setLabel(Label label) {
-		this.label = label;
-	}
 }

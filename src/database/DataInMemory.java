@@ -1,7 +1,10 @@
 package database;
 
+import controller.Observer;
 import model.Artikel;
+import model.Subject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class DataInMemory {
@@ -21,7 +24,8 @@ public class DataInMemory {
         try{
             return artikels.get(getal);
         }catch (Exception e){
-            throw new IllegalArgumentException("verkeerd getal meegegeven bij opvragen artikel");
+            //throw new IllegalArgumentException("verkeerd getal meegegeven bij opvragen artikel");
+            return null;
         }
 
     }
@@ -29,4 +33,6 @@ public class DataInMemory {
     public HashMap<Integer, Artikel> getArtikels() {
         return artikels;
     }
+
+
 }

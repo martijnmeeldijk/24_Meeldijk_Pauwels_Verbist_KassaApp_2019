@@ -21,7 +21,6 @@ import java.util.Comparator;
 public class KassaOverviewPane extends GridPane {
 	private KassaViewController kassaViewController;
 	private TableView<Artikel> table;
-	private ObservableList<Artikel>list;
 	private Label prijs;
 	private Label prijswaarde;
 	public static Comparator<Artikel> omschrijvingcomperator = new OmschrijvingComparable();
@@ -45,7 +44,7 @@ public class KassaOverviewPane extends GridPane {
 		lblHeading.setFont(new Font("Arial", 20));
 		table = new TableView<Artikel>();
 
-		table.setItems(list);
+		table.setItems(kassaViewController.getBestelling().getArtikels());
 		TableColumn<Artikel, Integer> colcode = new TableColumn<Artikel, Integer>("code");
 		colcode.setMinWidth(100);
 		colcode.setCellValueFactory(new PropertyValueFactory<Artikel, Integer>("code"));
@@ -90,14 +89,6 @@ public class KassaOverviewPane extends GridPane {
 		alert.show();
 	}
 
-	public void setList(ObservableList<Artikel> list) {
-		this.list = list;
-		table.setItems(list);
-	}
-
-	public ObservableList<Artikel> getList() {
-		return list;
-	}
 
 	public void setPrijs(String prijs) {
 		this.prijswaarde.setText(prijs);

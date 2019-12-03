@@ -10,19 +10,19 @@ import database.DataInMemory;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.BorderPane;
+import model.Bestelling;
 import view.panels.ArtikelOverviewPane;
 import view.panels.KassaOverviewPane;
 
 public class KassaMainPane extends BorderPane {
 
-	public KassaMainPane(){
-        ArtikelOverviewController artikelOverviewController= new ArtikelOverviewController();
+	public KassaMainPane(Bestelling bestelling){
+        ArtikelOverviewController artikelOverviewController= new ArtikelOverviewController(bestelling);
 
 	    TabPane tabPane = new TabPane();
-	    KassaViewController kassaViewController= new KassaViewController();
+	    KassaViewController kassaViewController= new KassaViewController(bestelling);
         KassaOverviewPane kassaOverviewPane=new KassaOverviewPane(kassaViewController);
         Tab kassaTab = new Tab("Kassa", kassaOverviewPane);
-        // artikeloverviewpane moet niet gewoon een new artikeltextloadsave() object aanmaken! het is om te testen
         ArtikelOverviewPane artikelOverviewPane = new ArtikelOverviewPane(artikelOverviewController);
         Tab artikelTab = new Tab("Artikelen",artikelOverviewPane);
         Tab instellingTab = new Tab("Instellingen");

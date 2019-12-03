@@ -1,25 +1,21 @@
 package controller;
 
-import database.DataInMemory;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.Label;
 import model.Artikel;
-import view.KassaView;
+import model.Bestelling;
 import view.panels.KassaOverviewPane;
-
-import java.awt.*;
 
 public class KassaViewController implements Observer {
     private KassaOverviewPane kassaOverviewPane;
-    DataInMemory dataInMemory;
-
-    public KassaViewController() {
-        dataInMemory= new DataInMemory();
+    Bestelling bestelling;
+    public KassaViewController(Bestelling bestelling) {
+        this.bestelling=bestelling;
     }
+
     public void berekenPrice(){
         double totaal=0.0;
-        for(Artikel artikel:kassaOverviewPane.getList()){
+        for(Artikel artikel:bestelling.getArtikels()){
             totaal+=artikel.getVerkoopprijs();
         }
         kassaOverviewPane.setPrijs(String.valueOf(totaal));
@@ -32,19 +28,17 @@ public class KassaViewController implements Observer {
     }
 
     public void verwerkInput(int code){
-        ObservableList<Artikel>tijdelijk=kassaOverviewPane.getList();
-        if(tijdelijk==null){
-            tijdelijk= FXCollections.observableArrayList();
-        }
-        if(dataInMemory.getArtikel(code)==null){
-            kassaOverviewPane.displayErrorMessage("niet bestaande code");
+        if(bestelling.itemBestaat(code)){
+            bestelling.addArtikel(code);
+            berekenPrice();
         }
         else {
-            tijdelijk.add(dataInMemory.getArtikel(code));
-            kassaOverviewPane.setList(tijdelijk);
-            System.out.println(tijdelijk);
+            kassaOverviewPane.displayErrorMessage("niet bestaande code");
         }
-        berekenPrice();
+    }
+
+    public Bestelling getBestelling() {
+        return bestelling;
     }
 
     @Override

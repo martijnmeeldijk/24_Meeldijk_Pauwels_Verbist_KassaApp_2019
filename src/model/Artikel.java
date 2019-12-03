@@ -6,6 +6,7 @@ public class Artikel {
     private String artikelgroep;
     private double verkoopprijs;
     private int voorraad;
+    private int aantal;
     private final static int btw = 6;
 
     public Artikel(int code, String omschrijving, String artikelgroep, double verkoopprijs, int voorraad) {
@@ -55,6 +56,18 @@ public class Artikel {
         return artikelgroep;
     }
 
+    public static int getBtw() {
+        return btw;
+    }
+
+    public int getAantal() {
+        return aantal;
+    }
+
+    public void setAantal(int aantal) {
+        this.aantal = aantal;
+    }
+
     public void setArtikelgroep(String artikelgroep) {
         if(artikelgroep==null || artikelgroep.length()==0){
             throw new IllegalArgumentException("artikelgroep mag niet leeg zijn of null zijn");
@@ -83,6 +96,7 @@ public class Artikel {
         }
         this.voorraad = voorraad;
     }
+
 
 
 
