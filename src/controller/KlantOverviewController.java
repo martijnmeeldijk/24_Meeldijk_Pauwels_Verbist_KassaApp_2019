@@ -29,9 +29,19 @@ public class KlantOverviewController implements Observer {
         //System.out.println("klantoverview controller updated");
         if(klantOverviewPane!=null){
             klantOverviewPane.setArtikels(getList());
-        }
+            berekenPrice();
 
+        }
     }
+    public void berekenPrice(){
+        double totaal=0.0;
+
+        for(Artikel artikel:getList()){
+            totaal+=artikel.getVerkoopprijs() * artikel.getAantal();
+        }
+        klantOverviewPane.setPrijs(String.valueOf(totaal));
+    }
+
 
     public ObservableList<Artikel> getList() {
         System.out.println("hier");

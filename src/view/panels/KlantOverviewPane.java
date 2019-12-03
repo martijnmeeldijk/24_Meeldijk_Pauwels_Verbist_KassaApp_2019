@@ -10,6 +10,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import model.Artikel;
 import model.OmschrijvingComparable;
@@ -19,12 +21,20 @@ import java.util.Comparator;
 
 public class KlantOverviewPane  extends GridPane {
     private TableView<Artikel> table;
-    private Label label= new Label("bla");
+    private Label prijs;
+    private Label prijswaarde;
     public static Comparator<Artikel> omschrijvingcomperator = new OmschrijvingComparable();
 
 
     public KlantOverviewPane(KlantOverviewController klantOverviewController) {
         // dit stelt voor de meegegeven controller deze view in
+        prijswaarde=new Label("0.0");
+        prijs=new Label("prijs: ");
+        HBox prijsbox=new HBox();
+        prijsbox.getChildren().addAll(prijs,prijswaarde);
+        VBox vb= new VBox();
+        vb.getChildren().add(prijsbox);
+
         klantOverviewController.setKlantOverviewPane(this);
         this.setPadding(new Insets(10, 10, 10, 10));
         Label lblHeading = new Label("artikels");
@@ -47,7 +57,8 @@ public class KlantOverviewPane  extends GridPane {
 
 
         table.getColumns().addAll(colOmschrijving,colAantal, colVerkoopprijs);
-        this.getChildren().addAll(lblHeading, table);
+        vb.getChildren().add(table);
+        this.getChildren().addAll(lblHeading, vb);
     }
 
     public void displayErrorMessage(String errorMessage){
@@ -65,6 +76,10 @@ public class KlantOverviewPane  extends GridPane {
     public TableView<Artikel> getTable() {
         return table;
     }
+    public void setPrijs(String prijs) {
+        this.prijswaarde.setText(prijs);
+    }
+
 
     public void refresh(){
         table.refresh();
