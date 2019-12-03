@@ -37,7 +37,7 @@ public class KassaViewController implements Observer {
             tijdelijk= FXCollections.observableArrayList();
         }
         if(dataInMemory.getArtikel(code)==null){
-            kassaOverviewPane.displayErrorMessage("verkeerd product");
+            kassaOverviewPane.displayErrorMessage("niet bestaande code");
         }
         else {
             tijdelijk.add(dataInMemory.getArtikel(code));

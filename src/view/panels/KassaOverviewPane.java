@@ -68,18 +68,19 @@ public class KassaOverviewPane extends GridPane {
 		table.getColumns().addAll(colcode,colOmschrijving,colArtikelgroep, colVerkoopprijs,colVoorraad);
 		vb.getChildren().add(table);
 		this.getChildren().addAll(vb);
-		textField.setOnKeyPressed(new EventHandler<KeyEvent>()
-		{
-			@Override
-			public void handle(KeyEvent ke)
+
+		textField.setOnKeyPressed(ke -> {
+			if (ke.getCode().equals(KeyCode.ENTER))
 			{
-				if (ke.getCode().equals(KeyCode.ENTER))
-				{
-					kassaViewController.verwerkInput(Integer.parseInt(textField.getText()));
+				try{kassaViewController.verwerkInput(Integer.parseInt(textField.getText()));}
+				catch (Exception e){
+					displayErrorMessage("niet bestaande code");
 				}
+				textField.clear();
 			}
 		});
 	}
+
 
 
 	public void displayErrorMessage(String errorMessage){
