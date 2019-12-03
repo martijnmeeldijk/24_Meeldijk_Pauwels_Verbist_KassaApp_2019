@@ -52,7 +52,7 @@ public class KassaOverviewPane extends GridPane {
 
 		//creeer tabel
 		table = new TableView<Artikel>();
-		table.setItems(kassaViewController.getBestelling().getArtikels());
+		table.setItems(kassaViewController.getArtikels());
 
 		//creeer kolommen
 		TableColumn<Artikel, Integer> colcode = new TableColumn<Artikel, Integer>("code");
