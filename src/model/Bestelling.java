@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class Bestelling implements Subject {
     private ObservableList<Artikel> artikels;
     private ArrayList<Observer> observers;
-    DataInMemory dataInMemory;
+    private DataInMemory dataInMemory;
 
 
     public Bestelling() {
@@ -24,12 +24,14 @@ public class Bestelling implements Subject {
         notifyObserver();
     }
 
+    public void removeArtikel(int code){
+        artikels.remove(dataInMemory.getArtikel(code));
+        notifyObserver();
+    }
+
 
     public boolean itemBestaat(int getal){
-        if(dataInMemory.getArtikel(getal)==null){
-            return false;
-        }
-        return true;
+        return dataInMemory.getArtikel(getal) != null;
     }
 
     public DataInMemory getDataInMemory() {
