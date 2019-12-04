@@ -3,21 +3,24 @@ package controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Artikel;
-import model.Bestelling;
-import view.KlantOverviewPane;
+import model.bestelling.Bestelling;
+import view.panels.KlantOverviewPane;
 
 public class KlantOverviewController implements Observer {
-    private Bestelling bestelling;
-    private KlantOverviewPane klantOverviewPane;
+    Bestelling bestelling;
+    KlantOverviewPane klantOverviewPane;
 
     public KlantOverviewController(Bestelling bestelling) {
         this.bestelling = bestelling;
         bestelling.add(this);
+
     }
 
     public void setKlantOverviewPane(KlantOverviewPane klantOverviewPane) {
         this.klantOverviewPane = klantOverviewPane;
     }
+
+
 
     @Override
     public void update() {
@@ -28,7 +31,7 @@ public class KlantOverviewController implements Observer {
 
         }
     }
-    private void berekenPrice(){
+    public void berekenPrice(){
         double totaal=0.0;
 
         for(Artikel artikel:getList()){
@@ -53,4 +56,5 @@ public class KlantOverviewController implements Observer {
         }
         return tijdelijk;
     }
+
 }
