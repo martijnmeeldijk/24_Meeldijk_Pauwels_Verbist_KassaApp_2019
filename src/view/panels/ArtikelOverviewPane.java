@@ -25,33 +25,23 @@ public class ArtikelOverviewPane extends GridPane {
 		this.artikelOverviewController=artikelOverviewController;
 		this.artikelOverviewController.setArtikelOverviewPane(this);
 
+		//layout
 		this.setPadding(new Insets(10, 10, 10, 10));
+
+		//creeer titel
 		Label lblHeading = new Label("artikels");
 		lblHeading.setFont(new Font("Arial", 20));
-		table = new TableView<>();
 
-		table.setItems(artikelOverviewController.getList());
-		TableColumn<Artikel, Integer> colcode = new TableColumn<>("code");
-		colcode.setMinWidth(100);
-		colcode.setCellValueFactory(new PropertyValueFactory<>("code"));
+		//creeer tabel
+		tabel();
 
-		TableColumn<Artikel, String> colArtikelgroep = new TableColumn<>("artikelgroep");
-		colArtikelgroep.setMinWidth(100);
-		colArtikelgroep.setCellValueFactory(new PropertyValueFactory<>("artikelgroep"));
-
-		TableColumn<Artikel, String> colOmschrijving = new TableColumn<>("Omschrijving");
-		colOmschrijving.setMinWidth(300);
-		colOmschrijving.setCellValueFactory(new PropertyValueFactory<>("Omschrijving"));
-
-		TableColumn<Artikel, Double> colVerkoopprijs = new TableColumn<>("verkoopprijs");
-		colVerkoopprijs.setMinWidth(100);
-		colVerkoopprijs.setCellValueFactory(new PropertyValueFactory<>("verkoopprijs"));
-
-		TableColumn<Artikel, Integer> colVoorraad = new TableColumn<>("voorraad");
-		colVoorraad.setMinWidth(100);
-		colVoorraad.setCellValueFactory(new PropertyValueFactory<>("voorraad"));
-		table.getColumns().addAll(colcode,colOmschrijving,colArtikelgroep, colVerkoopprijs,colVoorraad);
+		//voeg titel en tabel toe
 		this.getChildren().addAll(lblHeading, table);
+	}
+
+	private void tabel(){
+		//creeer tabel
+		table = Tabel.create(artikelOverviewController.getList());
 	}
 
 	/*public void displayErrorMessage(String errorMessage){

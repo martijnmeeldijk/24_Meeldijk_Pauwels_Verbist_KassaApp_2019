@@ -37,7 +37,6 @@ public class Bestelling implements Subject {
         currentState.removeArtikel(code);
     }
 
-
     public boolean itemBestaat(int getal){
         return dataInMemory.getArtikel(getal) != null;
     }
