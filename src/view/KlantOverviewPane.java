@@ -79,24 +79,23 @@ public class KlantOverviewPane  extends GridPane {
         table.getColumns().addAll(colOmschrijving,colAantal, colVerkoopprijs);
     }
 
-    public void displayErrorMessage(String errorMessage){
+    public void setArtikels(ObservableList<Artikel> list){
+        table.setItems(list);
+        table.refresh();
+    }
+
+    public void setPrijs(String prijs) {
+        this.prijswaarde.setText(prijs);
+    }
+
+    /*public void displayErrorMessage(String errorMessage){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setHeaderText("Information Alert");
         alert.setContentText(errorMessage);
         alert.show();
     }
 
-    public void setArtikels(ObservableList<Artikel>list){
-        table.setItems(list);
-        table.refresh();
-    }
-
-    /*public TableView<Artikel> getTable() {
+    public TableView<Artikel> getTable() {
         return table;
     }*/
-
-    public void setPrijs(String prijs) {
-        this.prijswaarde.setText(prijs);
-    }
-
 }

@@ -19,8 +19,6 @@ public class KlantOverviewController implements Observer {
         this.klantOverviewPane = klantOverviewPane;
     }
 
-
-
     @Override
     public void update() {
         //System.out.println("klantoverview controller updated");

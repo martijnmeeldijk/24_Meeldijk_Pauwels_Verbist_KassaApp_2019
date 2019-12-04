@@ -22,8 +22,6 @@ public class KassaViewController implements Observer {
         kassaOverviewPane.setPrijs(String.valueOf(totaal));
     }
 
-
-
     public void setKassaView(KassaOverviewPane kassaOverviewPane) {
         this.kassaOverviewPane = kassaOverviewPane;
     }
