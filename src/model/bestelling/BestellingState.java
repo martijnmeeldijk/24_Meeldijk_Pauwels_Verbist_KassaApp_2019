@@ -17,10 +17,10 @@ public abstract class BestellingState {
         this.bestelling = bestelling;
     }
     public void zetOnHold(){
-        throw new NotPossibleException("Het artikel kan niet 'on hold' gezet worden.");
+        throw new NotPossibleException("De bestelling kan niet 'on hold' gezet worden.");
     }
     public void zetActief(){
-        throw new NotPossibleException(("Het artikel kan niet op 'actief' gezet worden"));
+        throw new NotPossibleException(("De bestelling kan niet op 'actief' gezet worden"));
     }
     public void addArtikel(int code){
         throw new NotPossibleException(("Het artikel kan niet toegevogd worden want de bestelling is 'On Hold' gezet"));

@@ -8,6 +8,7 @@ import view.panels.KassaOverviewPane;
 public class KassaViewController implements Observer {
     private KassaOverviewPane kassaOverviewPane;
     private Bestelling bestelling;
+    private Bestelling onHoldBestelling;
 
     public KassaViewController(Bestelling bestelling) {
         this.bestelling=bestelling;
@@ -58,4 +59,17 @@ public class KassaViewController implements Observer {
     @Override
     public void update() {
     }
+
+    public void zetOnHold(){
+        try {
+            bestelling.zetOnHold();
+            onHoldBestelling = bestelling;
+            System.out.println("On hold gezet");
+        }
+        catch (Exception e){
+            kassaOverviewPane.displayErrorMessage(e.getMessage());
+        }
+
+    }
+
 }

@@ -86,8 +86,9 @@ public class KassaOverviewPane extends GridPane {
 		ComboBox<String> kortingstype = new ComboBox<>(options);
 		vb.getChildren().addAll(korting,kortingstype);
 
-		// Zet on hold (geschreven door martijn)
+		// zet on hold
 		Button zetOnHold = new Button("Zet on hold");
+		zetOnHold.setOnMouseClicked(event -> kassaViewController.zetOnHold());
 		vb.getChildren().addAll(zetOnHold);
 	}
 
