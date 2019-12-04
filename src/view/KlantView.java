@@ -5,7 +5,6 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import model.bestelling.Bestelling;
-import view.panels.KlantOverviewPane;
 
 public class KlantView  {
 	private Stage stage = new Stage();

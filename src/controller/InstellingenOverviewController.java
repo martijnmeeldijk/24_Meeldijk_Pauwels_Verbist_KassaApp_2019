@@ -1,6 +1,6 @@
 package controller;
 
-import model.Bestelling;
+import model.bestelling.Bestelling;
 import view.panels.InstellingenOverviewPane;
 
 public class InstellingenOverviewController implements Observer{

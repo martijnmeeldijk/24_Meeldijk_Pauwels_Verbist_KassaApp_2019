@@ -4,7 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Artikel;
 import model.bestelling.Bestelling;
-import view.panels.KlantOverviewPane;
+import view.KlantOverviewPane;
 
 public class KlantOverviewController implements Observer {
     Bestelling bestelling;

@@ -17,6 +17,7 @@ public class KassaOverviewPane extends GridPane {
 	private KassaViewController kassaViewController;
 	private TableView<Artikel> table;
 	private Label prijswaarde;
+	private TextField inputCode;
 	//public static Comparator<Artikel> omschrijvingcomperator = new OmschrijvingComparable();
 
 	public KassaOverviewPane(KassaViewController kassaViewController) {
@@ -29,7 +30,7 @@ public class KassaOverviewPane extends GridPane {
 
 		//creer display inputveld code en totaalprijs
 		Label code = new Label("Code:");
-		TextField inputCode = new TextField ();
+		inputCode = new TextField ();
 		prijswaarde=new Label("0.0");
 		Label prijs=new Label("prijs: ");
 		HBox prijsbox=new HBox();
@@ -52,39 +53,10 @@ public class KassaOverviewPane extends GridPane {
 		this.getChildren().addAll(vb);
 
 		//registreer input code
-		inputCode.setOnKeyPressed(ke -> {
-			if (ke.getCode().equals(KeyCode.ENTER))
-			{
-				try{kassaViewController.addArtikkel(Integer.parseInt(inputCode.getText()));}
-				catch (Exception e){
-					displayErrorMessage("niet bestaande code");
-				}
-				inputCode.clear();
-			}
-		});
+		inputCode();
 
 		//verwijder item uit tabel bij dubbelklik
-		table.setRowFactory( tv -> {
-			TableRow<Artikel> row = new TableRow<>();
-			row.setOnMouseClicked(event -> {
-				if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
-					int codeInt = row.getItem().getCode();
-					kassaViewController.removeArtikkel(codeInt);
-				}
-			});
-			return row ;
-		});
-
-		//korting
-		Label korting = new Label("Korting:");
-		ObservableList<String> options =
-				FXCollections.observableArrayList(
-						"Option 1",
-						"Option 2",
-						"Option 3"
-				);
-		ComboBox<String> kortingstype = new ComboBox<>(options);
-		vb.getChildren().addAll(korting,kortingstype);
+		verwijder();
 
 		// zet on hold
 		Button zetOnHold = new Button("Zet on hold");
@@ -136,6 +108,34 @@ public class KassaOverviewPane extends GridPane {
 		table.getColumns().addAll(colcode,colOmschrijving,colArtikelgroep, colVerkoopprijs,colVoorraad);
 	}
 
+	private void inputCode(){
+		//registreer input code
+		inputCode.setOnKeyPressed(ke -> {
+			if (ke.getCode().equals(KeyCode.ENTER))
+			{
+				try{kassaViewController.addArtikkel(Integer.parseInt(inputCode.getText()));}
+				catch (Exception e){
+					displayErrorMessage("niet bestaande code");
+				}
+				inputCode.clear();
+			}
+		});
+	}
+
+	private void verwijder(){
+		//verwijder item uit tabel bij dubbelklik
+		table.setRowFactory( tv -> {
+			TableRow<Artikel> row = new TableRow<>();
+			row.setOnMouseClicked(event -> {
+				if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
+					int codeInt = row.getItem().getCode();
+					kassaViewController.removeArtikkel(codeInt);
+				}
+			});
+			return row ;
+		});
+	}
+
 	public void displayErrorMessage(String errorMessage){
 		Alert alert = new Alert(Alert.AlertType.INFORMATION);
 		alert.setHeaderText("Information Alert");
@@ -146,7 +146,8 @@ public class KassaOverviewPane extends GridPane {
 	public void setPrijs(String prijs) {
 		this.prijswaarde.setText(prijs);
 	}
-	public void refresh(){
+
+	private void refresh(){
 		table.refresh();
 	}
 }

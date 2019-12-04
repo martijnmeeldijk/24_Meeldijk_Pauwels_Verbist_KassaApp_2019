@@ -81,11 +81,15 @@ public class KlantOverviewPane  extends GridPane {
 
     public void setArtikels(ObservableList<Artikel> list){
         table.setItems(list);
-        table.refresh();
+        refresh();
     }
 
     public void setPrijs(String prijs) {
         this.prijswaarde.setText(prijs);
+    }
+
+    private void refresh(){
+        table.refresh();
     }
 
     /*public void displayErrorMessage(String errorMessage){
