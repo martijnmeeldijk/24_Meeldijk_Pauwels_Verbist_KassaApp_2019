@@ -88,12 +88,21 @@ public class KassaOverviewPane extends GridPane {
 
 		// zet on hold
 		Button zetOnHold = new Button("Zet on hold");
-		zetOnHold.setOnAction(onHold -> kassaViewController.zetOnHold());
+		zetOnHold.setOnAction(onHold -> {
+			kassaViewController.zetOnHold();
+			tabel();
+			refresh();
+		});
 		vb.getChildren().addAll(zetOnHold);
 
 		// Zet on hold artikel terug actief
 		Button zetActief = new Button("Zet Actief");
-		zetActief.setOnAction(actief -> kassaViewController.zetActief());
+		zetActief.setOnAction(actief ->
+		{
+			kassaViewController.zetActief();
+			tabel();
+			refresh();
+		});
 		vb.getChildren().addAll(zetActief);
 	}
 
@@ -136,6 +145,9 @@ public class KassaOverviewPane extends GridPane {
 
 	public void setPrijs(String prijs) {
 		this.prijswaarde.setText(prijs);
+	}
+	public void refresh(){
+		table.refresh();
 	}
 }
 	

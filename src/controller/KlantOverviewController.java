@@ -56,4 +56,5 @@ public class KlantOverviewController implements Observer {
         }
         return tijdelijk;
     }
+
 }
