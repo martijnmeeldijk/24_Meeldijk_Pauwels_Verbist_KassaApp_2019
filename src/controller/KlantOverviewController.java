@@ -7,8 +7,8 @@ import model.bestelling.Bestelling;
 import view.KlantOverviewPane;
 
 public class KlantOverviewController implements Observer {
-    Bestelling bestelling;
-    KlantOverviewPane klantOverviewPane;
+    private Bestelling bestelling;
+    private KlantOverviewPane klantOverviewPane;
 
     public KlantOverviewController(Bestelling bestelling) {
         this.bestelling = bestelling;
@@ -28,10 +28,10 @@ public class KlantOverviewController implements Observer {
         if(klantOverviewPane!=null){
             klantOverviewPane.setArtikels(getList());
             berekenPrice();
-
         }
     }
-    public void berekenPrice(){
+
+    private void berekenPrice(){
         double totaal=0.0;
 
         for(Artikel artikel:getList()){
