@@ -48,12 +48,12 @@ public class KassaViewController implements Observer {
         }
     }
 
-    public Bestelling getBestelling() {
+    /*public Bestelling getBestelling() {
         return bestelling;
-    }
+    }*/
 
     public ObservableList<Artikel> getArtikels(){
-        return  bestelling.getArtikels();
+        return bestelling.getArtikels();
     }
 
     @Override
