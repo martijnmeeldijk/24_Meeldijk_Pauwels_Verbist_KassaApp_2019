@@ -93,4 +93,8 @@ public class Bestelling implements Subject {
     public BestellingState getOnHold() {
         return onHold;
     }
+
+    public boolean isActief(){
+        return currentState.getClass() == Actief.class;
+    }
 }
