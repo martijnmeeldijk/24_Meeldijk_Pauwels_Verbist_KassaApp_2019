@@ -75,16 +75,7 @@ public class KassaOverviewPane extends GridPane {
 			return row ;
 		});
 
-		//korting
-		Label korting = new Label("Korting:");
-		ObservableList<String> options =
-				FXCollections.observableArrayList(
-						"Option 1",
-						"Option 2",
-						"Option 3"
-				);
-		ComboBox<String> kortingstype = new ComboBox<>(options);
-		vb.getChildren().addAll(korting,kortingstype);
+
 	}
 
 	private void tabel(){

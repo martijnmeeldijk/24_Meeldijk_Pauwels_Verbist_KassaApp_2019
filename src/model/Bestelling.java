@@ -8,10 +8,10 @@ import javafx.collections.ObservableList;
 import java.util.ArrayList;
 
 public class Bestelling implements Subject {
+
     private ObservableList<Artikel> artikels;
     private ArrayList<Observer> observers;
     private DataInMemory dataInMemory;
-
 
     public Bestelling() {
         observers=new ArrayList<>();

@@ -4,18 +4,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Artikel;
 import model.Bestelling;
-import view.panels.KlantOverviewPane;
-
-import java.util.HashSet;
+import view.KlantOverviewPane;
 
 public class KlantOverviewController implements Observer {
-    Bestelling bestelling;
-    KlantOverviewPane klantOverviewPane;
+    private Bestelling bestelling;
+    private KlantOverviewPane klantOverviewPane;
 
     public KlantOverviewController(Bestelling bestelling) {
         this.bestelling = bestelling;
         bestelling.add(this);
-
     }
 
     public void setKlantOverviewPane(KlantOverviewPane klantOverviewPane) {
@@ -33,7 +30,7 @@ public class KlantOverviewController implements Observer {
 
         }
     }
-    public void berekenPrice(){
+    private void berekenPrice(){
         double totaal=0.0;
 
         for(Artikel artikel:getList()){

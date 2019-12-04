@@ -1,4 +1,4 @@
-package view.panels;
+package view;
 
 import controller.ArtikelOverviewController;
 import controller.KlantOverviewController;
@@ -20,45 +20,63 @@ import org.omg.PortableInterceptor.INACTIVE;
 import java.util.Comparator;
 
 public class KlantOverviewPane  extends GridPane {
+    private KlantOverviewController klantOverviewController;
     private TableView<Artikel> table;
-    private Label prijs;
     private Label prijswaarde;
     public static Comparator<Artikel> omschrijvingcomperator = new OmschrijvingComparable();
 
 
     public KlantOverviewPane(KlantOverviewController klantOverviewController) {
         // dit stelt voor de meegegeven controller deze view in
+        this.klantOverviewController=klantOverviewController;
+        this.klantOverviewController.setKlantOverviewPane(this);
+
+        //layout
+        this.setPadding(new Insets(10, 10, 10, 10));
+
+        //creeer display totaalprijs
         prijswaarde=new Label("0.0");
-        prijs=new Label("prijs: ");
+        Label prijs = new Label("prijs: ");
         HBox prijsbox=new HBox();
         prijsbox.getChildren().addAll(prijs,prijswaarde);
+
+        //voeg totaalprijs toe
         VBox vb= new VBox();
         vb.getChildren().add(prijsbox);
+        vb.setSpacing(10);
 
-        klantOverviewController.setKlantOverviewPane(this);
-        this.setPadding(new Insets(10, 10, 10, 10));
+        //creeer titel
         Label lblHeading = new Label("artikels");
         lblHeading.setFont(new Font("Arial", 20));
-        table = new TableView<Artikel>();
 
-        table.setItems(klantOverviewController.getList());
+        //creeer tabel
+        tabel();
 
-        TableColumn<Artikel, String> colOmschrijving = new TableColumn<Artikel, String>("Omschrijving");
-        colOmschrijving.setMinWidth(300);
-        colOmschrijving.setCellValueFactory(new PropertyValueFactory<Artikel, String>("Omschrijving"));
-
-        TableColumn<Artikel, Double> colVerkoopprijs = new TableColumn<Artikel, Double>("verkoopprijs");
-        colVerkoopprijs.setMinWidth(100);
-        colVerkoopprijs.setCellValueFactory(new PropertyValueFactory<Artikel, Double>("verkoopprijs"));
-
-        TableColumn<Artikel, Integer> colAantal = new TableColumn<Artikel, Integer>("aantal");
-        colAantal.setMinWidth(100);
-        colAantal.setCellValueFactory(new PropertyValueFactory<Artikel, Integer>("aantal"));
-
-
-        table.getColumns().addAll(colOmschrijving,colAantal, colVerkoopprijs);
+        //voeg titel en tabel toe
         vb.getChildren().add(table);
         this.getChildren().addAll(lblHeading, vb);
+    }
+
+    private void tabel(){
+        //creeer tabel
+        table = new TableView<>();
+        table.setItems(klantOverviewController.getList());
+
+        //creeer kolommen
+        TableColumn<Artikel, String> colOmschrijving = new TableColumn<>("Omschrijving");
+        colOmschrijving.setMinWidth(300);
+        colOmschrijving.setCellValueFactory(new PropertyValueFactory<>("Omschrijving"));
+
+        TableColumn<Artikel, Integer> colAantal = new TableColumn<>("aantal");
+        colAantal.setMinWidth(100);
+        colAantal.setCellValueFactory(new PropertyValueFactory<>("aantal"));
+
+        TableColumn<Artikel, Double> colVerkoopprijs = new TableColumn<>("verkoopprijs");
+        colVerkoopprijs.setMinWidth(100);
+        colVerkoopprijs.setCellValueFactory(new PropertyValueFactory<>("verkoopprijs"));
+
+        //voeg kolommen toe aan tabel
+        table.getColumns().addAll(colOmschrijving,colAantal, colVerkoopprijs);
     }
 
     public void displayErrorMessage(String errorMessage){
@@ -70,18 +88,15 @@ public class KlantOverviewPane  extends GridPane {
 
     public void setArtikels(ObservableList<Artikel>list){
         table.setItems(list);
-        refresh();
+        table.refresh();
     }
 
-    public TableView<Artikel> getTable() {
+    /*public TableView<Artikel> getTable() {
         return table;
-    }
+    }*/
+
     public void setPrijs(String prijs) {
         this.prijswaarde.setText(prijs);
     }
 
-
-    public void refresh(){
-        table.refresh();
-    }
 }

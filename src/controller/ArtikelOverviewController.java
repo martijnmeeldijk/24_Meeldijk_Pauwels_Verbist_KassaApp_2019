@@ -12,17 +12,14 @@ import java.util.Comparator;
 import java.util.HashMap;
 
 public class ArtikelOverviewController implements Observer {
-    private ArtikelOverviewPane artikelOverviewPane;
-    public static Comparator<Artikel> omschrijvingcomperator = new OmschrijvingComparable();
-    Bestelling bestelling;
+    private static Comparator<Artikel> omschrijvingcomperator = new OmschrijvingComparable();
+    private Bestelling bestelling;
     public ArtikelOverviewController(Bestelling bestelling) {
         this.bestelling=bestelling;
     }
 
     public void setArtikelOverviewPane(ArtikelOverviewPane artikelOverviewPane) {
-        this.artikelOverviewPane = artikelOverviewPane;
         update();
-
     }
 
     public ObservableList<Artikel> getList(){
