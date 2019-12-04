@@ -30,13 +30,11 @@ public class Bestelling implements Subject {
     }
 
     public void addArtikel(int code){
-        artikels.add(dataInMemory.getArtikel(code));
-        notifyObserver();
+        currentState.addArtikel(code);
     }
 
     public void removeArtikel(int code){
-        artikels.remove(dataInMemory.getArtikel(code));
-        notifyObserver();
+        currentState.removeArtikel(code);
     }
 
 
@@ -74,6 +72,12 @@ public class Bestelling implements Subject {
 
 
     /** STATE **/
+    public void zetOnHold(){
+        currentState.zetOnHold();
+    }
+    public void zetActief(){
+        currentState.zetActief();
+    }
     public BestellingState getCurrentState(){
         return currentState;
     }
