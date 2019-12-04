@@ -1,10 +1,9 @@
 package controller;
 
-import database.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Artikel;
-import model.Bestelling;
+import model.bestelling.Bestelling;
 import model.OmschrijvingComparable;
 import view.panels.ArtikelOverviewPane;
 

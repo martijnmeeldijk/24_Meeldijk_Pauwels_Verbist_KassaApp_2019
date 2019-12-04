@@ -3,10 +3,8 @@ package controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Artikel;
-import model.Bestelling;
+import model.bestelling.Bestelling;
 import view.panels.KlantOverviewPane;
-
-import java.util.HashSet;
 
 public class KlantOverviewController implements Observer {
     Bestelling bestelling;

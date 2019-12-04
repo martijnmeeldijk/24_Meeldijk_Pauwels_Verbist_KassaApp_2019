@@ -1,15 +1,11 @@
 package view;
 
-import controller.KassaViewController;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import model.Bestelling;
-
-import java.awt.*;
+import model.bestelling.Bestelling;
 
 public class KassaView extends GridPane {
 	private Stage stage = new Stage();

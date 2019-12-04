@@ -1,9 +1,11 @@
-package model;
+package model.bestelling;
 
 import controller.Observer;
 import database.DataInMemory;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import model.Artikel;
+import model.Subject;
 
 import java.util.ArrayList;
 

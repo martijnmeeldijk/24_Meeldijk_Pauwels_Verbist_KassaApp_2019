@@ -1,9 +1,8 @@
 package application;
 	
-import controller.KassaViewController;
 import javafx.application.Application;
 import javafx.stage.Stage;
-import model.Bestelling;
+import model.bestelling.Bestelling;
 import view.KassaView;
 import view.KlantView;
 

@@ -1,16 +1,10 @@
 package view;
 
-import controller.ArtikelOverviewController;
 import controller.KlantOverviewController;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import model.Bestelling;
+import model.bestelling.Bestelling;
 import view.panels.KlantOverviewPane;
 
 public class KlantView  {
