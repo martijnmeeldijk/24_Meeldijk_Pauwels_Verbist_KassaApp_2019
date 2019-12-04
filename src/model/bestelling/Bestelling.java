@@ -14,11 +14,19 @@ public class Bestelling implements Subject {
     private ArrayList<Observer> observers;
     private DataInMemory dataInMemory;
 
+    private BestellingState actief;
+    private BestellingState onHold;
+    private BestellingState currentState;
+
 
     public Bestelling() {
         observers=new ArrayList<>();
         dataInMemory= new DataInMemory();
         artikels= FXCollections.observableArrayList();
+
+        actief = new Actief(this);
+        onHold = new OnHold(this);
+        this.currentState = actief;
     }
 
     public void addArtikel(int code){
@@ -62,5 +70,23 @@ public class Bestelling implements Subject {
 
     public ObservableList<Artikel> getArtikels() {
         return artikels;
+    }
+
+
+    /** STATE **/
+    public BestellingState getCurrentState(){
+        return currentState;
+    }
+
+    public void setCurrentState(BestellingState bestellingState){
+        this.currentState = bestellingState;
+    }
+
+    public BestellingState getActief() {
+        return actief;
+    }
+
+    public BestellingState getOnHold() {
+        return onHold;
     }
 }
