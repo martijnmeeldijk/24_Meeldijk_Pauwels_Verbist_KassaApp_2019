@@ -33,5 +33,7 @@ public abstract class BestellingState {
         throw new NotPossibleException("De bestelling kan niet afgesloten worden want hij staat 'On hold'");
     }
 
-
+    public  void betaal(){
+        throw new NotPossibleException("De bestelling kan nog niet betaald worden want hij is niet afgesloten.");
+    }
 }

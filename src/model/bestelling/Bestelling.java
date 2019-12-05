@@ -20,6 +20,7 @@ public class Bestelling implements Subject {
     private BestellingState actief;
     private BestellingState onHold;
     private BestellingState afgesloten;
+    private BestellingState betaald;
     private BestellingState currentState;
 
     private Korting korting = KortingFactory.getInstance().createKorting(Kortingsmogelijkheden.Nummer);
@@ -122,5 +123,13 @@ public class Bestelling implements Subject {
 
     public BestellingState getAfgesloten() {
         return afgesloten;
+    }
+
+    public void betaal() {
+        currentState.betaal();
+    }
+
+    public BestellingState getBetaald() {
+        return betaald;
     }
 }
