@@ -110,6 +110,7 @@ public class KassaViewController implements Observer {
     //geeft de andere bestelling terug als de eerste on hold staat
     public Bestelling getBestelling() {
         //return bestelling.isActief()?bestelling:altBestelling;
+        //winkel.verwisselActieveBestellingen();
         return winkel.getActieveBestelling();
     }
 
