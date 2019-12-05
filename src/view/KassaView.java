@@ -21,7 +21,7 @@ public class KassaView extends GridPane {
 		stage.setY(20);
 
 		Group root = new Group();
-		Scene scene = new Scene(root, 720, 500);
+		Scene scene = new Scene(root, 725, 500);
 
 		BorderPane borderPane = new KassaMainPane(winkel);
 		borderPane.prefHeightProperty().bind(scene.heightProperty());

@@ -34,6 +34,10 @@ public class KlantOverviewPane  extends GridPane {
         //layout
         this.setPadding(new Insets(10, 10, 10, 10));
 
+        //creeer box
+        VBox vb= new VBox();
+        vb.setSpacing(10);
+
         //creeer display totaalprijs
         prijswaarde=new Label("0.0");
         Label prijs = new Label("prijs: ");
@@ -41,9 +45,7 @@ public class KlantOverviewPane  extends GridPane {
         prijsbox.getChildren().addAll(prijs,prijswaarde);
 
         //voeg totaalprijs toe
-        VBox vb= new VBox();
         vb.getChildren().add(prijsbox);
-        vb.setSpacing(10);
 
         //creeer titel
         Label lblHeading = new Label("artikels");
