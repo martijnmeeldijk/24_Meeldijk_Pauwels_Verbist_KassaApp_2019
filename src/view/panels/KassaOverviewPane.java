@@ -1,29 +1,23 @@
 package view.panels;
 
-import controller.ArtikelOverviewController;
 import controller.KassaViewController;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import model.Artikel;
-import model.OmschrijvingComparable;
-
-import java.util.Comparator;
 
 public class KassaOverviewPane extends GridPane {
 	private KassaViewController kassaViewController;
 	private TableView<Artikel> table;
-	private Label prijs;
 	private Label prijswaarde;
-	private TextField textField;
+	private TextField inputCode;
 	//public static Comparator<Artikel> omschrijvingcomperator = new OmschrijvingComparable();
 
 	public KassaOverviewPane(KassaViewController kassaViewController) {
@@ -35,16 +29,16 @@ public class KassaOverviewPane extends GridPane {
 		this.setPadding(new Insets(10, 10, 10, 10));
 
 		//creer display inputveld code en totaalprijs
-		Label label1 = new Label("Code:");
-		textField = new TextField ();
+		Label code = new Label("Code:");
+		inputCode = new TextField ();
 		prijswaarde=new Label("0.0");
-		prijs=new Label("prijs: ");
+		Label prijs=new Label("prijs: ");
 		HBox prijsbox=new HBox();
 		prijsbox.getChildren().addAll(prijs,prijswaarde);
 
 		//voeg inputveld code en totaalprijs toe
 		VBox vb = new VBox();
-		vb.getChildren().addAll(label1,textField,prijsbox);
+		vb.getChildren().addAll(code,inputCode,prijsbox);
 		vb.setSpacing(10);
 
 		//creeer titel
@@ -58,59 +52,63 @@ public class KassaOverviewPane extends GridPane {
 		vb.getChildren().addAll(lblHeading,table);
 		this.getChildren().addAll(vb);
 
-		//registreer input
-		textField.setOnKeyPressed(ke -> {
+		//registreer input code
+		inputCode();
+
+		//verwijder item uit tabel bij dubbelklik
+		verwijder();
+
+		// zet on hold
+		Button zetOnHold = new Button("Zet on hold");
+		zetOnHold.setOnAction(onHold -> {
+			kassaViewController.zetOnHold();
+			tabel();
+			refresh();
+		});
+		vb.getChildren().addAll(zetOnHold);
+
+		// Zet on hold artikel terug actief
+		Button zetActief = new Button("Zet Actief");
+		zetActief.setOnAction(actief ->
+		{
+			kassaViewController.zetActief();
+			tabel();
+			refresh();
+		});
+		vb.getChildren().addAll(zetActief);
+	}
+
+	private void tabel(){
+		//creeer tabel
+		table = Tabel.create(kassaViewController.getArtikels());
+	}
+
+	private void inputCode(){
+		//registreer input code
+		inputCode.setOnKeyPressed(ke -> {
 			if (ke.getCode().equals(KeyCode.ENTER))
 			{
-				try{kassaViewController.addArtikkel(Integer.parseInt(textField.getText()));}
+				try{kassaViewController.addArtikkel(Integer.parseInt(inputCode.getText()));}
 				catch (Exception e){
 					displayErrorMessage("niet bestaande code");
 				}
-				textField.clear();
+				inputCode.clear();
 			}
 		});
+	}
 
+	private void verwijder(){
 		//verwijder item uit tabel bij dubbelklik
 		table.setRowFactory( tv -> {
 			TableRow<Artikel> row = new TableRow<>();
 			row.setOnMouseClicked(event -> {
 				if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
-					int code = row.getItem().getCode();
-					kassaViewController.removeArtikkel(code);
+					int codeInt = row.getItem().getCode();
+					kassaViewController.removeArtikkel(codeInt);
 				}
 			});
 			return row ;
 		});
-	}
-
-	private void tabel(){
-		//creeer tabel
-		table = new TableView<>();
-		table.setItems(kassaViewController.getArtikels());
-
-		//creeer kolommen
-		TableColumn<Artikel, Integer> colcode = new TableColumn<>("code");
-		colcode.setMinWidth(100);
-		colcode.setCellValueFactory(new PropertyValueFactory<>("code"));
-
-		TableColumn<Artikel, String> colOmschrijving = new TableColumn<>("Omschrijving");
-		colOmschrijving.setMinWidth(300);
-		colOmschrijving.setCellValueFactory(new PropertyValueFactory<>("Omschrijving"));
-
-		TableColumn<Artikel, String> colArtikelgroep = new TableColumn<>("artikelgroep");
-		colArtikelgroep.setMinWidth(100);
-		colArtikelgroep.setCellValueFactory(new PropertyValueFactory<>("artikelgroep"));
-
-		TableColumn<Artikel, Double> colVerkoopprijs = new TableColumn<>("verkoopprijs");
-		colVerkoopprijs.setMinWidth(100);
-		colVerkoopprijs.setCellValueFactory(new PropertyValueFactory<>("verkoopprijs"));
-
-		TableColumn<Artikel, Integer> colVoorraad = new TableColumn<>("voorraad");
-		colVoorraad.setMinWidth(100);
-		colVoorraad.setCellValueFactory(new PropertyValueFactory<>("voorraad"));
-
-		//voeg kolommen toe aan tabel
-		table.getColumns().addAll(colcode,colOmschrijving,colArtikelgroep, colVerkoopprijs,colVoorraad);
 	}
 
 	public void displayErrorMessage(String errorMessage){
@@ -122,6 +120,10 @@ public class KassaOverviewPane extends GridPane {
 
 	public void setPrijs(String prijs) {
 		this.prijswaarde.setText(prijs);
+	}
+
+	private void refresh(){
+		table.refresh();
 	}
 }
 	

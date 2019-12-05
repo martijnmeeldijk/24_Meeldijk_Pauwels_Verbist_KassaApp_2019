@@ -1,17 +1,11 @@
 package view;
 
-import controller.ArtikelOverviewController;
 import controller.KlantOverviewController;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import model.Bestelling;
-import view.panels.KlantOverviewPane;
+import model.bestelling.Bestelling;
 
 public class KlantView  {
 	private Stage stage = new Stage();
@@ -21,13 +15,21 @@ public class KlantView  {
 
 		stage.setTitle("KLANT VIEW");
 		stage.setResizable(false);
-		stage.setX(775);
+
+		//positie
+		stage.setX(760);
 		stage.setY(20);
+
 		Group root = new Group();
-		Scene scene = new Scene(root, 500, 500);
+		Scene scene = new Scene(root, 520, 500);
+
 		KlantOverviewController klantOverviewController= new KlantOverviewController(bestelling);
 
-		root.getChildren().add(new KlantOverviewPane(klantOverviewController));
+		GridPane gridPane = new KlantOverviewPane(klantOverviewController);
+		gridPane.prefHeightProperty().bind(scene.heightProperty());
+		gridPane.prefWidthProperty().bind(scene.widthProperty());
+
+		root.getChildren().add(gridPane);
 		stage.setScene(scene);
 		stage.sizeToScene();
 		stage.show();

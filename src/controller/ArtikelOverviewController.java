@@ -1,10 +1,9 @@
 package controller;
 
-import database.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Artikel;
-import model.Bestelling;
+import model.bestelling.Bestelling;
 import model.OmschrijvingComparable;
 import view.panels.ArtikelOverviewPane;
 
@@ -12,17 +11,14 @@ import java.util.Comparator;
 import java.util.HashMap;
 
 public class ArtikelOverviewController implements Observer {
-    private ArtikelOverviewPane artikelOverviewPane;
-    public static Comparator<Artikel> omschrijvingcomperator = new OmschrijvingComparable();
-    Bestelling bestelling;
+    private static Comparator<Artikel> omschrijvingcomperator = new OmschrijvingComparable();
+    private Bestelling bestelling;
     public ArtikelOverviewController(Bestelling bestelling) {
         this.bestelling=bestelling;
     }
 
     public void setArtikelOverviewPane(ArtikelOverviewPane artikelOverviewPane) {
-        this.artikelOverviewPane = artikelOverviewPane;
         update();
-
     }
 
     public ObservableList<Artikel> getList(){

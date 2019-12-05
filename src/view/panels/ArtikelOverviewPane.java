@@ -17,44 +17,34 @@ import java.util.HashMap;
 public class ArtikelOverviewPane extends GridPane {
 	private TableView<Artikel> table;
 	private ArtikelOverviewController artikelOverviewController;
-	public static Comparator<Artikel> omschrijvingcomperator = new OmschrijvingComparable();
+	//public static Comparator<Artikel> omschrijvingcomperator = new OmschrijvingComparable();
 
 
 	public ArtikelOverviewPane(ArtikelOverviewController artikelOverviewController) {
 		// dit stelt voor de meegegeven controller deze view in
 		this.artikelOverviewController=artikelOverviewController;
-		artikelOverviewController.setArtikelOverviewPane(this);
+		this.artikelOverviewController.setArtikelOverviewPane(this);
 
+		//layout
 		this.setPadding(new Insets(10, 10, 10, 10));
+
+		//creeer titel
 		Label lblHeading = new Label("artikels");
 		lblHeading.setFont(new Font("Arial", 20));
-		table = new TableView<Artikel>();
 
-		table.setItems(artikelOverviewController.getList());
-		TableColumn<Artikel, Integer> colcode = new TableColumn<Artikel, Integer>("code");
-		colcode.setMinWidth(100);
-		colcode.setCellValueFactory(new PropertyValueFactory<Artikel, Integer>("code"));
+		//creeer tabel
+		tabel();
 
-		TableColumn<Artikel, String> colArtikelgroep = new TableColumn<Artikel, String>("artikelgroep");
-		colArtikelgroep.setMinWidth(100);
-		colArtikelgroep.setCellValueFactory(new PropertyValueFactory<Artikel, String>("artikelgroep"));
-
-		TableColumn<Artikel, String> colOmschrijving = new TableColumn<Artikel, String>("Omschrijving");
-		colOmschrijving.setMinWidth(300);
-		colOmschrijving.setCellValueFactory(new PropertyValueFactory<Artikel, String>("Omschrijving"));
-
-		TableColumn<Artikel, Double> colVerkoopprijs = new TableColumn<Artikel, Double>("verkoopprijs");
-		colVerkoopprijs.setMinWidth(100);
-		colVerkoopprijs.setCellValueFactory(new PropertyValueFactory<Artikel, Double>("verkoopprijs"));
-
-		TableColumn<Artikel, Integer> colVoorraad = new TableColumn<Artikel, Integer>("voorraad");
-		colVoorraad.setMinWidth(100);
-		colVoorraad.setCellValueFactory(new PropertyValueFactory<Artikel, Integer>("voorraad"));
-		table.getColumns().addAll(colcode,colOmschrijving,colArtikelgroep, colVerkoopprijs,colVoorraad);
+		//voeg titel en tabel toe
 		this.getChildren().addAll(lblHeading, table);
 	}
 
-	public void displayErrorMessage(String errorMessage){
+	private void tabel(){
+		//creeer tabel
+		table = Tabel.create(artikelOverviewController.getList());
+	}
+
+	/*public void displayErrorMessage(String errorMessage){
 		Alert alert = new Alert(Alert.AlertType.INFORMATION);
 		alert.setHeaderText("Information Alert");
 		alert.setContentText(errorMessage);
@@ -63,7 +53,7 @@ public class ArtikelOverviewPane extends GridPane {
 
 	public void refresh(){
 		table.refresh();
-	}
+	}*/
 }
 	
 	
