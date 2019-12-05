@@ -3,6 +3,7 @@ package model.korting;
 public enum Kortingsmogelijkheden {
     Groep(5),
     Drempel(5),
+    Nummer(0),
     Duurst(25);
 
     private int korting;

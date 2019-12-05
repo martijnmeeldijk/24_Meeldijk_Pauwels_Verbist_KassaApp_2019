@@ -4,11 +4,24 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Artikel;
 import model.bestelling.Bestelling;
+import model.korting.Korting;
+import model.korting.KortingFactory;
+import model.korting.Kortingsmogelijkheden;
 import view.KlantOverviewPane;
 
 public class KlantOverviewController implements Observer {
     private Bestelling bestelling;
     private KlantOverviewPane klantOverviewPane;
+    private Korting korting = KortingFactory.getInstance().createKorting(Kortingsmogelijkheden.Nummer);
+
+    public void setKorting(Kortingsmogelijkheden korting){
+        this.korting=KortingFactory.getInstance().createKorting(korting);
+    }
+
+    private void berekenPrice(){
+        double totaal=korting.PrijsNaKorting(getList());
+        klantOverviewPane.setPrijs(String.valueOf(totaal));
+    }
 
     public KlantOverviewController(Bestelling bestelling) {
         this.bestelling = bestelling;
@@ -30,7 +43,7 @@ public class KlantOverviewController implements Observer {
         }
     }
 
-    private void berekenPrice(){
+    private void originalberekenPrice(){
         double totaal=0.0;
 
         for(Artikel artikel:getList()){

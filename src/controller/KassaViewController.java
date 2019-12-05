@@ -3,18 +3,31 @@ package controller;
 import javafx.collections.ObservableList;
 import model.Artikel;
 import model.bestelling.Bestelling;
+import model.korting.Korting;
+import model.korting.KortingFactory;
+import model.korting.Kortingsmogelijkheden;
 import view.panels.KassaOverviewPane;
 
 public class KassaViewController implements Observer {
     private KassaOverviewPane kassaOverviewPane;
     private Bestelling bestelling;
     private Bestelling altBestelling;
+    private Korting korting = KortingFactory.getInstance().createKorting(Kortingsmogelijkheden.Nummer);
+
+    public void setKorting(Kortingsmogelijkheden korting){
+        this.korting=KortingFactory.getInstance().createKorting(korting);
+    }
+
+    private void price(){
+        double totaal=korting.PrijsNaKorting(getBestelling().getArtikels());
+        kassaOverviewPane.setPrijs(String.valueOf(totaal));
+    }
 
     public KassaViewController(Bestelling bestelling) {
         this.bestelling=bestelling;
     }
 
-    private void price(){
+    private void originalprice(){
         double totaal=0.0;
         for(Artikel artikel:getBestelling().getArtikels()){
             totaal+=artikel.getVerkoopprijs();

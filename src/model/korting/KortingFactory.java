@@ -15,6 +15,7 @@ public class KortingFactory {
     public Korting createKorting(Kortingsmogelijkheden mogelijk) {
         Korting korting;
         String name = String.valueOf(mogelijk)+"korting";
+        System.out.println(name);
         try{
             Class cl = Class.forName("model.korting."+name);
             Object obj = cl.newInstance();
