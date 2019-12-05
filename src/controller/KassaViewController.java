@@ -59,7 +59,7 @@ public class KassaViewController implements Observer {
     }
 
     public void addArtikkel(int code){
-        if(getBestelling().itemBestaat(code)){
+        if(winkel.itemBestaat(code)){
             getBestelling().addArtikel(code);
             originalPrice();
         }
@@ -69,7 +69,7 @@ public class KassaViewController implements Observer {
     }
 
     public void removeArtikkel(int code){
-        if(getBestelling().itemBestaat(code)){
+        if(winkel.itemBestaat(code)){
             getBestelling().removeArtikel(code);
             originalPrice();
         }
@@ -79,7 +79,6 @@ public class KassaViewController implements Observer {
     }
 
     public ObservableList<Artikel> getArtikels(){
-        //return getBestelling().getArtikels();
         return winkel.getActieveBestelling().getArtikels();
     }
 

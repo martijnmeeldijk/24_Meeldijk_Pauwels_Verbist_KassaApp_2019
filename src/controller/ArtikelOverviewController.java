@@ -25,7 +25,7 @@ public class ArtikelOverviewController implements Observer {
 
     public ObservableList<Artikel> getList(){
         ObservableList<Artikel>artikels= FXCollections.observableArrayList();
-        HashMap<Integer,Artikel>hashartikels=winkel.getActieveBestelling().getDataInMemory().getArtikels();
+        HashMap<Integer,Artikel>hashartikels=winkel.getDataInMemory().getArtikels();
         for(int key:hashartikels.keySet()){
             artikels.add(hashartikels.get(key));
         }
