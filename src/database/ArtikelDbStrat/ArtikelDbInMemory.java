@@ -1,6 +1,7 @@
-package database;
+package database.ArtikelDbStrat;
 
 import database.Factory.LoadSaveStrategyFactory;
+import database.LoadSaveStrat.LoadSaveStrategy;
 import model.Artikel;
 
 import java.io.*;
@@ -9,8 +10,8 @@ import java.util.Properties;
 
 public class ArtikelDbInMemory implements ArtikelDbStrategy {
     private LoadSaveStrategy loadSaveStrategy;
-    Properties properties;
-    String filename = "src/database/database.properties";
+    private Properties properties;
+    private String filename = "src/database/database.properties";
 
     @Override
     public HashMap<Integer, Artikel> load() {
@@ -30,7 +31,7 @@ public class ArtikelDbInMemory implements ArtikelDbStrategy {
         loadSaveStrategy.save(artikels);
     }
 
-    public void setStrategy(LoadSaveStrategy loadSaveStrategy){
+    private void setStrategy(LoadSaveStrategy loadSaveStrategy){
         this.loadSaveStrategy = loadSaveStrategy;
     }
 
@@ -43,7 +44,8 @@ public class ArtikelDbInMemory implements ArtikelDbStrategy {
         }
         return prop;
     }
-    private void saveProperties(Properties prop){
+
+    /*private void saveProperties(Properties prop){
         try (OutputStream output = new FileOutputStream(filename)) {
 
             // save properties to project root folder
@@ -60,5 +62,5 @@ public class ArtikelDbInMemory implements ArtikelDbStrategy {
 
     public String getFilename() {
         return filename;
-    }
+    }*/
 }

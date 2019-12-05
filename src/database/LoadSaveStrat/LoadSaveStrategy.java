@@ -1,4 +1,4 @@
-package database;
+package database.LoadSaveStrat;
 
 import model.Artikel;
 
@@ -7,6 +7,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public interface LoadSaveStrategy {
-    public HashMap<Integer, Artikel> load();
-    public void save(HashMap<Integer, Artikel> artikels);
+    HashMap<Integer, Artikel> load();
+    void save(HashMap<Integer, Artikel> artikels);
 }

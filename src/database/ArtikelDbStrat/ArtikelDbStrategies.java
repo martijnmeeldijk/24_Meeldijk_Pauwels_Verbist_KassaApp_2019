@@ -1,7 +1,7 @@
-package database;
+package database.ArtikelDbStrat;
 
 public enum ArtikelDbStrategies {
-    INMEMORY ("database.ArtikelDbInMemory");
+    INMEMORY ("database.ArtikelDbStrat.ArtikelDbStrategy.ArtikelDbInMemory");
 
     //var
     private String classname;

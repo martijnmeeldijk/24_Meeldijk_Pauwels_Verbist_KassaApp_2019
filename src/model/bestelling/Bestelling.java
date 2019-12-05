@@ -1,7 +1,7 @@
 package model.bestelling;
 
 import controller.Observer;
-import database.DataInMemory;
+import database.ArtikelDbStrat.DataInMemory;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Artikel;

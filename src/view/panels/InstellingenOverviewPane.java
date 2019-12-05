@@ -1,7 +1,7 @@
 package view.panels;
 
 import controller.InstellingenOverviewController;
-import database.LoadSaveStrategies;
+import database.LoadSaveStrat.LoadSaveStrategies;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -61,6 +61,10 @@ public class InstellingenOverviewPane extends GridPane {
 
         //voeg titel en Hbox toe
         vb.getChildren().addAll(tabelDb,laadHb);
+
+        //setLaadoptie
+        laadknop.setOnAction(actief ->
+                instellingenOverviewController.setLaadoptie(LoadSaveStrategies.valueOf(laadtype.getValue()).getClassname()));
 
         //creeer titel
         Label korting = new Label("Eerste korting:");

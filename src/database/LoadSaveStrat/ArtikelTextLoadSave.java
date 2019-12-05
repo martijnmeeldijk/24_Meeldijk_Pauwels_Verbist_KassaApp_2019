@@ -1,4 +1,4 @@
-package database;
+package database.LoadSaveStrat;
 
 //import com.sun.tools.jdeprscan.scan.Scan;
 import model.Artikel;
@@ -8,12 +8,13 @@ import java.io.*;
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class ArtikelTextLoadSave extends TekstLoadSaveTemplate{
+public class ArtikelTextLoadSave extends TekstLoadSaveTemplate {
     private String filename = "src/bestanden/artikel.txt";
     private HashMap<Integer, Artikel> artikels;
     public ArtikelTextLoadSave() {
         this.artikels =new HashMap<>();
     }
+
     public HashMap<Integer, Artikel> load(){
         // code , omschrijving, artikelgroep, verkoopprijs, voorraad \n
         File file = new File(filename);

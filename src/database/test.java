@@ -1,14 +1,7 @@
 package database;
 
-import database.Factory.ArtikelDbStrategyFactory;
-import model.Artikel;
-
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
+import database.ArtikelDbStrat.ArtikelDbContext;
+import database.LoadSaveStrat.LoadSaveStrategies;
 
 public class test {
     public static void main(String[] args){
@@ -28,10 +21,14 @@ public class test {
         System.out.println(test);
 
         test.put(20, new Artikel(24, "bla", "test", 20, 3));
-        excelAdapter.save(test);*/
+        excelAdapter.save(test);
+
+
         ArtikelDbStrategyFactory.getInstance().createArtikelDbStrategy("ArtikelDbInMemory");
 
         ArtikelDbContext context = new ArtikelDbContext();
-        System.out.println(context.load());
+        System.out.println(context.load());*/
+
+        System.out.println(LoadSaveStrategies.valueOf("EXCEL").getClassname());
     }
 }

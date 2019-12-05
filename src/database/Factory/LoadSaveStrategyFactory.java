@@ -1,8 +1,6 @@
 package database.Factory;
 
-import database.LoadSaveStrategy;
-
-import java.lang.reflect.InvocationTargetException;
+import database.LoadSaveStrat.LoadSaveStrategy;
 
 public class LoadSaveStrategyFactory {
     private static LoadSaveStrategyFactory unique= new LoadSaveStrategyFactory();
@@ -17,7 +15,7 @@ public class LoadSaveStrategyFactory {
     public LoadSaveStrategy createArtikelDbStrategy(String name) {
         LoadSaveStrategy strategy;
         try{
-            Class strategyClass = Class.forName("database."+name);
+            Class strategyClass = Class.forName("database.LoadSaveStrat."+name);
             Object strategyObject = strategyClass.newInstance();
             strategy = (LoadSaveStrategy) strategyObject;
         }catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {

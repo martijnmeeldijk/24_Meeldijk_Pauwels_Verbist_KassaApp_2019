@@ -1,9 +1,8 @@
-package database;
+package database.LoadSaveStrat;
 
 public enum LoadSaveStrategies {
-
-    TEKSTLOADSAVE ("database.ArtikelTekstLoadSave"),
-    EXCEL ("database.ExcelAdapter");
+    TEKSTLOADSAVE ("ArtikelTextLoadSave"),
+    EXCEL ("ExcelAdapter");
 
     public String classname;
     LoadSaveStrategies(String classname){

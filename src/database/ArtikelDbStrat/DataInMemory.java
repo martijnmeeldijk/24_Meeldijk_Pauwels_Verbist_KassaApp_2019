@@ -1,19 +1,21 @@
-package database;
+package database.ArtikelDbStrat;
 
-import controller.Observer;
+import database.ArtikelDbStrat.ArtikelDbContext;
 import model.Artikel;
-import model.Subject;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class DataInMemory {
+    public ArtikelDbContext getArtikelDbContext() {
+        return artikelDbContext;
+    }
+
     private ArtikelDbContext artikelDbContext;
     private HashMap<Integer, Artikel>artikels;
 
     public DataInMemory() {
         this.artikelDbContext = new ArtikelDbContext();
-        artikels= artikelDbContext.load();
+        artikels = artikelDbContext.load();
     }
 
     public void saveData(){

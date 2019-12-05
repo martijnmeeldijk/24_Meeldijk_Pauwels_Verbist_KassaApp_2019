@@ -1,8 +1,6 @@
 package database.Factory;
 
-import database.ArtikelDbStrategy;
-
-import java.lang.reflect.InvocationTargetException;
+import database.ArtikelDbStrat.ArtikelDbStrategy;
 
 public class ArtikelDbStrategyFactory {
     //singleton
@@ -17,7 +15,7 @@ public class ArtikelDbStrategyFactory {
     public ArtikelDbStrategy createArtikelDbStrategy(String name) {
         ArtikelDbStrategy strategy;
         try{
-            Class strategyClass = Class.forName("database."+name);
+            Class strategyClass = Class.forName("database.ArtikelDbStrat."+name);
             Object strategyObject = strategyClass.newInstance();
             strategy = (ArtikelDbStrategy) strategyObject;
         }catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {

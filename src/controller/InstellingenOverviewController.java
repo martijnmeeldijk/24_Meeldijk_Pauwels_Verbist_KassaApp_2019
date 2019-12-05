@@ -31,6 +31,10 @@ public class InstellingenOverviewController implements Observer{
         winkel.getActieveBestelling().setKorting(korting);
     }
 
+    public void setLaadoptie(String laadoptie){
+        winkel.getActieveBestelling().getDataInMemory().getArtikelDbContext().saveProperties(laadoptie);
+    }
+
     @Override
     public void update() {
 
