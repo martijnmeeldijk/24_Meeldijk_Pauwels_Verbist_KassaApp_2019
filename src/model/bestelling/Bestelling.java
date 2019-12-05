@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class Bestelling implements Subject {
     private ObservableList<Artikel> artikels;
     private ArrayList<Observer> observers;
-    //private DataInMemory dataInMemory;
+    private DataInMemory dataInMemory;
 
     private BestellingState actief;
     private BestellingState onHold;
@@ -36,6 +36,7 @@ public class Bestelling implements Subject {
 
     public Bestelling() {
         observers=new ArrayList<>();
+        dataInMemory= new DataInMemory();
         artikels= FXCollections.observableArrayList();
 
         actief = new Actief(this);
@@ -51,7 +52,13 @@ public class Bestelling implements Subject {
         currentState.removeArtikel(code);
     }
 
+    public boolean itemBestaat(int getal){
+        return dataInMemory.getArtikel(getal) != null;
+    }
 
+    public DataInMemory getDataInMemory() {
+        return dataInMemory;
+    }
 
     @Override
     public void add(Observer observer) {

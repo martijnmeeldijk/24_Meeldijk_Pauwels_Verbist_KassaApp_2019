@@ -1,31 +1,18 @@
 package model;
 
-import database.DataInMemory;
 import model.bestelling.Bestelling;
 
 import java.util.ArrayList;
 
 public class Winkel {
     ArrayList<Bestelling> bestellingen;
-    private DataInMemory dataInMemory;
-
     //dataInMemory kan wss beter hier in winkel worden toegevoegd ipv in elke bestelling appart dus nog refactoren
 
     public Winkel() {
-        dataInMemory= new DataInMemory();
         bestellingen = new ArrayList<>();
         bestellingen.add(new Bestelling());
 
     }
-    public boolean itemBestaat(int getal){
-        return dataInMemory.getArtikel(getal) != null;
-    }
-
-    public DataInMemory getDataInMemory() {
-        return dataInMemory;
-    }
-
-
 
     public void addBestelling(){
         for(Bestelling bestelling:bestellingen){
