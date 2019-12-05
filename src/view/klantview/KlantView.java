@@ -1,4 +1,4 @@
-package view;
+package view.klantview;
 
 import controller.KlantOverviewController;
 import javafx.scene.Group;
@@ -6,7 +6,6 @@ import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import model.Winkel;
-import model.bestelling.Bestelling;
 
 public class KlantView  {
 	private Stage stage = new Stage();

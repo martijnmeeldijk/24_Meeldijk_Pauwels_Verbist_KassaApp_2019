@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 public class Winkel {
     ArrayList<Bestelling> bestellingen;
+    int timeheld;
     //dataInMemory kan wss beter hier in winkel worden toegevoegd ipv in elke bestelling appart dus nog refactoren
 
     public Winkel() {
