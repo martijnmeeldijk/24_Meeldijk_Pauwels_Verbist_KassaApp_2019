@@ -20,6 +20,7 @@ public class Bestelling implements Subject {
     private BestellingState actief;
     private BestellingState onHold;
     private BestellingState afgesloten;
+    private BestellingState betaald;
     private BestellingState currentState;
 
     private Korting korting = KortingFactory.getInstance().createKorting(Kortingsmogelijkheden.Nummer);
@@ -92,7 +93,14 @@ public class Bestelling implements Subject {
     public void zetActief(){
         currentState.zetActief();
     }
-    public void sluitAf(){currentState.sluitAf();}
+    public void sluitAf(){
+        if(!artikels.isEmpty()){
+            currentState.sluitAf();
+        }
+        else{
+            throw new NotPossibleException("Je kan geen bestelling afsluiten met een leeg winkelmandje");
+        }
+    }
     public BestellingState getCurrentState(){
         return currentState;
     }
@@ -115,5 +123,13 @@ public class Bestelling implements Subject {
 
     public BestellingState getAfgesloten() {
         return afgesloten;
+    }
+
+    public void betaal() {
+        currentState.betaal();
+    }
+
+    public BestellingState getBetaald() {
+        return betaald;
     }
 }
