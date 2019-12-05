@@ -12,9 +12,9 @@ public class KortingFactory {
     }
 
     //maak
-    public Korting createKorting(String mogelijk) {
+    public Korting createKorting(Kortingsmogelijkheden mogelijk) {
         Korting korting;
-        String name = String.valueOf(mogelijk);
+        String name = String.valueOf(mogelijk)+"korting";
         try{
             Class cl = Class.forName("model.korting."+name);
             Object obj = cl.newInstance();

@@ -24,7 +24,6 @@ public class KlantOverviewController implements Observer {
 
     @Override
     public void update() {
-        //System.out.println("klantoverview controller updated");
         if(klantOverviewPane!=null){
             klantOverviewPane.setArtikels(getList());
             berekenPrice();
