@@ -1,4 +1,4 @@
-package view;
+package view.klantview;
 
 import controller.ArtikelOverviewController;
 import controller.KlantOverviewController;

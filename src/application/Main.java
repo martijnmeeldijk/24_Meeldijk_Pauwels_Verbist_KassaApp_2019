@@ -3,9 +3,8 @@ package application;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import model.Winkel;
-import model.bestelling.Bestelling;
 import view.KassaView;
-import view.KlantView;
+import view.klantview.KlantView;
 
 import java.io.FileNotFoundException;
 
