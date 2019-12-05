@@ -9,7 +9,7 @@ public class Drempelkorting implements Korting {
     private double berekenTotaal(ObservableList<Artikel> list){
         double totaal=0.0;
         for(Artikel artikel: list){
-            totaal+=artikel.getVerkoopprijs();
+            totaal+=artikel.getVerkoopprijs()*artikel.getAantal();
         }
         return totaal;
     }

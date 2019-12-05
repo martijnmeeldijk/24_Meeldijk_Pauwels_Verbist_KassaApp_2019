@@ -12,28 +12,20 @@ import view.KlantOverviewPane;
 public class KlantOverviewController implements Observer {
     private Bestelling bestelling;
     private KlantOverviewPane klantOverviewPane;
-    private Korting korting = KortingFactory.getInstance().createKorting(Kortingsmogelijkheden.Nummer);
-
-    public void setKorting(Kortingsmogelijkheden korting){
-        this.korting=KortingFactory.getInstance().createKorting(korting);
-    }
 
     private void berekenPrice(){
-        double totaal=korting.PrijsNaKorting(getList());
+        double totaal=bestelling.getKorting().PrijsNaKorting(getList());
         klantOverviewPane.setPrijs(String.valueOf(totaal));
     }
 
     public KlantOverviewController(Bestelling bestelling) {
         this.bestelling = bestelling;
         bestelling.add(this);
-
     }
 
     public void setKlantOverviewPane(KlantOverviewPane klantOverviewPane) {
         this.klantOverviewPane = klantOverviewPane;
     }
-
-
 
     @Override
     public void update() {
@@ -54,8 +46,7 @@ public class KlantOverviewController implements Observer {
 
 
     public ObservableList<Artikel> getList() {
-        System.out.println("hier");
-        ObservableList<Artikel>tijdelijk= FXCollections.observableArrayList();
+        ObservableList<Artikel> tijdelijk= FXCollections.observableArrayList();
         for(Artikel artikel:bestelling.getArtikels()){
             if(tijdelijk.contains(artikel)){
                 int index= tijdelijk.indexOf(artikel);

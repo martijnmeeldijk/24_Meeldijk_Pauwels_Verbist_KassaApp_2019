@@ -6,6 +6,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Artikel;
 import model.Subject;
+import model.korting.Korting;
+import model.korting.KortingFactory;
+import model.korting.Kortingsmogelijkheden;
 
 import java.util.ArrayList;
 
@@ -17,6 +20,18 @@ public class Bestelling implements Subject {
     private BestellingState actief;
     private BestellingState onHold;
     private BestellingState currentState;
+
+    private Korting korting = KortingFactory.getInstance().createKorting(Kortingsmogelijkheden.Nummer);
+
+    public Korting getKorting() {
+        return korting;
+    }
+
+    public void setKorting(Korting korting) {
+        this.korting = korting;
+        System.out.println("new korting");
+        notifyObserver();
+    }
 
 
     public Bestelling() {
@@ -49,7 +64,6 @@ public class Bestelling implements Subject {
     public void add(Observer observer) {
         observers.add(observer);
         notifyObserver();
-
     }
 
     @Override

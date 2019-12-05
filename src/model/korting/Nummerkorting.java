@@ -10,7 +10,7 @@ public class Nummerkorting implements Korting{
     public double PrijsNaKorting(ObservableList<Artikel> list) {
         double totaal=0.0;
         for(Artikel artikel:list){
-            totaal+=artikel.getVerkoopprijs()*(1-(0.01*korting.getKorting()));
+            totaal+=artikel.getVerkoopprijs()*(1-(0.01*korting.getKorting()))*artikel.getAantal();
         }
         return totaal;
     }

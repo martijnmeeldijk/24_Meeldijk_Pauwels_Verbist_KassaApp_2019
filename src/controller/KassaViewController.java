@@ -1,5 +1,6 @@
 package controller;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Artikel;
 import model.bestelling.Bestelling;
@@ -18,21 +19,37 @@ public class KassaViewController implements Observer {
         this.korting=KortingFactory.getInstance().createKorting(korting);
     }
 
-    private void price(){
-        double totaal=korting.PrijsNaKorting(getBestelling().getArtikels());
+    //voor prijs met korting
+    /*private void price(){
+        double totaal=korting.PrijsNaKorting(getList());
         kassaOverviewPane.setPrijs(String.valueOf(totaal));
     }
 
-    public KassaViewController(Bestelling bestelling) {
-        this.bestelling=bestelling;
-    }
+     private ObservableList<Artikel> getList() {
+        ObservableList<Artikel> tijdelijk= FXCollections.observableArrayList();
+        for(Artikel artikel:bestelling.getArtikels()){
+            if(tijdelijk.contains(artikel)){
+                int index= tijdelijk.indexOf(artikel);
+                tijdelijk.get(index).setAantal(tijdelijk.get(index).getAantal()+1);
+            }
+            else {
+                artikel.setAantal(1);
+                tijdelijk.add(artikel);
+            }
+        }
+        return tijdelijk;
+    }*/
 
-    private void originalprice(){
+    private void originalPrice(){
         double totaal=0.0;
         for(Artikel artikel:getBestelling().getArtikels()){
             totaal+=artikel.getVerkoopprijs();
         }
-        kassaOverviewPane.setPrijs(String.valueOf(totaal));
+        kassaOverviewPane.setOriginelePrijs(String.valueOf(totaal));
+    }
+
+    public KassaViewController(Bestelling bestelling) {
+        this.bestelling=bestelling;
     }
 
     public void setKassaView(KassaOverviewPane kassaOverviewPane) {
@@ -42,7 +59,7 @@ public class KassaViewController implements Observer {
     public void addArtikkel(int code){
         if(getBestelling().itemBestaat(code)){
             getBestelling().addArtikel(code);
-            price();
+            originalPrice();
         }
         else {
             kassaOverviewPane.displayErrorMessage("niet bestaande code");
@@ -52,16 +69,12 @@ public class KassaViewController implements Observer {
     public void removeArtikkel(int code){
         if(getBestelling().itemBestaat(code)){
             getBestelling().removeArtikel(code);
-            price();
+            originalPrice();
         }
         else {
             kassaOverviewPane.displayErrorMessage("niet bestaande code");
         }
     }
-
-    /*public Bestelling getBestelling() {
-        return bestelling;
-    }*/
 
     public ObservableList<Artikel> getArtikels(){
         return getBestelling().getArtikels();

@@ -13,6 +13,7 @@ import java.util.HashMap;
 public class ArtikelOverviewController implements Observer {
     private static Comparator<Artikel> omschrijvingcomperator = new OmschrijvingComparable();
     private Bestelling bestelling;
+
     public ArtikelOverviewController(Bestelling bestelling) {
         this.bestelling=bestelling;
     }

@@ -17,9 +17,9 @@ public class Groepkorting implements Korting{
         double totaal=0.0;
         for(Artikel artikel: list){
             if(artikel.getArtikelgroep().equals(groep)){
-                totaal+=artikel.getVerkoopprijs()*(1-(0.01*korting.getKorting()));
+                totaal+=artikel.getVerkoopprijs()*(1-(0.01*korting.getKorting()))*artikel.getAantal();
             }
-            else totaal+=artikel.getVerkoopprijs();
+            else totaal+=artikel.getVerkoopprijs()*artikel.getAantal();
         }
         return totaal;
     }

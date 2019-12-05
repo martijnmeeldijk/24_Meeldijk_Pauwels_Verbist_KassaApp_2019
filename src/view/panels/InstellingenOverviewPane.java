@@ -53,16 +53,26 @@ public class InstellingenOverviewPane extends GridPane {
         kortingstype.setValue(Kortingsmogelijkheden.Nummer.toString());
 
         //creeer kortingInput
-        TextField kortingInput = new TextField("0");
+        TextField kortingInput = new TextField();
 
         //creeer knop
         Button knop = new Button("Zet korting");
 
         //plaats combobox, kortingsInput en knop in Hbox
-        hb.getChildren().addAll(kortingstype,kortingInput);
+        hb.getChildren().addAll(kortingstype,kortingInput,knop);
 
         //voeg titel en combobox toe
         vb.getChildren().addAll(korting,hb);
+
+        //setKorting
+        knop.setOnAction(actief ->
+        {
+            if(kortingInput.getText().equals("")){
+                instellingenOverviewController.setKorting(kortingstype.getValue());
+            }else{
+                instellingenOverviewController.setKorting(kortingstype.getValue(),Integer.parseInt(kortingInput.getText()));
+            }
+        });
 
     }
 }

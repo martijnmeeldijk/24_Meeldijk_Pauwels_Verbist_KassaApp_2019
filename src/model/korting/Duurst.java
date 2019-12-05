@@ -20,9 +20,13 @@ public class Duurst implements Korting{
         Artikel max = getMax(list);
         for(Artikel artikel: list){
             if(artikel.equals(max)){
-                totaal+=artikel.getVerkoopprijs()*(1-(0.01*korting.getKorting()));
+                if(artikel.getAantal()>1){
+                    totaal+=artikel.getVerkoopprijs()*(1-(0.01*korting.getKorting()));
+                    totaal+=artikel.getVerkoopprijs()*(artikel.getAantal()-1);
+                }
+                else totaal+=artikel.getVerkoopprijs()*(1-(0.01*korting.getKorting()));
             }
-            else totaal+=artikel.getVerkoopprijs();
+            else totaal+=artikel.getVerkoopprijs()*artikel.getAantal();
         }
         return totaal;
     }
