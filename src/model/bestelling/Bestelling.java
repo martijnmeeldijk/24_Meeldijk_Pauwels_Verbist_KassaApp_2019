@@ -29,7 +29,6 @@ public class Bestelling implements Subject {
 
     public void setKorting(Korting korting) {
         this.korting = korting;
-        System.out.println("new korting");
         notifyObserver();
     }
 
