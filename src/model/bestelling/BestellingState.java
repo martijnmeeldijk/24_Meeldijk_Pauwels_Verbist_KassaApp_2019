@@ -29,6 +29,9 @@ public abstract class BestellingState {
     public void removeArtikel(int code){
         throw new NotPossibleException("Het artikel kan niet verwijderd worden want de bestelling is 'On Hold' gezet");
     }
+    public void sluitAf(){
+        throw new NotPossibleException("De bestelling kan niet afgesloten worden want hij staat 'On hold'");
+    }
 
 
 }

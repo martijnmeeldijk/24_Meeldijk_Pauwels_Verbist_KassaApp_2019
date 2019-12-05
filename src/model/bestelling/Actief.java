@@ -20,4 +20,7 @@ public class Actief extends BestellingState {
         bestelling.getArtikels().remove(bestelling.getDataInMemory().getArtikel(code));
         bestelling.notifyObserver();
     }
+    public void sluitAf(){
+        
+    }
 }
