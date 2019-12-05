@@ -81,7 +81,6 @@ public class KassaViewController implements Observer {
     public ObservableList<Artikel> getArtikels(){
         //return getBestelling().getArtikels();
         return winkel.getActieveBestelling().getArtikels();
-
     }
 
     @Override
