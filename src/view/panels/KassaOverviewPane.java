@@ -84,7 +84,14 @@ public class KassaOverviewPane extends GridPane {
 			table.setItems(kassaViewController.getArtikels());
 			refresh();
 		});
-		vb.getChildren().addAll(zetActief);
+		vb.getChildren().add(zetActief);
+
+		Button sluitAf = new Button("Sluit Af");
+		sluitAf.setOnAction(sluit ->{
+			sluitAf.setText("Betaal");
+			kassaViewController.sluitAf();
+		});
+		vb.getChildren().add(sluitAf);
 	}
 
 	private void tabel(){

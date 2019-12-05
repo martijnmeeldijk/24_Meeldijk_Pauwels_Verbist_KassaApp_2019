@@ -89,4 +89,12 @@ public class KassaViewController implements Observer {
         return winkel.getActieveBestelling();
     }
 
+    public void sluitAf() {
+        try{
+            winkel.getActieveBestelling().sluitAf();
+        }
+        catch (Exception e){
+            kassaOverviewPane.displayErrorMessage(e.getMessage());
+        }
+    }
 }
