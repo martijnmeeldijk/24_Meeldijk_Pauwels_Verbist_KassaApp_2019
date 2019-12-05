@@ -1,6 +1,7 @@
 package view.panels;
 
 import controller.InstellingenOverviewController;
+import database.LoadSaveStrategies;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -31,12 +32,42 @@ public class InstellingenOverviewPane extends GridPane {
         vb.setSpacing(10);
         this.getChildren().add(vb);
 
+        //creeer Hbox
+        HBox laadHb= new HBox();
+        laadHb.setSpacing(10);
+
         //creeer titel
-        Label korting = new Label("Korting:");
+        Label tabelDb = new Label("Hoe tabel inladen:");
+
+        //creeer Strings arraylist van laadmogelijkheden
+        ArrayList<String> laad = new ArrayList<>();
+        for(LoadSaveStrategies s: LoadSaveStrategies.values()){
+            laad.add(s.toString());
+        }
+
+        //in combobox
+        ObservableList<String> laadOptions =
+                FXCollections.observableArrayList(
+                        laad
+                );
+        ComboBox<String> laadtype = new ComboBox<>(laadOptions);
+        laadtype.setValue(LoadSaveStrategies.EXCEL.toString());
+
+        //creeer knop
+        Button laadknop = new Button("Zet laadoptie");
+
+        //plaats combobox en knop in Hbox
+        laadHb.getChildren().addAll(laadtype,laadknop);
+
+        //voeg titel en Hbox toe
+        vb.getChildren().addAll(tabelDb,laadHb);
+
+        //creeer titel
+        Label korting = new Label("Eerste korting:");
 
         //creeer Hbox
-        HBox hb= new HBox();
-        hb.setSpacing(10);
+        HBox kortingHb= new HBox();
+        kortingHb.setSpacing(10);
 
         //creeer Strings arraylist van kortingsmogelijkheden
         ArrayList<String> list = new ArrayList<>();
@@ -45,27 +76,27 @@ public class InstellingenOverviewPane extends GridPane {
         }
 
         //in combobox
-        ObservableList<String> options =
+        ObservableList<String> kortingOptions =
                 FXCollections.observableArrayList(
                      list
                 );
-        ComboBox<String> kortingstype = new ComboBox<>(options);
+        ComboBox<String> kortingstype = new ComboBox<>(kortingOptions);
         kortingstype.setValue(Kortingsmogelijkheden.Nummer.toString());
 
         //creeer kortingInput
         TextField kortingInput = new TextField();
 
         //creeer knop
-        Button knop = new Button("Zet korting");
+        Button kortingknop = new Button("Zet korting");
 
         //plaats combobox, kortingsInput en knop in Hbox
-        hb.getChildren().addAll(kortingstype,kortingInput,knop);
+        kortingHb.getChildren().addAll(kortingstype,kortingInput,kortingknop);
 
-        //voeg titel en combobox toe
-        vb.getChildren().addAll(korting,hb);
+        //voeg titel en Hbox toe
+        vb.getChildren().addAll(korting,kortingHb);
 
         //setKorting
-        knop.setOnAction(actief ->
+        kortingknop.setOnAction(actief ->
         {
             if(kortingInput.getText().equals("")){
                 instellingenOverviewController.setKorting(kortingstype.getValue());
