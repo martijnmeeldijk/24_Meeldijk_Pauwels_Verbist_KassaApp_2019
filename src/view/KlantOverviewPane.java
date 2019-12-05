@@ -16,6 +16,7 @@ import javafx.scene.text.Font;
 import model.Artikel;
 import model.OmschrijvingComparable;
 import org.omg.PortableInterceptor.INACTIVE;
+import view.panels.AantalList;
 
 import java.util.Comparator;
 
@@ -62,7 +63,7 @@ public class KlantOverviewPane  extends GridPane {
     private void tabel(){
         //creeer tabel
         table = new TableView<>();
-        table.setItems(klantOverviewController.getList());
+        table.setItems(AantalList.getList(klantOverviewController.getWinkel()));
 
         //creeer kolommen
         TableColumn<Artikel, String> colOmschrijving = new TableColumn<>("Omschrijving");
