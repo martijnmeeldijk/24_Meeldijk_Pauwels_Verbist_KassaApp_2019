@@ -11,7 +11,7 @@ import java.util.Properties;
 
 public class ArtikelDbContext {
     private ArtikelDbStrategy artikelDbStrategy;
-    Properties properties;
+    private Properties properties;
 
     public ArtikelDbContext() {
         properties = loadProperties("src/database/database.properties");
@@ -19,13 +19,12 @@ public class ArtikelDbContext {
         // an Laat ik de factory de klasse maken die in de properties file staat
         // Luister naar King Marti op SoundCloud
         this.setStrategy(ArtikelDbStrategyFactory.getInstance().createArtikelDbStrategy(properties.getProperty("ArtikelDbStrategy")));
-
-
     }
 
-    public void setStrategy(ArtikelDbStrategy artikelDbStrategy){
+    private void setStrategy(ArtikelDbStrategy artikelDbStrategy){
         this.artikelDbStrategy = artikelDbStrategy;
     }
+
     public HashMap<Integer, Artikel> load(){
         return artikelDbStrategy.load();
     }
