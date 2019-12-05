@@ -14,12 +14,12 @@ public class KassaViewController implements Observer {
     private KassaOverviewPane kassaOverviewPane;
     //private Bestelling bestelling;
     private Winkel winkel;
-    private Bestelling altBestelling;
     private Korting korting = KortingFactory.getInstance().createKorting(Kortingsmogelijkheden.Nummer);
 
     public KassaViewController(Winkel winkel) {
         this.winkel = winkel;
     }
+
     public void setKorting(Kortingsmogelijkheden korting){
         this.korting=KortingFactory.getInstance().createKorting(korting);
     }
@@ -53,9 +53,6 @@ public class KassaViewController implements Observer {
         kassaOverviewPane.setOriginelePrijs(String.valueOf(totaal));
     }
 
-    public KassaViewController(Bestelling bestelling) {
-        this.bestelling=bestelling;
-    }
 
     public void setKassaView(KassaOverviewPane kassaOverviewPane) {
         this.kassaOverviewPane = kassaOverviewPane;
@@ -94,7 +91,7 @@ public class KassaViewController implements Observer {
     public void zetOnHold(){
         try {
             winkel.getActieveBestelling().zetOnHold();
-            altBestelling = new Bestelling();
+            winkel.addBestelling();
         }
         catch (Exception e){
             kassaOverviewPane.displayErrorMessage(e.getMessage());

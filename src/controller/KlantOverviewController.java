@@ -21,16 +21,13 @@ public class KlantOverviewController implements Observer {
         this.winkel=winkel;
         winkel.getActieveBestelling().add(this);
         //bestelling.add(this);
+        }
 
     private void berekenPrice(){
-        double totaal=bestelling.getKorting().PrijsNaKorting(getList());
+        double totaal=winkel.getActieveBestelling().getKorting().PrijsNaKorting(getList());
         klantOverviewPane.setPrijs(String.valueOf(totaal));
     }
 
-    public KlantOverviewController(Bestelling bestelling) {
-        this.bestelling = bestelling;
-        bestelling.add(this);
-    }
 
     public void setKlantOverviewPane(KlantOverviewPane klantOverviewPane) {
         this.klantOverviewPane = klantOverviewPane;
@@ -56,7 +53,7 @@ public class KlantOverviewController implements Observer {
     public ObservableList<Artikel> getList() {
         System.out.println("hier");
         ObservableList<Artikel>tijdelijk= FXCollections.observableArrayList();
-        for(Artikel artikel:bestelling.getArtikels()){
+        for(Artikel artikel:winkel.getActieveBestelling().getArtikels()){
             if(tijdelijk.contains(artikel)){
                 int index= tijdelijk.indexOf(artikel);
                 tijdelijk.get(index).setAantal(tijdelijk.get(index).getAantal()+1);
