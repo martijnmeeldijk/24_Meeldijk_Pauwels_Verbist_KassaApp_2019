@@ -6,6 +6,8 @@ import model.Artikel;
 import model.Bestelling;
 import view.panels.KlantOverviewPane;
 
+import java.util.HashSet;
+
 public class KlantOverviewController implements Observer {
     Bestelling bestelling;
     KlantOverviewPane klantOverviewPane;
@@ -31,7 +33,6 @@ public class KlantOverviewController implements Observer {
 
         }
     }
-
     public void berekenPrice(){
         double totaal=0.0;
         for(Artikel artikel:getList()){
@@ -40,7 +41,9 @@ public class KlantOverviewController implements Observer {
         klantOverviewPane.setPrijs(String.valueOf(totaal));
     }
 
+
     public ObservableList<Artikel> getList() {
+        System.out.println("hier");
         ObservableList<Artikel>tijdelijk= FXCollections.observableArrayList();
         for(Artikel artikel:bestelling.getArtikels()){
             if(tijdelijk.contains(artikel)){

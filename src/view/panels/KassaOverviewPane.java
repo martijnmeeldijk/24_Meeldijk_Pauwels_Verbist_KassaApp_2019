@@ -71,7 +71,7 @@ public class KassaOverviewPane extends GridPane {
 		});
 
 		//verwijder item uit tabel bij dubbelklik
-		table.setRowFactory( ev -> {
+		table.setRowFactory( tv -> {
 			TableRow<Artikel> row = new TableRow<>();
 			row.setOnMouseClicked(event -> {
 				if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
