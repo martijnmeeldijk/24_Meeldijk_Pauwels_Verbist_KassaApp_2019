@@ -21,6 +21,6 @@ public class Actief extends BestellingState {
         bestelling.notifyObserver();
     }
     public void sluitAf(){
-        
+        bestelling.setCurrentState(bestelling.getAfgesloten());
     }
 }

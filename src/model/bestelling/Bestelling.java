@@ -19,6 +19,7 @@ public class Bestelling implements Subject {
 
     private BestellingState actief;
     private BestellingState onHold;
+    private BestellingState afgesloten;
     private BestellingState currentState;
 
     private Korting korting = KortingFactory.getInstance().createKorting(Kortingsmogelijkheden.Nummer);
@@ -41,6 +42,7 @@ public class Bestelling implements Subject {
 
         actief = new Actief(this);
         onHold = new OnHold(this);
+        afgesloten = new Afgesloten(this);
         this.currentState = actief;
     }
 
@@ -91,6 +93,7 @@ public class Bestelling implements Subject {
     public void zetActief(){
         currentState.zetActief();
     }
+    public void sluitAf(){currentState.sluitAf();}
     public BestellingState getCurrentState(){
         return currentState;
     }
@@ -109,5 +112,9 @@ public class Bestelling implements Subject {
 
     public boolean isActief(){
         return currentState.getClass() == Actief.class;
+    }
+
+    public BestellingState getAfgesloten() {
+        return afgesloten;
     }
 }
