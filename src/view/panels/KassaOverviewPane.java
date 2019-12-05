@@ -28,6 +28,11 @@ public class KassaOverviewPane extends GridPane {
 		//layout
 		this.setPadding(new Insets(10, 10, 10, 10));
 
+		//creeer box
+		VBox vb = new VBox();
+		vb.setSpacing(10);
+		this.getChildren().add(vb);
+
 		//creer display inputveld code en totaalprijs
 		Label code = new Label("Code:");
 		inputCode = new TextField ();
@@ -37,9 +42,8 @@ public class KassaOverviewPane extends GridPane {
 		prijsbox.getChildren().addAll(prijs,prijswaarde);
 
 		//voeg inputveld code en totaalprijs toe
-		VBox vb = new VBox();
 		vb.getChildren().addAll(code,inputCode,prijsbox);
-		vb.setSpacing(10);
+
 
 		//creeer titel
 		Label lblHeading = new Label("artikels");
@@ -50,7 +54,6 @@ public class KassaOverviewPane extends GridPane {
 
 		//voeg titel en tabel toe
 		vb.getChildren().addAll(lblHeading,table);
-		this.getChildren().addAll(vb);
 
 		//registreer input code
 		inputCode();

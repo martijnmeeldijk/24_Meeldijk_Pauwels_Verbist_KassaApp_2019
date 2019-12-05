@@ -3,6 +3,7 @@ package view.panels;
 import controller.InstellingenOverviewController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
@@ -16,10 +17,15 @@ public class InstellingenOverviewPane extends GridPane {
         this.instellingenOverviewController=instellingenOverviewController;
         this.instellingenOverviewController.setInstellingenOverviewPane(this);
 
+        //layout
+        this.setPadding(new Insets(10, 10, 10, 10));
+
+        //creeer box
         VBox vb= new VBox();
         vb.setSpacing(10);
+        this.getChildren().add(vb);
 
-        //korting
+        //model.korting
         Label korting = new Label("Korting:");
         ObservableList<String> options =
                 FXCollections.observableArrayList(
@@ -28,6 +34,8 @@ public class InstellingenOverviewPane extends GridPane {
                         "Option 3"
                 );
         ComboBox<String> kortingstype = new ComboBox<>(options);
+
         vb.getChildren().addAll(korting,kortingstype);
+
     }
 }

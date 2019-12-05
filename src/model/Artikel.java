@@ -16,6 +16,7 @@ public class Artikel {
         setVerkoopprijs(verkoopprijs);
         setVoorraad(voorraad);
     }
+
     public static Artikel MaakArtikel(String code, String omschrijving, String artikelgroep, String verkoopprijs, String voorraad) {
         try {
             return new Artikel(Integer.parseInt(code), omschrijving, artikelgroep,
@@ -49,10 +50,6 @@ public class Artikel {
         this.omschrijving = omschrijving;
     }
 
-    public String getArtikelgroep() {
-        return artikelgroep;
-    }
-
     public static int getBtw() {
         return btw;
     }
@@ -63,6 +60,10 @@ public class Artikel {
 
     public void setAantal(int aantal) {
         this.aantal = aantal;
+    }
+
+    public String getArtikelgroep() {
+        return artikelgroep;
     }
 
     private void setArtikelgroep(String artikelgroep) {
