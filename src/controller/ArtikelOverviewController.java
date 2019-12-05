@@ -13,7 +13,6 @@ import java.util.HashMap;
 
 public class ArtikelOverviewController implements Observer {
     private static Comparator<Artikel> omschrijvingcomperator = new OmschrijvingComparable();
-    //private Bestelling bestelling;
     private Winkel winkel;
 
     public ArtikelOverviewController(Winkel winkel) {
@@ -41,6 +40,5 @@ public class ArtikelOverviewController implements Observer {
 
     @Override
     public void update() {
-        //artikelOverviewPane.setList(getList());
     }
 }
