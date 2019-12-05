@@ -121,7 +121,7 @@ public class KassaOverviewPane extends GridPane {
 		alert.show();
 	}
 
-	public void setPrijs(String prijs) {
+	public void setOriginelePrijs(String prijs) {
 		this.prijswaarde.setText(prijs);
 	}
 

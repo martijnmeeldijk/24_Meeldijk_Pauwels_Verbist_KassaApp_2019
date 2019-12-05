@@ -5,6 +5,9 @@ import javafx.collections.ObservableList;
 import model.Artikel;
 import model.Winkel;
 import model.bestelling.Bestelling;
+import model.korting.Korting;
+import model.korting.KortingFactory;
+import model.korting.Kortingsmogelijkheden;
 import view.KlantOverviewPane;
 
 public class KlantOverviewController implements Observer {
@@ -19,24 +22,29 @@ public class KlantOverviewController implements Observer {
         winkel.getActieveBestelling().add(this);
         //bestelling.add(this);
 
+    private void berekenPrice(){
+        double totaal=bestelling.getKorting().PrijsNaKorting(getList());
+        klantOverviewPane.setPrijs(String.valueOf(totaal));
+    }
+
+    public KlantOverviewController(Bestelling bestelling) {
+        this.bestelling = bestelling;
+        bestelling.add(this);
     }
 
     public void setKlantOverviewPane(KlantOverviewPane klantOverviewPane) {
         this.klantOverviewPane = klantOverviewPane;
     }
 
-
-
     @Override
     public void update() {
-        //check of dit null is voor tijdens het opstarten van de applicatie
         if(klantOverviewPane!=null){
             klantOverviewPane.setArtikels(getList());
             berekenPrice();
         }
     }
 
-    private void berekenPrice(){
+    private void originalberekenPrice(){
         double totaal=0.0;
         for(Artikel artikel:getList()){
             totaal+=artikel.getVerkoopprijs() * artikel.getAantal();
@@ -48,7 +56,7 @@ public class KlantOverviewController implements Observer {
     public ObservableList<Artikel> getList() {
         System.out.println("hier");
         ObservableList<Artikel>tijdelijk= FXCollections.observableArrayList();
-        for(Artikel artikel:winkel.getActieveBestelling().getArtikels()){
+        for(Artikel artikel:bestelling.getArtikels()){
             if(tijdelijk.contains(artikel)){
                 int index= tijdelijk.indexOf(artikel);
                 tijdelijk.get(index).setAantal(tijdelijk.get(index).getAantal()+1);

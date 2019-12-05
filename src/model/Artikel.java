@@ -95,7 +95,14 @@ public class Artikel {
         this.voorraad = voorraad;
     }
 
-
+    @Override
+    public boolean equals(Object obj){
+        if(obj instanceof Artikel) {
+            Artikel artikel = (Artikel) obj;
+            if (artikel.code == getCode()) return true;
+        }
+        return false;
+    }
 
 
     @Override
