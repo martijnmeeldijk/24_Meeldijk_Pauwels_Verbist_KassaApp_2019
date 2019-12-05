@@ -5,13 +5,14 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import model.Winkel;
 import model.bestelling.Bestelling;
 
 public class KlantView  {
 	private Stage stage = new Stage();
 
 
-	public KlantView(Bestelling bestelling){
+	public KlantView(Winkel winkel){
 
 		stage.setTitle("KLANT VIEW");
 		stage.setResizable(false);
@@ -23,7 +24,7 @@ public class KlantView  {
 		Group root = new Group();
 		Scene scene = new Scene(root, 520, 500);
 
-		KlantOverviewController klantOverviewController= new KlantOverviewController(bestelling);
+		KlantOverviewController klantOverviewController= new KlantOverviewController(winkel);
 
 		GridPane gridPane = new KlantOverviewPane(klantOverviewController);
 		gridPane.prefHeightProperty().bind(scene.heightProperty());

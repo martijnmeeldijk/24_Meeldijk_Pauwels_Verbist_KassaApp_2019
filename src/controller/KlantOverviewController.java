@@ -3,16 +3,21 @@ package controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Artikel;
+import model.Winkel;
 import model.bestelling.Bestelling;
 import view.KlantOverviewPane;
 
 public class KlantOverviewController implements Observer {
-    private Bestelling bestelling;
+    //private Bestelling bestelling;
+    private Winkel winkel;
+
     private KlantOverviewPane klantOverviewPane;
 
-    public KlantOverviewController(Bestelling bestelling) {
-        this.bestelling = bestelling;
-        bestelling.add(this);
+    public KlantOverviewController(Winkel winkel) {
+        //this.bestelling = bestelling;
+        this.winkel=winkel;
+        winkel.getActieveBestelling().add(this);
+        //bestelling.add(this);
 
     }
 
@@ -43,7 +48,7 @@ public class KlantOverviewController implements Observer {
     public ObservableList<Artikel> getList() {
         System.out.println("hier");
         ObservableList<Artikel>tijdelijk= FXCollections.observableArrayList();
-        for(Artikel artikel:bestelling.getArtikels()){
+        for(Artikel artikel:winkel.getActieveBestelling().getArtikels()){
             if(tijdelijk.contains(artikel)){
                 int index= tijdelijk.indexOf(artikel);
                 tijdelijk.get(index).setAantal(tijdelijk.get(index).getAantal()+1);

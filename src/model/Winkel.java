@@ -6,9 +6,12 @@ import java.util.ArrayList;
 
 public class Winkel {
     ArrayList<Bestelling> bestellingen;
+    //dataInMemory kan wss beter hier in winkel worden toegevoegd ipv in elke bestelling appart dus nog refactoren
 
     public Winkel() {
         bestellingen = new ArrayList<>();
+        bestellingen.add(new Bestelling());
+
     }
 
     public void addBestelling(){
@@ -19,5 +22,24 @@ public class Winkel {
         }
         bestellingen.add(new Bestelling());
     }
+
+    public Bestelling getActieveBestelling(){
+        for(Bestelling bestelling:bestellingen){
+            if(bestelling.isActief()){
+                return bestelling;
+            }
+        }
+        return null;
+    }
+
+    public Bestelling getpassiveBestelling(){
+        for(Bestelling bestelling:bestellingen){
+            if(!bestelling.isActief()){
+                return bestelling;
+            }
+        }
+        return null;
+    }
+
 
 }

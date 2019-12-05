@@ -3,6 +3,7 @@ package controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Artikel;
+import model.Winkel;
 import model.bestelling.Bestelling;
 import model.OmschrijvingComparable;
 import view.panels.ArtikelOverviewPane;
@@ -12,9 +13,11 @@ import java.util.HashMap;
 
 public class ArtikelOverviewController implements Observer {
     private static Comparator<Artikel> omschrijvingcomperator = new OmschrijvingComparable();
-    private Bestelling bestelling;
-    public ArtikelOverviewController(Bestelling bestelling) {
-        this.bestelling=bestelling;
+    //private Bestelling bestelling;
+    private Winkel winkel;
+
+    public ArtikelOverviewController(Winkel winkel) {
+        this.winkel = winkel;
     }
 
     public void setArtikelOverviewPane(ArtikelOverviewPane artikelOverviewPane) {
@@ -23,7 +26,7 @@ public class ArtikelOverviewController implements Observer {
 
     public ObservableList<Artikel> getList(){
         ObservableList<Artikel>artikels= FXCollections.observableArrayList();
-        HashMap<Integer,Artikel>hashartikels=bestelling.getDataInMemory().getArtikels();
+        HashMap<Integer,Artikel>hashartikels=winkel.getActieveBestelling().getDataInMemory().getArtikels();
         for(int key:hashartikels.keySet()){
             artikels.add(hashartikels.get(key));
         }
@@ -32,7 +35,7 @@ public class ArtikelOverviewController implements Observer {
     }
 
     public Bestelling getBestelling() {
-        return bestelling;
+        return winkel.getActieveBestelling();
     }
 
 

@@ -5,12 +5,13 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import model.Winkel;
 import model.bestelling.Bestelling;
 
 public class KassaView extends GridPane {
 	private Stage stage = new Stage();
 
-	public KassaView(Bestelling bestelling){
+	public KassaView(Winkel winkel){
 
 		stage.setTitle("KASSA VIEW");
 		stage.setResizable(false);
@@ -22,7 +23,7 @@ public class KassaView extends GridPane {
 		Group root = new Group();
 		Scene scene = new Scene(root, 720, 500);
 
-		BorderPane borderPane = new KassaMainPane(bestelling);
+		BorderPane borderPane = new KassaMainPane(winkel);
 		borderPane.prefHeightProperty().bind(scene.heightProperty());
 		borderPane.prefWidthProperty().bind(scene.widthProperty());
 

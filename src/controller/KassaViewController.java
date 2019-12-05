@@ -2,16 +2,18 @@ package controller;
 
 import javafx.collections.ObservableList;
 import model.Artikel;
+import model.Winkel;
 import model.bestelling.Bestelling;
 import view.panels.KassaOverviewPane;
 
 public class KassaViewController implements Observer {
     private KassaOverviewPane kassaOverviewPane;
-    private Bestelling bestelling;
+    //private Bestelling bestelling;
+    private Winkel winkel;
     private Bestelling altBestelling;
 
-    public KassaViewController(Bestelling bestelling) {
-        this.bestelling=bestelling;
+    public KassaViewController(Winkel winkel) {
+        this.winkel = winkel;
     }
 
     private void price(){
@@ -51,7 +53,9 @@ public class KassaViewController implements Observer {
     }*/
 
     public ObservableList<Artikel> getArtikels(){
-        return getBestelling().getArtikels();
+        //return getBestelling().getArtikels();
+        return winkel.getActieveBestelling().getArtikels();
+
     }
 
     @Override
@@ -60,7 +64,7 @@ public class KassaViewController implements Observer {
 
     public void zetOnHold(){
         try {
-            bestelling.zetOnHold();
+            winkel.getActieveBestelling().zetOnHold();
             altBestelling = new Bestelling();
         }
         catch (Exception e){
@@ -70,7 +74,8 @@ public class KassaViewController implements Observer {
     }
     public void zetActief() {
         try {
-            bestelling.zetActief();
+            //bestelling.zetActief();
+            winkel.getpassiveBestelling().zetActief();
         } catch (Exception e) {
             kassaOverviewPane.displayErrorMessage(e.getMessage());
         }
@@ -78,7 +83,8 @@ public class KassaViewController implements Observer {
 
     //geeft de andere bestelling terug als de eerste on hold staat
     public Bestelling getBestelling() {
-        return bestelling.isActief()?bestelling:altBestelling;
+        //return bestelling.isActief()?bestelling:altBestelling;
+        return winkel.getActieveBestelling();
     }
 
 }
