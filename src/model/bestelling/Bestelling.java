@@ -92,7 +92,14 @@ public class Bestelling implements Subject {
     public void zetActief(){
         currentState.zetActief();
     }
-    public void sluitAf(){currentState.sluitAf();}
+    public void sluitAf(){
+        if(!artikels.isEmpty()){
+            currentState.sluitAf();
+        }
+        else{
+            throw new NotPossibleException("Je kan geen bestelling afsluiten met een leeg winkelmandje");
+        }
+    }
     public BestellingState getCurrentState(){
         return currentState;
     }
