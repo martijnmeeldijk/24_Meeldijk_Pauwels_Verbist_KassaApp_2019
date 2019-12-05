@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ExcelAdapter implements LoadSaveStrategy {
-        ExcelPlugin excelPlugin;
+    private ExcelPlugin excelPlugin;
 
     public ExcelAdapter() {
         excelPlugin= new ExcelPlugin();
@@ -28,20 +28,17 @@ public class ExcelAdapter implements LoadSaveStrategy {
                     Artikel artikel1= Artikel.MaakArtikel(artikel.get(0),artikel.get(2),artikel.get(1),artikel.get(3),artikel.get(4));
                     artikels.put(code,artikel1);
                 }
-            } catch (BiffException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
+            } catch (BiffException|IOException e) {
                 e.printStackTrace();
             }
-
-        return artikels;
+            return artikels;
         }
 
-        public ArrayList<String> geefArray(Artikel artikel){
+        private ArrayList<String> geefArray(Artikel artikel){
         ArrayList<String>artikelInLijst= new ArrayList<>();
         artikelInLijst.add(String.valueOf(artikel.getCode()));
         artikelInLijst.add(artikel.getOmschrijving());
-            artikelInLijst.add(artikel.getArtikelgroep());
+            artikelInLijst.add(String.valueOf(artikel.getArtikelgroep()));
             artikelInLijst.add(String.valueOf(artikel.getVerkoopprijs()));
             artikelInLijst.add(String.valueOf(artikel.getVoorraad()));
 
@@ -50,18 +47,14 @@ public class ExcelAdapter implements LoadSaveStrategy {
 
         @Override
         public void save(HashMap<Integer, Artikel> artikels) {
-            ArrayList<ArrayList<String>>items= new ArrayList<ArrayList<String>>();
+            ArrayList<ArrayList<String>>items= new ArrayList<>();
             for(Integer key: artikels.keySet()){
                 items.add(geefArray(artikels.get(key)));
             }
             File file = new File("src/bestanden/artikel.xls");
             try {
                 excelPlugin.write(file,items);
-            } catch (BiffException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (WriteException e) {
+            } catch (BiffException|IOException|WriteException e) {
                 e.printStackTrace();
             }
         }

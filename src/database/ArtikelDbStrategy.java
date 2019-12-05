@@ -6,6 +6,6 @@ import java.io.FileNotFoundException;
 import java.util.HashMap;
 
 public interface ArtikelDbStrategy {
-    public HashMap<Integer, Artikel> load();
-    public void save(HashMap<Integer, Artikel> artikels);
+    HashMap<Integer, Artikel> load();
+    void save(HashMap<Integer, Artikel> artikels);
 }

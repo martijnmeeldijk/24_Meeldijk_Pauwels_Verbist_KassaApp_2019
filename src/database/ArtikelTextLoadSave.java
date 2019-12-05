@@ -2,12 +2,14 @@ package database;
 
 //import com.sun.tools.jdeprscan.scan.Scan;
 import model.Artikel;
+import model.Artikelgroep;
+
 import java.io.*;
 import java.util.HashMap;
 import java.util.Scanner;
 
 public class ArtikelTextLoadSave extends TekstLoadSaveTemplate{
-    public String filename = "src/bestanden/artikel.txt";
+    private String filename = "src/bestanden/artikel.txt";
     private HashMap<Integer, Artikel> artikels;
     public ArtikelTextLoadSave() {
         this.artikels =new HashMap<>();
@@ -21,6 +23,7 @@ public class ArtikelTextLoadSave extends TekstLoadSaveTemplate{
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+        assert scanner != null;
         while(scanner.hasNextLine()){
             Scanner linescanner = new Scanner(scanner.nextLine());
             linescanner.useDelimiter(",");
@@ -48,7 +51,7 @@ public class ArtikelTextLoadSave extends TekstLoadSaveTemplate{
                 Artikel artikel = artikels.get(a);
                 int code = artikel.getCode();
                 String omschrijving = artikel.getOmschrijving();
-                String artikelgroep = artikel.getArtikelgroep();
+                Artikelgroep artikelgroep = artikel.getArtikelgroep();
                 double verkoopprijs = artikel.getVerkoopprijs();
                 int voorraad= artikel.getVoorraad();
 

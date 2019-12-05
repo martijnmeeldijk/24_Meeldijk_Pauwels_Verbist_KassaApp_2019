@@ -3,7 +3,7 @@ package model;
 public class Artikel {
     private int code;
     private String omschrijving;
-    private String artikelgroep;
+    private Artikelgroep artikelgroep;
     private double verkoopprijs;
     private int voorraad;
     private int aantal;
@@ -62,7 +62,7 @@ public class Artikel {
         this.aantal = aantal;
     }
 
-    public String getArtikelgroep() {
+    public Artikelgroep getArtikelgroep() {
         return artikelgroep;
     }
 
@@ -70,7 +70,7 @@ public class Artikel {
         if(artikelgroep==null || artikelgroep.length()==0){
             throw new IllegalArgumentException("artikelgroep mag niet leeg zijn of null zijn");
         }
-        this.artikelgroep = artikelgroep;
+        this.artikelgroep = Artikelgroep.valueOf(artikelgroep);
     }
 
     public double getVerkoopprijs() {
