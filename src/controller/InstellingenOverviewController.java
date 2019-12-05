@@ -26,12 +26,12 @@ public class InstellingenOverviewController implements Observer{
     public void setKorting(String thekorting, int hoeveelheid){
         Korting korting = KortingFactory.getInstance().createKortingString(thekorting);
         korting.setKorting(hoeveelheid);
-        bestelling.setKorting(korting);
+        winkel.getActieveBestelling().setKorting(korting);
     }
 
     public void setKorting(String thekorting){
         Korting korting = KortingFactory.getInstance().createKortingString(thekorting);
-        bestelling.setKorting(korting);
+        winkel.getActieveBestelling().setKorting(korting);
     }
 
     @Override
