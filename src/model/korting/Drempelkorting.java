@@ -24,10 +24,10 @@ public class Drempelkorting implements Korting {
     }
 
     @Override
-    public double PrijsNaKorting(ObservableList<Artikel> list) {
+    public double korting(ObservableList<Artikel> list) {
         double totaal = berekenTotaal(list);
         if(totaal>drempel){
-            return totaal*(1-(0.01*korting.getKorting()));
+            return totaal*(0.01*korting.getKorting());
         }
         return totaal;
     }
@@ -35,5 +35,10 @@ public class Drempelkorting implements Korting {
     @Override
     public void setKorting(int korting) {
         this.korting.setKorting(korting);
+    }
+
+    @Override
+    public String toString(){
+        return "Drempelkorting"+" drempel: "+drempel+", korting: "+korting.getKorting();
     }
 }

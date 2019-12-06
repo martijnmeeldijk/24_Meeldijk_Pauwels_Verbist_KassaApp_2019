@@ -1,6 +1,8 @@
 package controller;
 
+import model.Artikel;
 import model.Winkel;
+import model.korting.Korting;
 import view.klantview.KlantOverviewPane;
 
 public class KlantOverviewController implements Observer {
@@ -17,9 +19,19 @@ public class KlantOverviewController implements Observer {
         winkel.getActieveBestelling().add(this);
         }
 
+    private double totaal(){
+        double totaal=0.0;
+        for(Artikel artikel: winkel.getActieveBestelling().getArtikels()){
+            totaal+=artikel.getVerkoopprijs();
+        }
+        return totaal;
+    }
 
     private void kortingPrice(){
-        double totaal=winkel.getActieveBestelling().getKorting().PrijsNaKorting(AantalList.getList(winkel));
+        double totaal=0;
+        for(Korting k:winkel.getActieveBestelling().getKortingen()){
+            totaal+=k.korting(AantalList.getList(winkel));
+        }
         klantOverviewPane.setPrijs(String.valueOf(totaal));
     }
 

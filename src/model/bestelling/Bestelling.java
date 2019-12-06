@@ -27,17 +27,16 @@ public class Bestelling implements Subject {
     private BestellingState betaald;
     private BestellingState currentState;
 
-    private Korting korting = KortingFactory.getInstance().createKorting(Kortingsmogelijkheden.Nummer);
+    private ArrayList<Korting> kortingen = new ArrayList<>();
 
-    public Korting getKorting() {
-        return korting;
+    public ArrayList<Korting> getKortingen() {
+        return kortingen;
     }
 
-    public void setKorting(Korting korting) {
-        this.korting = korting;
+    public void addKorting(Korting korting) {
+        kortingen.add(korting);
         notifyObserver();
     }
-
 
     public Bestelling() {
         observers=new ArrayList<>();
@@ -48,6 +47,8 @@ public class Bestelling implements Subject {
         onHold = new OnHold(this);
         afgesloten = new Afgesloten(this);
         this.currentState = actief;
+
+        kortingen.add(KortingFactory.getInstance().createKorting(Kortingsmogelijkheden.Nummer));
     }
 
     public void addArtikel(int code){

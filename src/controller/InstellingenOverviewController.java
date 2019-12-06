@@ -7,6 +7,8 @@ import model.korting.KortingFactory;
 import model.korting.Kortingsmogelijkheden;
 import view.panels.InstellingenOverviewPane;
 
+import java.util.ArrayList;
+
 public class InstellingenOverviewController implements Observer{
     private Winkel winkel;
     private InstellingenOverviewPane instellingenOverviewPane;
@@ -20,15 +22,12 @@ public class InstellingenOverviewController implements Observer{
         this.instellingenOverviewPane=instellingenOverviewPane;
     }
 
-    public void setKorting(Kortingsmogelijkheden thekorting, int hoeveelheid){
-        Korting korting = KortingFactory.getInstance().createKorting(thekorting);
-        korting.setKorting(hoeveelheid);
-        winkel.getActieveBestelling().setKorting(korting);
+    public void addKorting(Korting korting){
+        winkel.getActieveBestelling().addKorting(korting);
     }
 
-    public void setKorting(Kortingsmogelijkheden thekorting){
-        Korting korting = KortingFactory.getInstance().createKorting(thekorting);
-        winkel.getActieveBestelling().setKorting(korting);
+    public ArrayList<Korting> getKortingen(){
+        return winkel.getActieveBestelling().getKortingen();
     }
 
     public void setLaadoptie(String laadoptie){

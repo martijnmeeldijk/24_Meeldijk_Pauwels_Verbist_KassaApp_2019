@@ -4,6 +4,6 @@ import javafx.collections.ObservableList;
 import model.Artikel;
 
 public interface Korting {
-    double PrijsNaKorting(ObservableList<Artikel> list);
+    double korting(ObservableList<Artikel> list);
     void setKorting(int korting);
 }

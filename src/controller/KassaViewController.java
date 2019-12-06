@@ -4,6 +4,7 @@ import javafx.collections.ObservableList;
 import model.Artikel;
 import model.Winkel;
 import model.bestelling.Bestelling;
+import model.korting.Korting;
 import view.panels.KassaOverviewPane;
 
 public class KassaViewController implements Observer {
@@ -13,8 +14,11 @@ public class KassaViewController implements Observer {
         this.winkel = winkel;
     }
 
-    private void kortingPrice(){
-        double totaal=winkel.getActieveBestelling().getKorting().PrijsNaKorting(AantalList.getList(winkel));
+    private void korting(){
+        double totaal=0;
+        for(Korting k:winkel.getActieveBestelling().getKortingen()){
+           totaal+=k.korting(AantalList.getList(winkel));
+        }
         kassaOverviewPane.setKortingPrijs(String.valueOf(totaal));
     }
 
@@ -35,7 +39,7 @@ public class KassaViewController implements Observer {
         if(getBestelling().itemBestaat(code)){
             getBestelling().addArtikel(code);
             originalPrice();
-            kortingPrice();
+            korting();
         }
         else {
             kassaOverviewPane.displayErrorMessage("niet bestaande code");
@@ -46,7 +50,7 @@ public class KassaViewController implements Observer {
         if(getBestelling().itemBestaat(code)){
             getBestelling().removeArtikel(code);
             originalPrice();
-            kortingPrice();
+            korting();
         }
         else {
             kassaOverviewPane.displayErrorMessage("niet bestaande code");

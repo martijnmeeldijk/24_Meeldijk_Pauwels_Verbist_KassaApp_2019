@@ -17,7 +17,7 @@ public class KassaOverviewPane extends GridPane {
 	private KassaViewController kassaViewController;
 	private TableView<Artikel> table;
 	private Label prijswaarde;
-	private Label kortingprijswaarde;
+	private Label kortingwaarde;
 	private TextField inputCode;
 	//public static Comparator<Artikel> omschrijvingcomperator = new OmschrijvingComparable();
 
@@ -43,10 +43,10 @@ public class KassaOverviewPane extends GridPane {
 		HBox prijsbox=new HBox();
 		prijsbox.getChildren().addAll(prijs,prijswaarde);
 
-		kortingprijswaarde=new Label("0.0");
-		Label kortingprijs=new Label("kortingprijs: ");
+		kortingwaarde=new Label("0.0");
+		Label korting=new Label("korting: ");
 		HBox kortingprijsbox=new HBox();
-		kortingprijsbox.getChildren().addAll(kortingprijs,kortingprijswaarde);
+		kortingprijsbox.getChildren().addAll(korting,kortingwaarde);
 
 		//voeg inputveld code en totaalprijs toe
 		vb.getChildren().addAll(code,inputCode,prijsbox,kortingprijsbox);
@@ -139,7 +139,7 @@ public class KassaOverviewPane extends GridPane {
 	}
 
 	public void setKortingPrijs(String prijs){
-		this.kortingprijswaarde.setText(prijs);
+		this.kortingwaarde.setText(prijs);
 	}
 
 	private void refresh(){

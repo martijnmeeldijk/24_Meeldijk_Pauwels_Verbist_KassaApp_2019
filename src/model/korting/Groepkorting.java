@@ -13,11 +13,11 @@ public class Groepkorting implements Korting{
     }
 
     @Override
-    public double PrijsNaKorting(ObservableList<Artikel> list) {
+    public double korting(ObservableList<Artikel> list) {
         double totaal=0.0;
         for(Artikel artikel: list){
             if(artikel.getArtikelgroep().equals(groep)){
-                totaal+=artikel.getVerkoopprijs()*(1-(0.01*korting.getKorting()))*artikel.getAantal();
+                totaal+=artikel.getVerkoopprijs()*(0.01*korting.getKorting())*artikel.getAantal();
             }
             else totaal+=artikel.getVerkoopprijs()*artikel.getAantal();
         }
@@ -27,5 +27,10 @@ public class Groepkorting implements Korting{
     @Override
     public void setKorting(int korting) {
         this.korting.setKorting(korting);
+    }
+
+    @Override
+    public String toString(){
+        return "Groepskorting"+" groep: "+groep+", korting: "+korting.getKorting();
     }
 }

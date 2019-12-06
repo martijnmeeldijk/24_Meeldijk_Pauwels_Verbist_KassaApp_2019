@@ -5,14 +5,13 @@ import model.bestelling.Bestelling;
 import java.util.ArrayList;
 
 public class Winkel {
-    ArrayList<Bestelling> bestellingen;
+    private ArrayList<Bestelling> bestellingen;
     int timeheld;
     //dataInMemory kan wss beter hier in winkel worden toegevoegd ipv in elke bestelling appart dus nog refactoren
 
     public Winkel() {
         bestellingen = new ArrayList<>();
         bestellingen.add(new Bestelling());
-
     }
 
     public void addBestelling(){

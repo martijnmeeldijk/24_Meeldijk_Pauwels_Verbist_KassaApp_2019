@@ -7,10 +7,11 @@ public class Nummerkorting implements Korting{
     private Kortingsmogelijkheden korting= Kortingsmogelijkheden.Nummer;
 
     @Override
-    public double PrijsNaKorting(ObservableList<Artikel> list) {
+    public double korting(ObservableList<Artikel> list) {
+        if(korting.getKorting()==0) return 0;
         double totaal=0.0;
         for(Artikel artikel:list){
-            totaal+=artikel.getVerkoopprijs()*(1-(0.01*korting.getKorting()))*artikel.getAantal();
+            totaal+=artikel.getVerkoopprijs()*(0.01*korting.getKorting())*artikel.getAantal();
         }
         return totaal;
     }
@@ -18,5 +19,10 @@ public class Nummerkorting implements Korting{
     @Override
     public void setKorting(int korting) {
         this.korting.setKorting(korting);
+    }
+
+    @Override
+    public String toString(){
+        return "Nummerkorting"+" korting: "+korting.getKorting();
     }
 }
