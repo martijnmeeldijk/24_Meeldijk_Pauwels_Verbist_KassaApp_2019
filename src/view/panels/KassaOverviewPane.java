@@ -77,7 +77,7 @@ public class KassaOverviewPane extends GridPane {
         vb.getChildren().addAll(zetOnHold);
 
         // Zet on hold artikel terug actief
-        Button zetActief = new Button("Zet Actief");
+        Button zetActief = new Button("get on hold bestelling");
         zetActief.setOnAction(actief ->
         {
             kassaViewController.zetActief();

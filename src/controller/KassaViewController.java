@@ -38,7 +38,6 @@ public class KassaViewController implements Observer {
 
     public void addArtikkel(int code) {
         if (getBestelling().itemBestaat(code)) {
-            //getBestelling().addArtikel(code);
             winkel.addArtikel(code);
             originalPrice();
             korting();
@@ -49,7 +48,6 @@ public class KassaViewController implements Observer {
 
     public void removeArtikkel(int code) {
         if (getBestelling().itemBestaat(code)) {
-            //getBestelling().removeArtikel(code);
             winkel.removeArtikel(code);
             originalPrice();
             korting();
@@ -67,29 +65,40 @@ public class KassaViewController implements Observer {
         System.out.println("kassaview: wel geupdate");
     }
 
+    public void viewLabelReset() {
+        originalPrice();
+        korting();
+    }
+
     public void zetOnHold() {
         try {
-            winkel.getActieveBestelling().zetOnHold();
-            winkel.addBestelling();
-            viewLabelReset();
-            winkel.notifyObserver();
+            if (winkel.getActieveBestelling().getArtikels().size() != 0) {
+                winkel.getActieveBestelling().zetOnHold();
+                winkel.addBestelling();
+                viewLabelReset();
+                winkel.notifyObserver();
+            } else {
+                kassaOverviewPane.displayErrorMessage("de bestelling is leeg");
+            }
+
+
         } catch (Exception e) {
             kassaOverviewPane.displayErrorMessage(e.getMessage());
         }
 
     }
-    public void viewLabelReset(){
-        originalPrice();
-        korting();
-    }
+
 
     public void zetActief() {
         try {
-            winkel.getpassiveBestelling().zetActief();
-            viewLabelReset();
-            winkel.notifyObserver();
+            if (winkel.getActieveBestelling().getArtikels().size() == 0) {
+                winkel.getpassiveBestelling().zetActief();
+                viewLabelReset();
+                winkel.notifyObserver();
 
-
+            } else {
+                kassaOverviewPane.displayErrorMessage("er is een verkoop bezig");
+            }
         } catch (Exception e) {
             kassaOverviewPane.displayErrorMessage(e.getMessage());
         }
