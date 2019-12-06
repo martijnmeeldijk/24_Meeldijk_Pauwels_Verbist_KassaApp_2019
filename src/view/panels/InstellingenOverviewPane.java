@@ -63,15 +63,10 @@ public class InstellingenOverviewPane extends GridPane {
         vb.getChildren().addAll(tabelDb,laadHb);
 
         //setLaadoptie
-        laadknop.setOnAction(actief ->
-                instellingenOverviewController.setLaadoptie(LoadSaveStrategies.valueOf(laadtype.getValue()).getClassname()));
+        laadknop.setOnAction(actief ->  instellingenOverviewController.setLaadoptie(LoadSaveStrategies.valueOf(laadtype.getValue()).getClassname()));
 
         //creeer titel
-        Label korting = new Label("Eerste korting:");
-
-        //creeer Hbox
-        HBox kortingHb= new HBox();
-        kortingHb.setSpacing(10);
+        Label korting = new Label("Korting:");
 
         //creeer Strings arraylist van kortingsmogelijkheden
         ArrayList<String> list = new ArrayList<>();
@@ -87,27 +82,11 @@ public class InstellingenOverviewPane extends GridPane {
         ComboBox<String> kortingstype = new ComboBox<>(kortingOptions);
         kortingstype.setValue(Kortingsmogelijkheden.Nummer.toString());
 
-        //creeer kortingInput
-        TextField kortingInput = new TextField();
+        vb.getChildren().addAll(korting,kortingstype);
 
-        //creeer knop
-        Button kortingknop = new Button("Zet korting");
+        //pas aan aan gekozen optie
+        Kortinglayout layout = new Kortinglayout(instellingenOverviewController,vb);
 
-        //plaats combobox, kortingsInput en knop in Hbox
-        kortingHb.getChildren().addAll(kortingstype,kortingInput,kortingknop);
-
-        //voeg titel en Hbox toe
-        vb.getChildren().addAll(korting,kortingHb);
-
-        //setKorting
-        kortingknop.setOnAction(actief ->
-        {
-            if(kortingInput.getText().equals("")){
-                instellingenOverviewController.setKorting(kortingstype.getValue());
-            }else{
-                instellingenOverviewController.setKorting(kortingstype.getValue(),Integer.parseInt(kortingInput.getText()));
-            }
-        });
-
+        kortingstype.setOnAction(actie -> System.out.println(kortingstype.getValue()));
     }
 }

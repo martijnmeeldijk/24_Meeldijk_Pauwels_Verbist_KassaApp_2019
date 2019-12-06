@@ -12,9 +12,9 @@ public class KortingFactory {
     }
 
     //maak
-    public Korting createKortingString(String mogelijk) {
+    public Korting createKorting(Kortingsmogelijkheden mogelijk) {
         Korting korting;
-        String name = mogelijk+"korting";
+        String name = mogelijk.toString()+"korting";
         try{
             Class cl = Class.forName("model.korting."+name);
             Object obj = cl.newInstance();
@@ -23,9 +23,5 @@ public class KortingFactory {
             throw new IllegalArgumentException("Error trying to make korting for "+name);
         }
         return korting;
-    }
-
-    public Korting createKorting(Kortingsmogelijkheden mogelijk){
-        return createKortingString(mogelijk.toString());
     }
 }

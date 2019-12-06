@@ -1,14 +1,9 @@
 package controller;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Artikel;
 import model.Winkel;
 import model.bestelling.Bestelling;
-import model.korting.Korting;
-import model.korting.KortingFactory;
-import model.korting.Kortingsmogelijkheden;
-import view.panels.AantalList;
 import view.panels.KassaOverviewPane;
 
 public class KassaViewController implements Observer {

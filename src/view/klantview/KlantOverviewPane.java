@@ -1,10 +1,8 @@
 package view.klantview;
 
-import controller.ArtikelOverviewController;
 import controller.KlantOverviewController;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -15,8 +13,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import model.Artikel;
 import model.OmschrijvingComparable;
-import org.omg.PortableInterceptor.INACTIVE;
-import view.panels.AantalList;
+import controller.AantalList;
 
 import java.util.Comparator;
 

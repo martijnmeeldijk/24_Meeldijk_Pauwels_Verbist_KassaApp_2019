@@ -2,7 +2,6 @@ package controller;
 
 import model.Winkel;
 import view.klantview.KlantOverviewPane;
-import view.panels.AantalList;
 
 public class KlantOverviewController implements Observer {
     public Winkel getWinkel() {

@@ -20,14 +20,14 @@ public class InstellingenOverviewController implements Observer{
         this.instellingenOverviewPane=instellingenOverviewPane;
     }
 
-    public void setKorting(String thekorting, int hoeveelheid){
-        Korting korting = KortingFactory.getInstance().createKortingString(thekorting);
+    public void setKorting(Kortingsmogelijkheden thekorting, int hoeveelheid){
+        Korting korting = KortingFactory.getInstance().createKorting(thekorting);
         korting.setKorting(hoeveelheid);
         winkel.getActieveBestelling().setKorting(korting);
     }
 
-    public void setKorting(String thekorting){
-        Korting korting = KortingFactory.getInstance().createKortingString(thekorting);
+    public void setKorting(Kortingsmogelijkheden thekorting){
+        Korting korting = KortingFactory.getInstance().createKorting(thekorting);
         winkel.getActieveBestelling().setKorting(korting);
     }
 

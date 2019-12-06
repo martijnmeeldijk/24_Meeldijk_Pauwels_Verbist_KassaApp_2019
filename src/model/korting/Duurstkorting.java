@@ -3,7 +3,7 @@ package model.korting;
 import javafx.collections.ObservableList;
 import model.Artikel;
 
-public class Duurst implements Korting{
+public class Duurstkorting implements Korting{
     private Kortingsmogelijkheden korting = Kortingsmogelijkheden.Duurst;
 
     private Artikel getMax(ObservableList<Artikel> list){
