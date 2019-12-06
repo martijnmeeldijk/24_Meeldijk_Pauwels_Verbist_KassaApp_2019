@@ -23,11 +23,11 @@ public class InstellingenOverviewController implements Observer{
     }
 
     public void addKorting(Korting korting){
-        winkel.getActieveBestelling().addKorting(korting);
+        winkel.addKorting(korting);
     }
 
     public ArrayList<Korting> getKortingen(){
-        return winkel.getActieveBestelling().getKortingen();
+        return winkel.getKortingen();
     }
 
     public void setLaadoptie(String laadoptie){
