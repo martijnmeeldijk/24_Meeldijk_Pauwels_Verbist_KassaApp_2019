@@ -15,22 +15,22 @@ public class KlantOverviewController implements Observer {
     private KlantOverviewPane klantOverviewPane;
 
     public KlantOverviewController(Winkel winkel) {
-        this.winkel=winkel;
+        this.winkel = winkel;
         winkel.add(this);
-        }
+    }
 
-    private double totaal(){
-        double totaal=0.0;
-        for(Artikel artikel: winkel.getActieveBestelling().getArtikels()){
-            totaal+=artikel.getVerkoopprijs();
+    private double totaal() {
+        double totaal = 0.0;
+        for (Artikel artikel : winkel.getActieveBestelling().getArtikels()) {
+            totaal += artikel.getVerkoopprijs();
         }
         return totaal;
     }
 
-    private void kortingPrice(){
-        double totaal=totaal();
-        for(Korting k:winkel.getKortingen()){
-            totaal-=k.getKorting(AantalList.getList(winkel));
+    private void kortingPrice() {
+        double totaal = totaal();
+        for (Korting k : winkel.getKortingen()) {
+            totaal -= k.getKorting(AantalList.getList(winkel));
         }
         klantOverviewPane.setPrijs(String.valueOf(totaal));
     }
@@ -41,10 +41,7 @@ public class KlantOverviewController implements Observer {
 
     @Override
     public void update() {
-        System.out.println("klantoverviewcontroller#####################");
-        System.out.println(klantOverviewPane);
-
-        if(klantOverviewPane!=null){
+        if (klantOverviewPane != null) {
             klantOverviewPane.setArtikels(AantalList.getList(winkel));
             kortingPrice();
         }

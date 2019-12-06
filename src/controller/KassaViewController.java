@@ -71,20 +71,22 @@ public class KassaViewController implements Observer {
         try {
             winkel.getActieveBestelling().zetOnHold();
             winkel.addBestelling();
-            originalPrice();
-            korting();
+            viewLabelReset();
             winkel.notifyObserver();
         } catch (Exception e) {
             kassaOverviewPane.displayErrorMessage(e.getMessage());
         }
 
     }
+    public void viewLabelReset(){
+        originalPrice();
+        korting();
+    }
 
     public void zetActief() {
         try {
             winkel.getpassiveBestelling().zetActief();
-            originalPrice();
-            korting();
+            viewLabelReset();
             winkel.notifyObserver();
 
 
@@ -108,5 +110,8 @@ public class KassaViewController implements Observer {
 
     public void annuleer() {
         winkel.removeActiveBestelling();
+        viewLabelReset();
+        winkel.notifyObserver();
+
     }
 }

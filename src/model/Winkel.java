@@ -58,18 +58,6 @@ public class Winkel implements Subject{
         return null;
     }
 
-    public void verwisselActieveBestellingen(){
-        //deze methode werkt enkel als er maar 2 bestellingen zijn want hij zet alles op actief of op hold (hij wisselt ze gewoon)
-        for(Bestelling bestelling:bestellingen){
-            if(bestelling.isActief()){
-                bestelling.zetOnHold();
-            }
-            else {
-            bestelling.isActief();
-            }
-        }
-    }
-
     public Bestelling getpassiveBestelling(){
         for(Bestelling bestelling:bestellingen){
             if(!bestelling.isActief()){
@@ -80,9 +68,7 @@ public class Winkel implements Subject{
     }
     @Override
     public void notifyObserver() {
-        System.out.println("bestelling : update");
         for(Observer observer:observers){
-            System.out.println(observer);
             observer.update();
         }
     }
