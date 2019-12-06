@@ -19,6 +19,8 @@ public class KassaOverviewPane extends GridPane {
     private Label prijswaarde;
     private Label kortingwaarde;
     private TextField inputCode;
+    Button sluitAf = new Button("Sluit Af");
+
     //public static Comparator<Artikel> omschrijvingcomperator = new OmschrijvingComparable();
 
     public KassaOverviewPane(KassaViewController kassaViewController) {
@@ -86,10 +88,9 @@ public class KassaOverviewPane extends GridPane {
         });
         vb.getChildren().add(zetActief);
 
-        Button sluitAf = new Button("Sluit Af");
         sluitAf.setOnAction(sluit -> {
             sluitAf.setText("Betaal");
-            kassaViewController.sluitAf();
+            kassaViewController.handelBestellingAf();
         });
         vb.getChildren().add(sluitAf);
 
@@ -149,7 +150,15 @@ public class KassaOverviewPane extends GridPane {
             this.kortingwaarde.setText(korting);
         }
 
-        private void refresh () {
+    public void setSluitAf(String tekst) {
+        sluitAf.setText(tekst);
+    }
+    public void setArtikels(ObservableList<Artikel> list){
+        table.setItems(list);
+        refresh();
+    }
+
+    private void refresh () {
             table.refresh();
         }
     }

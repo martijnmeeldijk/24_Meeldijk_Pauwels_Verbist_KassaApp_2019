@@ -28,12 +28,15 @@ public class Winkel implements Subject{
 
     public void removeActiveBestelling(){
         bestellingen.remove(getActieveBestelling());
+    }
+    public void annuleerBestelling(){
+        removeActiveBestelling();
         addBestelling();
     }
 
     public void addBestelling(){
         for(Bestelling bestelling:bestellingen){
-            if(bestelling.isActief()){
+            if(bestelling.isActiefOfAfgesloten()){
                 throw new IllegalStateException("er is nog een actieve bestelling dus geen nieuwe toevoegen");
             }
         }
@@ -51,7 +54,7 @@ public class Winkel implements Subject{
 
     public Bestelling getActieveBestelling(){
         for(Bestelling bestelling:bestellingen){
-            if(bestelling.isActief()){
+            if(bestelling.isActiefOfAfgesloten()){
                 return bestelling;
             }
         }
@@ -60,7 +63,7 @@ public class Winkel implements Subject{
 
     public Bestelling getpassiveBestelling(){
         for(Bestelling bestelling:bestellingen){
-            if(!bestelling.isActief()){
+            if(!bestelling.isActiefOfAfgesloten()){
                 return bestelling;
             }
         }

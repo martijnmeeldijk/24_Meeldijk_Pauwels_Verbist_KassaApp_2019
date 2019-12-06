@@ -4,6 +4,8 @@ import javafx.collections.ObservableList;
 import model.Artikel;
 import model.Winkel;
 import model.bestelling.Bestelling;
+import model.bestelling.state.Actief;
+import model.bestelling.state.Afgesloten;
 import model.korting.Korting;
 import view.panels.KassaOverviewPane;
 
@@ -13,6 +15,7 @@ public class KassaViewController implements Observer {
 
     public KassaViewController(Winkel winkel) {
         this.winkel = winkel;
+        winkel.add(this);
     }
 
     private void korting() {
@@ -62,7 +65,10 @@ public class KassaViewController implements Observer {
 
     @Override
     public void update() {
-        System.out.println("kassaview: wel geupdate");
+        if(kassaOverviewPane!=null){
+            kassaOverviewPane.setArtikels(AantalList.getList(winkel));
+            viewLabelReset();
+        }
     }
 
     public void viewLabelReset() {
@@ -72,15 +78,19 @@ public class KassaViewController implements Observer {
 
     public void zetOnHold() {
         try {
-            if (winkel.getActieveBestelling().getArtikels().size() != 0) {
-                winkel.getActieveBestelling().zetOnHold();
-                winkel.addBestelling();
-                viewLabelReset();
-                winkel.notifyObserver();
-            } else {
-                kassaOverviewPane.displayErrorMessage("de bestelling is leeg");
+            if(winkel.getpassiveBestelling()!=null){
+                kassaOverviewPane.displayErrorMessage("er is al een bestelling on hold");
             }
-
+            else {
+                if (winkel.getActieveBestelling().getArtikels().size() != 0) {
+                    winkel.getActieveBestelling().zetOnHold();
+                    winkel.addBestelling();
+                    viewLabelReset();
+                    winkel.notifyObserver();
+                } else {
+                    kassaOverviewPane.displayErrorMessage("de bestelling is leeg");
+                }
+            }
 
         } catch (Exception e) {
             kassaOverviewPane.displayErrorMessage(e.getMessage());
@@ -92,6 +102,7 @@ public class KassaViewController implements Observer {
     public void zetActief() {
         try {
             if (winkel.getActieveBestelling().getArtikels().size() == 0) {
+                winkel.removeActiveBestelling();
                 winkel.getpassiveBestelling().zetActief();
                 viewLabelReset();
                 winkel.notifyObserver();
@@ -109,6 +120,8 @@ public class KassaViewController implements Observer {
         return winkel.getActieveBestelling();
     }
 
+
+
     public void sluitAf() {
         try {
             winkel.getActieveBestelling().sluitAf();
@@ -122,5 +135,19 @@ public class KassaViewController implements Observer {
         viewLabelReset();
         winkel.notifyObserver();
 
+    }
+
+    public void handelBestellingAf() {
+
+        if(winkel.getActieveBestelling().getCurrentState() instanceof Actief){
+            sluitAf();
+            kassaOverviewPane.setSluitAf("betaal");
+        }
+        else if(winkel.getActieveBestelling().getCurrentState() instanceof Afgesloten){
+            winkel.removeActiveBestelling();
+            winkel.addBestelling();
+            winkel.notifyObserver();
+            kassaOverviewPane.setSluitAf("Sluit Af");
+        }
     }
 }

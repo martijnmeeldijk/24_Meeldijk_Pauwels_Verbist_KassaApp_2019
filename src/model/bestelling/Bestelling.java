@@ -91,8 +91,8 @@ public class Bestelling {
         return onHold;
     }
 
-    public boolean isActief(){
-        return currentState.getClass() == Actief.class;
+    public boolean isActiefOfAfgesloten(){
+        return currentState.getClass() == Actief.class || currentState.getClass() == Afgesloten.class  ;
     }
 
     public BestellingState getAfgesloten() {
