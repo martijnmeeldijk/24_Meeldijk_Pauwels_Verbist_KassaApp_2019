@@ -30,12 +30,17 @@ public class Drempelkorting implements Korting {
         if(totaal>drempel){
             return totaal*(0.01*kortingspercentage);
         }
-        return totaal;
+        return 0;
     }
 
     @Override
     public void setKortingspercentage(int korting) {
         this.kortingspercentage=korting;
+    }
+
+    @Override
+    public String prop() {
+        return korting+"/"+kortingspercentage+"/"+drempel;
     }
 
     @Override

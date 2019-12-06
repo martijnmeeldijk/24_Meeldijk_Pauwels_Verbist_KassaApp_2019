@@ -28,6 +28,7 @@ public class ArtikelDbContext {
     public HashMap<Integer, Artikel> load(){
         return artikelDbStrategy.load();
     }
+
     public void save(HashMap<Integer, Artikel> artikels){
         artikelDbStrategy.save(artikels);
     }

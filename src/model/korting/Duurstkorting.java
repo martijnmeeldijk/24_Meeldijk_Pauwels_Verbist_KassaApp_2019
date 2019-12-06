@@ -27,6 +27,11 @@ public class Duurstkorting implements Korting{
     }
 
     @Override
+    public String prop() {
+        return korting+"/"+kortingspercentage;
+    }
+
+    @Override
     public String toString(){
         return "Duurstekorting"+" korting: "+kortingspercentage;
     }
