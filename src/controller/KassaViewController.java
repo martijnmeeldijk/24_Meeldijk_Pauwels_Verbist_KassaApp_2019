@@ -15,10 +15,10 @@ public class KassaViewController implements Observer {
         this.winkel = winkel;
     }
 
-    private void korting(){
-        double totaal=0.0;
-        for(Korting k:winkel.getKortingen()){
-           totaal+=k.getKorting(AantalList.getList(winkel));
+    private void korting() {
+        double totaal = 0.0;
+        for (Korting k : winkel.getKortingen()) {
+            totaal += k.getKorting(AantalList.getList(winkel));
         }
         kassaOverviewPane.setKorting(String.valueOf(totaal));
     }
@@ -86,7 +86,7 @@ public class KassaViewController implements Observer {
             originalPrice();
             korting();
             winkel.notifyObserver();
-    
+
 
         } catch (Exception e) {
             kassaOverviewPane.displayErrorMessage(e.getMessage());
@@ -104,5 +104,9 @@ public class KassaViewController implements Observer {
         } catch (Exception e) {
             kassaOverviewPane.displayErrorMessage(e.getMessage());
         }
+    }
+
+    public void annuleer() {
+        winkel.removeActiveBestelling();
     }
 }

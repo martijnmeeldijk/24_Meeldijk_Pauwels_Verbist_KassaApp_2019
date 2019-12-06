@@ -26,6 +26,11 @@ public class Winkel implements Subject{
         loadKortingen();
     }
 
+    public void removeActiveBestelling(){
+        bestellingen.remove(getActieveBestelling());
+        addBestelling();
+    }
+
     public void addBestelling(){
         for(Bestelling bestelling:bestellingen){
             if(bestelling.isActief()){
@@ -153,6 +158,7 @@ public class Winkel implements Subject{
             io.printStackTrace();
         }
     }
+
 
     public ArrayList<Korting> getKortingen() {
         return kortingen;
