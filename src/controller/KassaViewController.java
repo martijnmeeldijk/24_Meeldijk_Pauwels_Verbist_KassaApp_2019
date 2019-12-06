@@ -10,22 +10,23 @@ import view.panels.KassaOverviewPane;
 public class KassaViewController implements Observer {
     private KassaOverviewPane kassaOverviewPane;
     private Winkel winkel;
+
     public KassaViewController(Winkel winkel) {
         this.winkel = winkel;
     }
 
-    private void korting(){
-        double totaal=0.0;
-        for(Korting k:winkel.getActieveBestelling().getKortingen()){
-           totaal+=k.getKorting(AantalList.getList(winkel));
+    private void korting() {
+        double totaal = 0.0;
+        for (Korting k : winkel.getActieveBestelling().getKortingen()) {
+            totaal += k.getKorting(AantalList.getList(winkel));
         }
         kassaOverviewPane.setKorting(String.valueOf(totaal));
     }
 
-    private void originalPrice(){
-        double totaal=0.0;
-        for(Artikel artikel: getBestelling().getArtikels()){
-            totaal+=artikel.getVerkoopprijs();
+    private void originalPrice() {
+        double totaal = 0.0;
+        for (Artikel artikel : getBestelling().getArtikels()) {
+            totaal += artikel.getVerkoopprijs();
         }
         kassaOverviewPane.setOriginelePrijs(String.valueOf(totaal));
     }
@@ -35,29 +36,27 @@ public class KassaViewController implements Observer {
         this.kassaOverviewPane = kassaOverviewPane;
     }
 
-    public void addArtikkel(int code){
-        if(getBestelling().itemBestaat(code)){
+    public void addArtikkel(int code) {
+        if (getBestelling().itemBestaat(code)) {
             getBestelling().addArtikel(code);
             originalPrice();
             korting();
-        }
-        else {
+        } else {
             kassaOverviewPane.displayErrorMessage("niet bestaande code");
         }
     }
 
-    public void removeArtikkel(int code){
-        if(getBestelling().itemBestaat(code)){
+    public void removeArtikkel(int code) {
+        if (getBestelling().itemBestaat(code)) {
             getBestelling().removeArtikel(code);
             originalPrice();
             korting();
-        }
-        else {
+        } else {
             kassaOverviewPane.displayErrorMessage("niet bestaande code");
         }
     }
 
-    public ObservableList<Artikel> getArtikels(){
+    public ObservableList<Artikel> getArtikels() {
         return winkel.getActieveBestelling().getArtikels();
     }
 
@@ -65,19 +64,25 @@ public class KassaViewController implements Observer {
     public void update() {
     }
 
-    public void zetOnHold(){
+    public void zetOnHold() {
         try {
             winkel.getActieveBestelling().zetOnHold();
             winkel.addBestelling();
-        }
-        catch (Exception e){
+            originalPrice();
+            korting();
+            winkel.getActieveBestelling().notifyObserver();
+        } catch (Exception e) {
             kassaOverviewPane.displayErrorMessage(e.getMessage());
         }
 
     }
+
     public void zetActief() {
         try {
             winkel.getpassiveBestelling().zetActief();
+            originalPrice();
+            korting();
+
         } catch (Exception e) {
             kassaOverviewPane.displayErrorMessage(e.getMessage());
         }
@@ -89,10 +94,9 @@ public class KassaViewController implements Observer {
     }
 
     public void sluitAf() {
-        try{
+        try {
             winkel.getActieveBestelling().sluitAf();
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             kassaOverviewPane.displayErrorMessage(e.getMessage());
         }
     }
