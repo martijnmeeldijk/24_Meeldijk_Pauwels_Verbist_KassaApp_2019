@@ -39,6 +39,11 @@ public class Drempelkorting implements Korting {
     }
 
     @Override
+    public String prop() {
+        return korting+"/"+kortingspercentage+"/"+drempel;
+    }
+
+    @Override
     public String toString(){
         return "Drempelkorting"+" drempel: "+drempel+", korting: "+kortingspercentage;
     }

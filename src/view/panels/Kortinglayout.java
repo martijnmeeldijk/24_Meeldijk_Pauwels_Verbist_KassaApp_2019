@@ -36,8 +36,6 @@ public class Kortinglayout {
 
     public void kies(String string){
         switch (string){
-            case "Nummer": Number();
-            break;
             case "Groep": Groep();
                 break;
             case "Drempel": Drempel();
@@ -71,33 +69,15 @@ public class Kortinglayout {
     private void schrijfKortingen(){
         StringBuilder tekst = new StringBuilder();
         ArrayList<Korting> list = instellingenOverviewController.getKortingen();
-        for(int i=0;i<list.size();i++){
+        for(int i=1;i<list.size();i++){
             if(tekst.toString().equals("")) tekst = new StringBuilder(list.get(i).toString());
             else tekst.append("\n").append(list.get(i).toString());
         }
         kortingen.setText(tekst.toString());
     }
 
-    private void Number(){
-        kortingHoeveelheid("0");
-
-        //creeer knop
-        Button kortingknop = new Button("Zet korting");
-        vb.getChildren().add(kortingknop);
-
-        //setKorting
-        kortingknop.setOnAction(actief -> {
-            Nummerkorting korting = (Nummerkorting) KortingFactory.getInstance().createKorting(Kortingsmogelijkheden.Nummer);
-            korting.setKortingspercentage(Integer.parseInt(kortinghoeveelheid.getText()));
-            instellingenOverviewController.addKorting(korting);
-
-            algemeneWeiziging();
-            vb.getChildren().remove(kortingknop);
-        });
-    }
-
     private void Duurst(){
-        kortingHoeveelheid("0");
+        kortingHoeveelheid("25");
 
         //creeer knop
         Button kortingknop = new Button("Zet korting");

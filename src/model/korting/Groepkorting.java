@@ -30,6 +30,11 @@ public class Groepkorting implements Korting{
     }
 
     @Override
+    public String prop() {
+        return korting+"/"+kortingspercentage+"/"+groep;
+    }
+
+    @Override
     public String toString(){
         return "Groepskorting"+" groep: "+groep+", korting: "+kortingspercentage;
     }
