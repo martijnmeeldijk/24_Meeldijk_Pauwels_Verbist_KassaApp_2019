@@ -30,7 +30,7 @@ public class Drempelkorting implements Korting {
         if(totaal>drempel){
             return totaal*(0.01*kortingspercentage);
         }
-        return totaal;
+        return 0;
     }
 
     @Override
