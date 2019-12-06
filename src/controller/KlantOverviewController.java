@@ -16,7 +16,7 @@ public class KlantOverviewController implements Observer {
 
     public KlantOverviewController(Winkel winkel) {
         this.winkel=winkel;
-        winkel.getActieveBestelling().add(this);
+        winkel.add(this);
         }
 
     private double totaal(){
@@ -41,6 +41,9 @@ public class KlantOverviewController implements Observer {
 
     @Override
     public void update() {
+        System.out.println("klantoverviewcontroller#####################");
+        System.out.println(klantOverviewPane);
+
         if(klantOverviewPane!=null){
             klantOverviewPane.setArtikels(AantalList.getList(winkel));
             kortingPrice();

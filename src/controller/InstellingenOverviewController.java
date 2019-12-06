@@ -15,7 +15,7 @@ public class InstellingenOverviewController implements Observer{
 
     public InstellingenOverviewController(Winkel winkel) {
         this.winkel=winkel;
-        winkel.getActieveBestelling().add(this);
+        winkel.add(this);
     }
 
     public void setInstellingenOverviewPane(InstellingenOverviewPane instellingenOverviewPane){

@@ -15,12 +15,10 @@ public class Actief extends BestellingState {
 
     public void addArtikel(int code){
         bestelling.getArtikels().add(bestelling.getDataInMemory().getArtikel(code));
-        bestelling.notifyObserver();
     }
 
     public void removeArtikel(int code){
         bestelling.getArtikels().remove(bestelling.getDataInMemory().getArtikel(code));
-        bestelling.notifyObserver();
     }
     public void sluitAf(){
         bestelling.setCurrentState(bestelling.getAfgesloten());

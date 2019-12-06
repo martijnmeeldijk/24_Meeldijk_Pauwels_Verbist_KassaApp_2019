@@ -16,7 +16,7 @@ import model.korting.Kortingsmogelijkheden;
 
 import java.util.ArrayList;
 
-public class Bestelling implements Subject {
+public class Bestelling {
     private ObservableList<Artikel> artikels;
     private ArrayList<Observer> observers;
     private DataInMemory dataInMemory;
@@ -38,7 +38,7 @@ public class Bestelling implements Subject {
         for(Korting k:kortingen){
             System.out.println(k.toString());
         }
-        notifyObserver();
+        //notifyObserver();
     }
 
     public Bestelling() {
@@ -68,25 +68,6 @@ public class Bestelling implements Subject {
 
     public DataInMemory getDataInMemory() {
         return dataInMemory;
-    }
-
-    @Override
-    public void add(Observer observer) {
-        observers.add(observer);
-        notifyObserver();
-    }
-
-    @Override
-    public void remove(Observer observer) {
-        observers.add(observer);
-
-    }
-
-    @Override
-    public void notifyObserver() {
-        for(Observer observer:observers){
-            observer.update();
-        }
     }
 
     public ObservableList<Artikel> getArtikels() {

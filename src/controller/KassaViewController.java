@@ -38,7 +38,8 @@ public class KassaViewController implements Observer {
 
     public void addArtikkel(int code) {
         if (getBestelling().itemBestaat(code)) {
-            getBestelling().addArtikel(code);
+            //getBestelling().addArtikel(code);
+            winkel.addArtikel(code);
             originalPrice();
             korting();
         } else {
@@ -48,7 +49,8 @@ public class KassaViewController implements Observer {
 
     public void removeArtikkel(int code) {
         if (getBestelling().itemBestaat(code)) {
-            getBestelling().removeArtikel(code);
+            //getBestelling().removeArtikel(code);
+            winkel.removeArtikel(code);
             originalPrice();
             korting();
         } else {
@@ -62,6 +64,7 @@ public class KassaViewController implements Observer {
 
     @Override
     public void update() {
+        System.out.println("kassaview: wel geupdate");
     }
 
     public void zetOnHold() {
@@ -70,7 +73,7 @@ public class KassaViewController implements Observer {
             winkel.addBestelling();
             originalPrice();
             korting();
-            winkel.getActieveBestelling().notifyObserver();
+            winkel.notifyObserver();
         } catch (Exception e) {
             kassaOverviewPane.displayErrorMessage(e.getMessage());
         }
@@ -82,6 +85,8 @@ public class KassaViewController implements Observer {
             winkel.getpassiveBestelling().zetActief();
             originalPrice();
             korting();
+            winkel.notifyObserver();
+    
 
         } catch (Exception e) {
             kassaOverviewPane.displayErrorMessage(e.getMessage());
