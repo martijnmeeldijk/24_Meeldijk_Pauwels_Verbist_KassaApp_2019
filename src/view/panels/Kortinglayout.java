@@ -16,7 +16,9 @@ import java.util.ArrayList;
 
 public class Kortinglayout {
     //interactie met Pane
+    // var
     private InstellingenOverviewController instellingenOverviewController;
+    //layout
     private VBox vb;
     private ComboBox<String> kortingstype;
     private Label kortingen;
@@ -61,11 +63,12 @@ public class Kortinglayout {
 
     private void algemeneWeiziging(){
         vb.getChildren().remove(kortingHb);
+        kortingstype.setValue("");
         kortingstype.setDisable(false);
-        schrijfKorting();
+        schrijfKortingen();
     }
 
-    private void schrijfKorting(){
+    private void schrijfKortingen(){
         StringBuilder tekst = new StringBuilder();
         ArrayList<Korting> list = instellingenOverviewController.getKortingen();
         for(int i=0;i<list.size();i++){
@@ -85,7 +88,7 @@ public class Kortinglayout {
         //setKorting
         kortingknop.setOnAction(actief -> {
             Nummerkorting korting = (Nummerkorting) KortingFactory.getInstance().createKorting(Kortingsmogelijkheden.Nummer);
-            korting.setKorting(Integer.parseInt(kortinghoeveelheid.getText()));
+            korting.setKortingspercentage(Integer.parseInt(kortinghoeveelheid.getText()));
             instellingenOverviewController.addKorting(korting);
 
             algemeneWeiziging();
@@ -103,7 +106,7 @@ public class Kortinglayout {
         //setKorting
         kortingknop.setOnAction(actief -> {
             Duurstkorting korting = (Duurstkorting) KortingFactory.getInstance().createKorting(Kortingsmogelijkheden.Duurst);
-            korting.setKorting(Integer.parseInt(kortinghoeveelheid.getText()));
+            korting.setKortingspercentage(Integer.parseInt(kortinghoeveelheid.getText()));
             instellingenOverviewController.addKorting(korting);
 
             algemeneWeiziging();
@@ -133,7 +136,7 @@ public class Kortinglayout {
         kortingknop.setOnAction(actief ->
         {
             Drempelkorting korting = (Drempelkorting) KortingFactory.getInstance().createKorting(Kortingsmogelijkheden.Drempel);
-            korting.setKorting(Integer.parseInt(kortinghoeveelheid.getText()));
+            korting.setKortingspercentage(Integer.parseInt(kortinghoeveelheid.getText()));
             korting.setDrempel(Double.parseDouble(drempelInputhoeveelheid.getText()));
             instellingenOverviewController.addKorting(korting);
 
@@ -176,9 +179,8 @@ public class Kortinglayout {
         //setKorting
         kortingknop.setOnAction(actief ->
         {
-
             Groepkorting korting = (Groepkorting)  KortingFactory.getInstance().createKorting(Kortingsmogelijkheden.Groep);
-            korting.setKorting(Integer.parseInt(kortinghoeveelheid.getText()));
+            korting.setKortingspercentage(Integer.parseInt(kortinghoeveelheid.getText()));
             korting.setGroep(Artikelgroep.valueOf(groepstype.getValue()));
             instellingenOverviewController.addKorting(korting);
 

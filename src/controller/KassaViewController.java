@@ -15,11 +15,11 @@ public class KassaViewController implements Observer {
     }
 
     private void korting(){
-        double totaal=0;
+        double totaal=0.0;
         for(Korting k:winkel.getActieveBestelling().getKortingen()){
-           totaal+=k.korting(AantalList.getList(winkel));
+           totaal+=k.getKorting(AantalList.getList(winkel));
         }
-        kassaOverviewPane.setKortingPrijs(String.valueOf(totaal));
+        kassaOverviewPane.setKorting(String.valueOf(totaal));
     }
 
     private void originalPrice(){

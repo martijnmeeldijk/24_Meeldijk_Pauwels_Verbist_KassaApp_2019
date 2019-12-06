@@ -5,6 +5,7 @@ import model.Artikel;
 
 public class Duurstkorting implements Korting{
     private Kortingsmogelijkheden korting = Kortingsmogelijkheden.Duurst;
+    private int kortingspercentage=25;
 
     private Artikel getMax(ObservableList<Artikel> list){
         Artikel max = null;
@@ -15,18 +16,18 @@ public class Duurstkorting implements Korting{
     }
 
     @Override
-    public double korting(ObservableList<Artikel> list) {
+    public double getKorting(ObservableList<Artikel> list) {
         Artikel max = getMax(list);
-        return max.getVerkoopprijs()*(0.01*korting.getKorting());
+        return max.getVerkoopprijs()*(0.01*kortingspercentage);
     }
 
     @Override
-    public void setKorting(int korting) {
-        this.korting.setKorting(korting);
+    public void setKortingspercentage(int korting) {
+        this.kortingspercentage=korting;
     }
 
     @Override
     public String toString(){
-        return "Duurstekorting"+" korting: "+korting.getKorting();
+        return "Duurstekorting"+" korting: "+kortingspercentage;
     }
 }

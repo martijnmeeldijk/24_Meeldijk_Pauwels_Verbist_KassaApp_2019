@@ -7,17 +7,18 @@ import model.Artikelgroep;
 public class Groepkorting implements Korting{
     private Kortingsmogelijkheden korting = Kortingsmogelijkheden.Groep;
     private Artikelgroep groep = Artikelgroep.gr1;
+    private int kortingspercentage=5;
 
     public void setGroep(Artikelgroep groep){
         this.groep=groep;
     }
 
     @Override
-    public double korting(ObservableList<Artikel> list) {
+    public double getKorting(ObservableList<Artikel> list) {
         double totaal=0.0;
         for(Artikel artikel: list){
             if(artikel.getArtikelgroep().equals(groep)){
-                totaal+=artikel.getVerkoopprijs()*(0.01*korting.getKorting())*artikel.getAantal();
+                totaal+=artikel.getVerkoopprijs()*(0.01*kortingspercentage)*artikel.getAantal();
             }
             else totaal+=artikel.getVerkoopprijs()*artikel.getAantal();
         }
@@ -25,12 +26,12 @@ public class Groepkorting implements Korting{
     }
 
     @Override
-    public void setKorting(int korting) {
-        this.korting.setKorting(korting);
+    public void setKortingspercentage(int korting) {
+        this.kortingspercentage=korting;
     }
 
     @Override
     public String toString(){
-        return "Groepskorting"+" groep: "+groep+", korting: "+korting.getKorting();
+        return "Groepskorting"+" groep: "+groep+", korting: "+kortingspercentage;
     }
 }

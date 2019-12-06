@@ -138,8 +138,8 @@ public class KassaOverviewPane extends GridPane {
 		this.prijswaarde.setText(prijs);
 	}
 
-	public void setKortingPrijs(String prijs){
-		this.kortingwaarde.setText(prijs);
+	public void setKorting(String korting){
+		this.kortingwaarde.setText(korting);
 	}
 
 	private void refresh(){

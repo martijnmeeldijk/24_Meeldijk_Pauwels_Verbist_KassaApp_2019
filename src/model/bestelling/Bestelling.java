@@ -35,6 +35,9 @@ public class Bestelling implements Subject {
 
     public void addKorting(Korting korting) {
         kortingen.add(korting);
+        for(Korting k:kortingen){
+            System.out.println(k.toString());
+        }
         notifyObserver();
     }
 
