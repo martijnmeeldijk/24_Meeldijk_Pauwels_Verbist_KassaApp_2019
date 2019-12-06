@@ -1,4 +1,6 @@
-package model.bestelling;
+package model.bestelling.state;
+
+import model.bestelling.Bestelling;
 
 public class Actief extends BestellingState {
 

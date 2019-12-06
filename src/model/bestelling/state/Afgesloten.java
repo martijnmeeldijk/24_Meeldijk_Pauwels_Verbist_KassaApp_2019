@@ -1,6 +1,8 @@
-package model.bestelling;
+package model.bestelling.state;
 
-public class Afgesloten extends BestellingState{
+import model.bestelling.Bestelling;
+
+public class Afgesloten extends BestellingState {
     public Afgesloten(Bestelling bestelling) {
         super(bestelling);
     }

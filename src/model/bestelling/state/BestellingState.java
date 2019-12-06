@@ -1,8 +1,11 @@
-package model.bestelling;
+package model.bestelling.state;
 
+
+import model.bestelling.Bestelling;
+import model.bestelling.NotPossibleException;
 
 public abstract class BestellingState {
-    Bestelling bestelling;
+    public Bestelling bestelling;
 
 
     public BestellingState(Bestelling bestelling) {
