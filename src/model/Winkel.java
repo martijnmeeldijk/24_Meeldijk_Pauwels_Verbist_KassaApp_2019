@@ -10,6 +10,7 @@ import java.util.Properties;
 
 public class Winkel implements Subject{
     private ArrayList<Observer> observers;
+    private ArrayList<LogObject>log;
     private ArrayList<Bestelling> bestellingen;
     int timeheld;
 
@@ -23,7 +24,11 @@ public class Winkel implements Subject{
         observers=new ArrayList<>();
         bestellingen = new ArrayList<>();
         bestellingen.add(new Bestelling());
+        log= new ArrayList<>();
         loadKortingen();
+    }
+    public void addLog(LogObject logObject){
+        log.add(logObject);
     }
 
     public void removeActiveBestelling(){

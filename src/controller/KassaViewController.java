@@ -2,6 +2,7 @@ package controller;
 
 import javafx.collections.ObservableList;
 import model.Artikel;
+import model.LogObject;
 import model.Winkel;
 import model.bestelling.Bestelling;
 import model.bestelling.state.Actief;
@@ -18,20 +19,28 @@ public class KassaViewController implements Observer {
         winkel.add(this);
     }
 
-    private void korting() {
+    private double getKorting(){
         double totaal = 0.0;
         for (Korting k : winkel.getKortingen()) {
             totaal += k.getKorting(AantalList.getList(winkel));
         }
-        kassaOverviewPane.setKorting(String.valueOf(totaal));
+        return totaal;
     }
 
-    private void originalPrice() {
+    private void korting() {
+
+        kassaOverviewPane.setKorting(String.valueOf(getKorting()));
+    }
+    private double getOriginalPrice(){
         double totaal = 0.0;
         for (Artikel artikel : getBestelling().getArtikels()) {
             totaal += artikel.getVerkoopprijs();
         }
-        kassaOverviewPane.setOriginelePrijs(String.valueOf(totaal));
+        return totaal;
+    }
+
+    private void originalPrice() {
+        kassaOverviewPane.setOriginelePrijs(String.valueOf(getOriginalPrice()));
     }
 
 
@@ -145,6 +154,9 @@ public class KassaViewController implements Observer {
         }
         else if(winkel.getActieveBestelling().getCurrentState() instanceof Afgesloten){
             // hier moet de code voor wat er gebeurt als er op de betaal knop gedrukt wordt
+            LogObject logObject= new LogObject(getOriginalPrice(),getKorting(),(getOriginalPrice()-getKorting()));
+            winkel.addLog(logObject);
+            //save vooraadd moet nog
             winkel.removeActiveBestelling();
             winkel.addBestelling();
             winkel.notifyObserver();
