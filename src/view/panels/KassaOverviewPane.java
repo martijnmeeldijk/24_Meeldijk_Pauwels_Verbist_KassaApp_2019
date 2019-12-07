@@ -11,6 +11,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import model.Artikel;
 
+import java.util.Optional;
+
 public class KassaOverviewPane extends GridPane {
     private KassaViewController kassaViewController;
     private TableView<Artikel> table;
@@ -121,12 +123,22 @@ public class KassaOverviewPane extends GridPane {
 
         private void verwijder () {
             //verwijder item uit tabel bij dubbelklik
+
             table.setRowFactory(tv -> {
                 TableRow<Artikel> row = new TableRow<>();
                 row.setOnMouseClicked(event -> {
                     if (event.getClickCount() == 2 && (!row.isEmpty())) {
-                        int codeInt = row.getItem().getCode();
-                        kassaViewController.removeArtikkel(codeInt);
+                        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                        alert.setTitle("Verwijderen");
+                        alert.setHeaderText("Artikel verwijderen");
+                        alert.setContentText("Bent u zeker dat u dit artikel uit de bestelling wilt verwijderen?");
+
+                        Optional<ButtonType> result = alert.showAndWait();
+                        if (result.get() == ButtonType.OK){
+                            int codeInt = row.getItem().getCode();
+                            kassaViewController.removeArtikkel(codeInt);
+                        }
+
                     }
                 });
                 return row;
