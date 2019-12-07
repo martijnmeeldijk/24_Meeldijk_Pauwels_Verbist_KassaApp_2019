@@ -27,9 +27,8 @@ public class KassaViewController implements Observer {
         return totaal;
     }
 
-    private void korting() {
-
-        kassaOverviewPane.setKorting(String.valueOf(getKorting()));
+    private void setPrijzen() {
+        kassaOverviewPane.setPrijzen(String.valueOf(getOriginalPrice()),String.valueOf(getKorting()),String.valueOf(getOriginalPrice()-getKorting()));
     }
 
     private double getOriginalPrice() {
@@ -40,10 +39,6 @@ public class KassaViewController implements Observer {
         return totaal;
     }
 
-    private void originalPrice() {
-        kassaOverviewPane.setOriginelePrijs(String.valueOf(getOriginalPrice()));
-    }
-
     public void setKassaView(KassaOverviewPane kassaOverviewPane) {
         this.kassaOverviewPane = kassaOverviewPane;
     }
@@ -51,8 +46,7 @@ public class KassaViewController implements Observer {
     public void addArtikkel(int code) {
         if (getBestelling().itemBestaat(code)) {
             winkel.addArtikel(code);
-            originalPrice();
-            korting();
+            setPrijzen();
         } else {
             kassaOverviewPane.displayErrorMessage("niet bestaande code");
         }
@@ -61,8 +55,7 @@ public class KassaViewController implements Observer {
     public void removeArtikkel(int code) {
         if (getBestelling().itemBestaat(code)) {
             winkel.removeArtikel(code);
-            originalPrice();
-            korting();
+            setPrijzen();
         } else {
             kassaOverviewPane.displayErrorMessage("niet bestaande code");
         }
@@ -134,8 +127,7 @@ public class KassaViewController implements Observer {
         winkel.notifyObserver();
     }
     private void viewLabelReset() {
-        originalPrice();
-        korting();
+        setPrijzen();
     }
 
     public void handelBestellingAf() {

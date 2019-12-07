@@ -29,10 +29,11 @@ public class KlantOverviewController implements Observer {
 
     private void kortingPrice() {
         double totaal = totaal();
+        double korting = 0.0;
         for (Korting k : winkel.getKortingen()) {
-            totaal -= k.getKorting(AantalList.getList(winkel));
+            totaal += k.getKorting(AantalList.getList(winkel));
         }
-        klantOverviewPane.setPrijs(String.valueOf(totaal));
+        klantOverviewPane.setPrijzen(String.valueOf(totaal),String.valueOf(korting),String.valueOf(totaal-korting));
     }
 
     public void setKlantOverviewPane(KlantOverviewPane klantOverviewPane) {

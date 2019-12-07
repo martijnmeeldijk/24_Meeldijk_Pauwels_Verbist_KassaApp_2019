@@ -21,6 +21,8 @@ public class KlantOverviewPane  extends GridPane {
     private KlantOverviewController klantOverviewController;
     private TableView<Artikel> table;
     private Label prijswaarde;
+    private Label kortingwaarde;
+    private Label betaalwaarde;
     public static Comparator<Artikel> omschrijvingcomperator = new OmschrijvingComparable();
 
 
@@ -36,14 +38,23 @@ public class KlantOverviewPane  extends GridPane {
         VBox vb= new VBox();
         vb.setSpacing(10);
 
-        //creeer display totaalprijs
-        prijswaarde=new Label("0.0");
+        //prijs, korting en totaal toevoegen
+        prijswaarde = new Label("0.0");
         Label prijs = new Label("prijs: ");
-        HBox prijsbox=new HBox();
-        prijsbox.getChildren().addAll(prijs,prijswaarde);
+        HBox prijsbox = new HBox();
+        prijsbox.getChildren().addAll(prijs, prijswaarde);
 
-        //voeg totaalprijs toe
-        vb.getChildren().add(prijsbox);
+        kortingwaarde = new Label("0.0");
+        Label korting = new Label("korting: ");
+        HBox kortingbox = new HBox();
+        kortingbox.getChildren().addAll(korting, kortingwaarde);
+
+        betaalwaarde = new Label("0.0");
+        Label betaal = new Label("te betalen: ");
+        HBox betaalbox = new HBox();
+        betaalbox.getChildren().addAll(betaal, betaalwaarde);
+
+        vb.getChildren().addAll(prijsbox,kortingbox,betaalbox);
 
         //creeer titel
         Label lblHeading = new Label("artikels");
@@ -84,8 +95,11 @@ public class KlantOverviewPane  extends GridPane {
         refresh();
     }
 
-    public void setPrijs(String prijs) {
+    //prijzen tonen
+    public void setPrijzen (String prijs,String korting,String betaal){
         this.prijswaarde.setText(prijs);
+        this.kortingwaarde.setText(korting);
+        this.betaalwaarde.setText(betaal);
     }
 
     private void refresh(){

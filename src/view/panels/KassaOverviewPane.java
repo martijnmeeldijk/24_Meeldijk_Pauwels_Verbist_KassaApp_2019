@@ -24,6 +24,7 @@ public class KassaOverviewPane extends GridPane {
     //prijs en korting
     private Label prijswaarde;
     private Label kortingwaarde;
+    private Label betaalwaarde;
 
     //on hold
     private boolean onHold = false;
@@ -100,7 +101,7 @@ public class KassaOverviewPane extends GridPane {
         knoppenBox.getChildren().addAll(hold,sluitAf,annuleer);
         vb.getChildren().add(knoppenBox);
 
-        //totaalprijs en korting toevoegen
+        //prijs, korting en totaal toevoegen
         prijswaarde = new Label("0.0");
         Label prijs = new Label("prijs: ");
         HBox prijsbox = new HBox();
@@ -111,7 +112,12 @@ public class KassaOverviewPane extends GridPane {
         HBox kortingbox = new HBox();
         kortingbox.getChildren().addAll(korting, kortingwaarde);
 
-        vb.getChildren().addAll(prijsbox,kortingbox);
+        betaalwaarde = new Label("0.0");
+        Label betaal = new Label("te betalen: ");
+        HBox betaalbox = new HBox();
+        betaalbox.getChildren().addAll(betaal, betaalwaarde);
+
+        vb.getChildren().addAll(prijsbox,kortingbox,betaalbox);
     }
 
     //tabel
@@ -148,7 +154,7 @@ public class KassaOverviewPane extends GridPane {
                     alert.setContentText("Bent u zeker dat u dit artikel uit de bestelling wilt verwijderen?");
 
                     Optional<ButtonType> result = alert.showAndWait();
-                    if (result.get() == ButtonType.OK){
+                    if (result.isPresent() && result.get() == ButtonType.OK){
                         int codeInt = row.getItem().getCode();
                         kassaViewController.removeArtikkel(codeInt);
                     }
@@ -166,12 +172,11 @@ public class KassaOverviewPane extends GridPane {
         refresh();
     }
 
-    //prijs tonen
-    public void setOriginelePrijs (String prijs){
+    //prijzen tonen
+    public void setPrijzen (String prijs,String korting,String betaal){
         this.prijswaarde.setText(prijs);
-    }
-    public void setKorting (String korting){
         this.kortingwaarde.setText(korting);
+        this.betaalwaarde.setText(betaal);
     }
 
     //on hold
