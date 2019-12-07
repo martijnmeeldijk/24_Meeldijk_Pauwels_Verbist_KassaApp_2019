@@ -14,20 +14,58 @@ import model.Artikel;
 import java.util.Optional;
 
 public class KassaOverviewPane extends GridPane {
+    //controller
     private KassaViewController kassaViewController;
+
+    //tabel en inputveld
     private TableView<Artikel> table;
+    private TextField inputCode;
+
+    //prijs en korting
     private Label prijswaarde;
     private Label kortingwaarde;
-    private TextField inputCode;
-    Button sluitAf = new Button("Sluit Af");
 
-    //public static Comparator<Artikel> omschrijvingcomperator = new OmschrijvingComparable();
+    //on hold
+    private boolean onHold = false;
+    private Button hold;
+
+    //afsluiten
+    private boolean betalen = false;
+    private Button sluitAf;
+
+    //anulleren
+    private Button annuleer;
+
+    //eerste Artikkel
+    private boolean eerst = true;
 
     public KassaOverviewPane(KassaViewController kassaViewController) {
         /// dit stelt voor de meegegeven controller deze view in
         this.kassaViewController = kassaViewController;
         this.kassaViewController.setKassaView(this);
 
+        //creeer elementen
+        elementen();
+
+        //registreer input code
+        inputCode();
+
+        //verwijder item uit tabel bij dubbelklik
+        verwijder();
+
+        //zet bestelling on hold of actief
+        hold();
+
+        //afsluiten
+        afsluiten();
+
+        //annulleren
+        annuleren();
+
+    }
+
+    //creeer elementen
+    private void elementen(){
         //layout
         this.setPadding(new Insets(10, 10, 10, 10));
 
@@ -36,10 +74,33 @@ public class KassaOverviewPane extends GridPane {
         vb.setSpacing(10);
         this.getChildren().add(vb);
 
-        //creer display inputveld code, totaalprijs en kortingtotaalprijs
+        //display inputveld code toevoegen
         Label code = new Label("Code:");
         inputCode = new TextField();
 
+        vb.getChildren().addAll(code, inputCode);
+
+        //tabel en titel toevoegen
+        Label lblHeading = new Label("artikels");
+        lblHeading.setFont(new Font("Arial", 20));
+
+        tabel();
+
+        vb.getChildren().addAll(lblHeading, table);
+
+        // zet on hold-, betaal- en anulleer-knoppen en voeg ze toe
+        HBox knoppenBox = new HBox();
+        knoppenBox.setSpacing(20);
+        hold = new Button("Zet on hold");
+        hold.setDisable(true);
+        sluitAf = new Button("Sluit Af");
+        sluitAf.setDisable(true);
+        annuleer = new Button("Annuleer");
+        annuleer.setDisable(true);
+        knoppenBox.getChildren().addAll(hold,sluitAf,annuleer);
+        vb.getChildren().add(knoppenBox);
+
+        //totaalprijs en korting toevoegen
         prijswaarde = new Label("0.0");
         Label prijs = new Label("prijs: ");
         HBox prijsbox = new HBox();
@@ -47,131 +108,141 @@ public class KassaOverviewPane extends GridPane {
 
         kortingwaarde = new Label("0.0");
         Label korting = new Label("korting: ");
-        HBox kortingprijsbox = new HBox();
-        kortingprijsbox.getChildren().addAll(korting, kortingwaarde);
+        HBox kortingbox = new HBox();
+        kortingbox.getChildren().addAll(korting, kortingwaarde);
 
-        //voeg inputveld code en totaalprijs toe
-        vb.getChildren().addAll(code, inputCode, prijsbox, kortingprijsbox);
-
-        //creeer titel
-        Label lblHeading = new Label("artikels");
-        lblHeading.setFont(new Font("Arial", 20));
-
-        //creeer tabel
-        tabel();
-
-        //voeg titel en tabel toe
-        vb.getChildren().addAll(lblHeading, table);
-
-        //registreer input code
-        inputCode();
-
-        //verwijder item uit tabel bij dubbelklik
-        verwijder();
-
-        // zet on hold
-        Button zetOnHold = new Button("Zet on hold");
-        zetOnHold.setOnAction(onHold -> {
-            kassaViewController.zetOnHold();
-            table.setItems(kassaViewController.getArtikels());
-            refresh();
-        });
-        vb.getChildren().addAll(zetOnHold);
-
-        // Zet on hold artikel terug actief
-        Button zetActief = new Button("get on hold bestelling");
-        zetActief.setOnAction(actief ->
-        {
-            kassaViewController.zetActief();
-            table.setItems(kassaViewController.getArtikels());
-            refresh();
-        });
-        vb.getChildren().add(zetActief);
-
-        sluitAf.setOnAction(sluit -> {
-            sluitAf.setText("Betaal");
-            kassaViewController.handelBestellingAf();
-        });
-        vb.getChildren().add(sluitAf);
-
-        Button annuleer = new Button("annuleer");
-        annuleer.setOnAction(an -> {
-            kassaViewController.annuleer();
-            table.setItems(kassaViewController.getArtikels());
-        });
-        vb.getChildren().addAll(annuleer);
+        vb.getChildren().addAll(prijsbox,kortingbox);
     }
 
-        private void tabel () {
-            //creeer tabel
-            table = TabelArtikels.create(kassaViewController.getArtikels());
-        }
+    //tabel
+    private void inputCode () {
+        //registreer input code
+        inputCode.setOnKeyPressed(ke -> {
+            if (ke.getCode().equals(KeyCode.ENTER)) {
+                try {
+                    kassaViewController.addArtikkel(Integer.parseInt(inputCode.getText()));
+                } catch (Exception e) {
+                    displayErrorMessage("niet bestaande code");
+                }
+                inputCode.clear();
+                if(!onHold) hold.setDisable(false);
+                else hold.setDisable(true);
+                sluitAf.setDisable(false);
+                annuleer.setDisable(false);
+            }
+        });
+    }
+    private void tabel () {
+        //creeer tabel
+        table = TabelArtikels.create(kassaViewController.getArtikels());
+    }
+    private void verwijder () {
+        //verwijder item uit tabel bij dubbelklik
+        table.setRowFactory(tv -> {
+            TableRow<Artikel> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (!row.isEmpty())) {
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert.setTitle("Verwijderen");
+                    alert.setHeaderText("Artikel verwijderen");
+                    alert.setContentText("Bent u zeker dat u dit artikel uit de bestelling wilt verwijderen?");
 
-        private void inputCode () {
-            //registreer input code
-            inputCode.setOnKeyPressed(ke -> {
-                if (ke.getCode().equals(KeyCode.ENTER)) {
-                    try {
-                        kassaViewController.addArtikkel(Integer.parseInt(inputCode.getText()));
-                    } catch (Exception e) {
-                        displayErrorMessage("niet bestaande code");
+                    Optional<ButtonType> result = alert.showAndWait();
+                    if (result.get() == ButtonType.OK){
+                        int codeInt = row.getItem().getCode();
+                        kassaViewController.removeArtikkel(codeInt);
                     }
-                    inputCode.clear();
                 }
             });
-        }
-
-        private void verwijder () {
-            //verwijder item uit tabel bij dubbelklik
-
-            table.setRowFactory(tv -> {
-                TableRow<Artikel> row = new TableRow<>();
-                row.setOnMouseClicked(event -> {
-                    if (event.getClickCount() == 2 && (!row.isEmpty())) {
-                        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                        alert.setTitle("Verwijderen");
-                        alert.setHeaderText("Artikel verwijderen");
-                        alert.setContentText("Bent u zeker dat u dit artikel uit de bestelling wilt verwijderen?");
-
-                        Optional<ButtonType> result = alert.showAndWait();
-                        if (result.get() == ButtonType.OK){
-                            int codeInt = row.getItem().getCode();
-                            kassaViewController.removeArtikkel(codeInt);
-                        }
-
-                    }
-                });
-                return row;
-            });
-        }
-
-        public void displayErrorMessage (String errorMessage){
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setHeaderText("Information Alert");
-            alert.setContentText(errorMessage);
-            alert.show();
-        }
-
-        public void setOriginelePrijs (String prijs){
-            this.prijswaarde.setText(prijs);
-        }
-
-        public void setKorting (String korting){
-            this.kortingwaarde.setText(korting);
-        }
-
-    public void setSluitAf(String tekst) {
-        sluitAf.setText(tekst);
+            return row;
+        });
     }
+    private void refresh () {
+        table.refresh();
+    }
+
     public void setArtikels(ObservableList<Artikel> list){
         table.setItems(list);
         refresh();
     }
 
-    private void refresh () {
-            table.refresh();
-        }
+    //prijs tonen
+    public void setOriginelePrijs (String prijs){
+        this.prijswaarde.setText(prijs);
     }
+    public void setKorting (String korting){
+        this.kortingwaarde.setText(korting);
+    }
+
+    //on hold
+    private void hold(){
+        hold.setOnAction(actief ->
+        {
+            if(onHold) actief();
+            else onHold();
+        });
+    }
+    private void actief(){
+        onHold=false;
+        hold.setText("zet on hold");
+
+        kassaViewController.zetActief();
+        table.setItems(kassaViewController.getArtikels());
+        refresh();
+
+        sluitAf.setDisable(false);
+        annuleer.setDisable(false);
+    }
+    private void onHold(){
+        onHold=true;
+        hold.setText("zet actief");
+
+        kassaViewController.zetOnHold();
+        table.setItems(kassaViewController.getArtikels());
+        refresh();
+    }
+
+    //betalen
+    private void afsluiten(){
+        sluitAf.setOnAction(sluit -> {
+            if(betalen){
+                sluitAf.setText("Sluit af");
+                betalen = false;
+
+                sluitAf.setDisable(true);
+                annuleer.setDisable(true);
+                if(onHold) hold.setDisable(false);
+                else hold.setDisable(true);
+
+            }else{
+                sluitAf.setText("Betalen");
+                betalen = true;
+            }
+            kassaViewController.handelBestellingAf();
+        });
+    }
+
+    //annuleren
+    private void annuleren(){
+        annuleer.setOnAction(an -> {
+            kassaViewController.annuleer();
+            table.setItems(kassaViewController.getArtikels());
+
+            annuleer.setDisable(true);
+            sluitAf.setDisable(true);
+            if(onHold) hold.setDisable(false);
+            else hold.setDisable(true);
+        });
+    }
+
+    //error tonen
+    public void displayErrorMessage (String errorMessage){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText("Information Alert");
+        alert.setContentText(errorMessage);
+        alert.show();
+    }
+}
 	
 	
 

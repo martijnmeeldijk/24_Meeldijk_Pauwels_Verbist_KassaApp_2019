@@ -44,7 +44,6 @@ public class KassaViewController implements Observer {
         kassaOverviewPane.setOriginelePrijs(String.valueOf(getOriginalPrice()));
     }
 
-
     public void setKassaView(KassaOverviewPane kassaOverviewPane) {
         this.kassaOverviewPane = kassaOverviewPane;
     }
@@ -82,11 +81,6 @@ public class KassaViewController implements Observer {
         }
     }
 
-    public void viewLabelReset() {
-        originalPrice();
-        korting();
-    }
-
     public void zetOnHold() {
         try {
             if (winkel.getpassiveBestelling() != null) {
@@ -107,7 +101,6 @@ public class KassaViewController implements Observer {
         }
 
     }
-
 
     public void zetActief() {
         try {
@@ -135,28 +128,19 @@ public class KassaViewController implements Observer {
         return winkel.getActieveBestelling();
     }
 
-
-    public void sluitAf() {
-        try {
-            winkel.getActieveBestelling().sluitAf();
-        } catch (Exception e) {
-            kassaOverviewPane.displayErrorMessage(e.getMessage());
-        }
-    }
-
     public void annuleer() {
         winkel.annuleerBestelling();
         viewLabelReset();
-        kassaOverviewPane.setSluitAf("Sluit Af");
         winkel.notifyObserver();
-
+    }
+    private void viewLabelReset() {
+        originalPrice();
+        korting();
     }
 
     public void handelBestellingAf() {
-
         if (winkel.getActieveBestelling().getCurrentState() instanceof Actief) {
             sluitAf();
-            kassaOverviewPane.setSluitAf("betaal");
         } else if (winkel.getActieveBestelling().getCurrentState() instanceof Afgesloten) {
             // hier moet de code voor wat er gebeurt als er op de betaal knop gedrukt wordt
             LogObject logObject = new LogObject(getOriginalPrice(), getKorting(), (getOriginalPrice() - getKorting()));
@@ -165,9 +149,14 @@ public class KassaViewController implements Observer {
             winkel.removeActiveBestelling();
             winkel.addBestelling();
             winkel.notifyObserver();
-            kassaOverviewPane.setSluitAf("Sluit Af");
-            winkel.checkHoldBestellign();
-
+            winkel.checkHoldBestelling();
+        }
+    }
+    private void sluitAf() {
+        try {
+            winkel.getActieveBestelling().sluitAf();
+        } catch (Exception e) {
+            kassaOverviewPane.displayErrorMessage(e.getMessage());
         }
     }
 }

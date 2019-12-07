@@ -12,7 +12,7 @@ public class Winkel implements Subject{
     private ArrayList<Observer> observers;
     private ArrayList<LogObject>log;
     private ArrayList<Bestelling> bestellingen;
-    int timeheld;
+    private int timeheld;
 
     private ArrayList<Korting> kortingen = new ArrayList<>();
     private Properties properties;
@@ -31,7 +31,7 @@ public class Winkel implements Subject{
         log.add(logObject);
     }
 
-    public void checkHoldBestellign(){
+    public void checkHoldBestelling(){
         if(timeheld==2){
             if(getpassiveBestelling()!=null){
                 bestellingen.remove(getpassiveBestelling());
@@ -55,6 +55,7 @@ public class Winkel implements Subject{
     public void removeActiveBestelling(){
         bestellingen.remove(getActieveBestelling());
     }
+
     public void annuleerBestelling(){
         removeActiveBestelling();
         addBestelling();
@@ -73,6 +74,7 @@ public class Winkel implements Subject{
         getActieveBestelling().addArtikel(code);
         notifyObserver();
     }
+
     public void removeArtikel(int code){
         getActieveBestelling().getArtikels().remove(getActieveBestelling().getDataInMemory().getArtikel(code));
         notifyObserver();
@@ -95,6 +97,7 @@ public class Winkel implements Subject{
         }
         return null;
     }
+
     @Override
     public void notifyObserver() {
         for(Observer observer:observers){
@@ -173,7 +176,6 @@ public class Winkel implements Subject{
             io.printStackTrace();
         }
     }
-
 
     public ArrayList<Korting> getKortingen() {
         return kortingen;
