@@ -28,14 +28,22 @@ public class LogViewController implements Observer {
         for(LogObject logObject:winkel.getLog()){
             logObjecten.add(logObject);
         }
-        System.out.println(logObjecten);
         return logObjecten;
+    }
+
+    public void setTextLog(){
+        String logText="";
+        for(LogObject logObject:getList()){
+            logText+=logObject.toString();
+        }
+
+        logviewPane.setTextlog(logText);
     }
 
     @Override
     public void update() {
         if(logviewPane!=null){
-            logviewPane.setLogList(getList());
+            setTextLog();
         }
     }
 }

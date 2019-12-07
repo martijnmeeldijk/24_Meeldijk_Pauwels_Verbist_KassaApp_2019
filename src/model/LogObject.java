@@ -22,11 +22,9 @@ public class LogObject {
 
     @Override
     public String toString() {
-        return "LogObject{" +
-                "datum en tijd=" + dateTime +
+        return "datum en tijd=" + dateTime +
                 ", totaal prijs=" + totaal +
                 ", korting=" + korting +
-                ", te betalen=" + tebetalen +
-                '}';
+                ", te betalen=" + tebetalen + "\n";
     }
 }

@@ -19,7 +19,7 @@ public class KassaViewController implements Observer {
         winkel.add(this);
     }
 
-    private double getKorting(){
+    private double getKorting() {
         double totaal = 0.0;
         for (Korting k : winkel.getKortingen()) {
             totaal += k.getKorting(AantalList.getList(winkel));
@@ -31,7 +31,8 @@ public class KassaViewController implements Observer {
 
         kassaOverviewPane.setKorting(String.valueOf(getKorting()));
     }
-    private double getOriginalPrice(){
+
+    private double getOriginalPrice() {
         double totaal = 0.0;
         for (Artikel artikel : getBestelling().getArtikels()) {
             totaal += artikel.getVerkoopprijs();
@@ -74,8 +75,9 @@ public class KassaViewController implements Observer {
 
     @Override
     public void update() {
-        if(kassaOverviewPane!=null){
-            kassaOverviewPane.setArtikels(AantalList.getList(winkel));
+        System.out.println("kassa update");
+        if (kassaOverviewPane != null) {
+            kassaOverviewPane.setArtikels(getArtikels());
             viewLabelReset();
         }
     }
@@ -87,10 +89,9 @@ public class KassaViewController implements Observer {
 
     public void zetOnHold() {
         try {
-            if(winkel.getpassiveBestelling()!=null){
+            if (winkel.getpassiveBestelling() != null) {
                 kassaOverviewPane.displayErrorMessage("er is al een bestelling on hold");
-            }
-            else {
+            } else {
                 if (winkel.getActieveBestelling().getArtikels().size() != 0) {
                     winkel.getActieveBestelling().zetOnHold();
                     winkel.addBestelling();
@@ -110,6 +111,7 @@ public class KassaViewController implements Observer {
 
     public void zetActief() {
         try {
+            if(winkel.getpassiveBestelling()!=null){
             if (winkel.getActieveBestelling().getArtikels().size() == 0) {
                 winkel.removeActiveBestelling();
                 winkel.getpassiveBestelling().zetActief();
@@ -118,6 +120,10 @@ public class KassaViewController implements Observer {
 
             } else {
                 kassaOverviewPane.displayErrorMessage("er is een verkoop bezig");
+            }
+            }
+            else {
+                kassaOverviewPane.displayErrorMessage("Geen on hold bestelling");
             }
         } catch (Exception e) {
             kassaOverviewPane.displayErrorMessage(e.getMessage());
@@ -130,7 +136,6 @@ public class KassaViewController implements Observer {
     }
 
 
-
     public void sluitAf() {
         try {
             winkel.getActieveBestelling().sluitAf();
@@ -140,27 +145,29 @@ public class KassaViewController implements Observer {
     }
 
     public void annuleer() {
-        winkel.removeActiveBestelling();
+        winkel.annuleerBestelling();
         viewLabelReset();
+        kassaOverviewPane.setSluitAf("Sluit Af");
         winkel.notifyObserver();
 
     }
 
     public void handelBestellingAf() {
 
-        if(winkel.getActieveBestelling().getCurrentState() instanceof Actief){
+        if (winkel.getActieveBestelling().getCurrentState() instanceof Actief) {
             sluitAf();
             kassaOverviewPane.setSluitAf("betaal");
-        }
-        else if(winkel.getActieveBestelling().getCurrentState() instanceof Afgesloten){
+        } else if (winkel.getActieveBestelling().getCurrentState() instanceof Afgesloten) {
             // hier moet de code voor wat er gebeurt als er op de betaal knop gedrukt wordt
-            LogObject logObject= new LogObject(getOriginalPrice(),getKorting(),(getOriginalPrice()-getKorting()));
+            LogObject logObject = new LogObject(getOriginalPrice(), getKorting(), (getOriginalPrice() - getKorting()));
             winkel.addLog(logObject);
             //save vooraadd moet nog
             winkel.removeActiveBestelling();
             winkel.addBestelling();
             winkel.notifyObserver();
             kassaOverviewPane.setSluitAf("Sluit Af");
+            winkel.checkHoldBestellign();
+
         }
     }
 }

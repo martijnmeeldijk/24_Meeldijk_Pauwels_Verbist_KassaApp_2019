@@ -31,6 +31,23 @@ public class Winkel implements Subject{
         log.add(logObject);
     }
 
+    public void checkHoldBestellign(){
+        if(timeheld==2){
+            if(getpassiveBestelling()!=null){
+                bestellingen.remove(getpassiveBestelling());
+                timeheld=0;
+            }
+        }
+        else {
+            if(getpassiveBestelling()!=null){
+                timeheld++;
+            }
+            else {
+                timeheld=0;
+            }
+        }
+    }
+
     public ArrayList<LogObject> getLog() {
         return log;
     }

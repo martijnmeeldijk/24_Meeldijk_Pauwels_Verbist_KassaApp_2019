@@ -19,7 +19,7 @@ public class TabelLogObjecten {
         TableColumn<LogObject, Date> coldateTime = new TableColumn<>("dateTime");
         coldateTime.setMinWidth(100);
         coldateTime.setCellValueFactory(new PropertyValueFactory<>("dateTime"));
-
+/*
         TableColumn<LogObject, Double> coltotaal = new TableColumn<>("totaal");
         coltotaal.setMinWidth(100);
         coltotaal.setCellValueFactory(new PropertyValueFactory<>("totaal"));
@@ -32,10 +32,13 @@ public class TabelLogObjecten {
         coltebetalen.setMinWidth(100);
         coltebetalen.setCellValueFactory(new PropertyValueFactory<>("tebetalen"));
 
+ */
+
 
 
         //voeg kolommen toe aan tabel
-        table.getColumns().addAll(coldateTime,coltotaal,colkorting,coltebetalen);
+        //table.getColumns().addAll(coldateTime,coltotaal,colkorting,coltebetalen);
+        table.getColumns().addAll(coldateTime);
         return table;
     }
 }
