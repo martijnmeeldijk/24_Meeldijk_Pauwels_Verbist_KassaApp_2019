@@ -111,6 +111,7 @@ public class KassaViewController implements Observer {
 
     public void zetActief() {
         try {
+            if(winkel.getpassiveBestelling()!=null){
             if (winkel.getActieveBestelling().getArtikels().size() == 0) {
                 winkel.removeActiveBestelling();
                 winkel.getpassiveBestelling().zetActief();
@@ -119,6 +120,10 @@ public class KassaViewController implements Observer {
 
             } else {
                 kassaOverviewPane.displayErrorMessage("er is een verkoop bezig");
+            }
+            }
+            else {
+                kassaOverviewPane.displayErrorMessage("Geen on hold bestelling");
             }
         } catch (Exception e) {
             kassaOverviewPane.displayErrorMessage(e.getMessage());
@@ -161,6 +166,8 @@ public class KassaViewController implements Observer {
             winkel.addBestelling();
             winkel.notifyObserver();
             kassaOverviewPane.setSluitAf("Sluit Af");
+            winkel.checkHoldBestellign();
+
         }
     }
 }
