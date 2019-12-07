@@ -140,7 +140,7 @@ public class KassaViewController implements Observer {
     }
 
     public void annuleer() {
-        winkel.removeActiveBestelling();
+        winkel.annuleerBestelling();
         viewLabelReset();
         winkel.notifyObserver();
 

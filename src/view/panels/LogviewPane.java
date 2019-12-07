@@ -6,17 +6,21 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-import model.Artikel;
 import model.LogObject;
 
 public class LogviewPane extends GridPane {
     private LogViewController logViewController;
     private TableView<LogObject> table;
+    private Label logs;
+
 
 
 
     public LogviewPane(LogViewController logViewController) {
+        logs =new Label("");
+        VBox vb= new VBox();
         // dit stelt voor de meegegeven controller deze view in
         this.logViewController=logViewController;
         this.logViewController.setLogviewPane(this);
@@ -32,7 +36,9 @@ public class LogviewPane extends GridPane {
         tabel();
 
         //voeg titel en tabel toe
-        this.getChildren().addAll(lblHeading, table);
+        //vb.getChildren().addAll(logs,lblHeading,table);
+        vb.getChildren().addAll(lblHeading,logs);
+        this.getChildren().addAll(vb);
     }
 
     private void tabel(){
@@ -41,7 +47,10 @@ public class LogviewPane extends GridPane {
     }
     private void refresh () {
         table.refresh();
-        System.out.println("items in tabel : "+ table.getItems());
+    }
+
+    public void setTextlog(String string){
+        logs.setText(string);
     }
 
     public void setLogList(ObservableList<LogObject> list){
