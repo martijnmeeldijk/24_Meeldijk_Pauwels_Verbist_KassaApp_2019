@@ -144,6 +144,7 @@ public class KassaViewController implements Observer {
             kassaOverviewPane.setSluitAf("betaal");
         }
         else if(winkel.getActieveBestelling().getCurrentState() instanceof Afgesloten){
+            // hier moet de code voor wat er gebeurt als er op de betaal knop gedrukt wordt
             winkel.removeActiveBestelling();
             winkel.addBestelling();
             winkel.notifyObserver();
