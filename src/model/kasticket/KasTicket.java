@@ -65,4 +65,8 @@ public class KasTicket extends Ticket {
         }
         return result;
     }
+
+    public Winkel getWinkel() {
+        return winkel;
+    }
 }

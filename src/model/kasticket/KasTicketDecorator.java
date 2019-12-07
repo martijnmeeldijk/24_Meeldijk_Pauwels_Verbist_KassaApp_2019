@@ -1,5 +1,6 @@
 package model.kasticket;
 
-public class KasTicketDecorator extends Ticket {
+public abstract class KasTicketDecorator extends Ticket {
 
+    public abstract String print();
 }

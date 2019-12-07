@@ -1,4 +1,20 @@
 package model.kasticket.decorators;
 
-public class BoodschapFooter {
+import model.kasticket.KasTicketDecorator;
+import model.kasticket.Ticket;
+
+public class BoodschapFooter extends KasTicketDecorator {
+    Ticket ticket;
+    String boodschap;
+    public BoodschapFooter(Ticket ticket){
+        this.ticket = ticket;
+    }
+
+    public String print() {
+        return ticket.print() + "\n" +boodschap;
+    }
+
+    public void setBoodschap(String boodschap) {
+        this.boodschap = boodschap;
+    }
 }
