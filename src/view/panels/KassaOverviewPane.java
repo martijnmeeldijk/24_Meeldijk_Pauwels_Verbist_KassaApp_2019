@@ -96,21 +96,7 @@ public class KassaOverviewPane extends GridPane {
         vb.getChildren().addAll(annuleer);
     }
 
-    private void actief(Button button){
-        onHold=false;
-        button.setText("zet on hold");
-        kassaViewController.zetActief();
-        table.setItems(kassaViewController.getArtikels());
-        refresh();
-    }
 
-    private void onHold(Button button){
-        onHold=true;
-        button.setText("zet actief");
-        kassaViewController.zetOnHold();
-        table.setItems(kassaViewController.getArtikels());
-        refresh();
-    }
 
     private void tabel () {
         //creeer tabel
