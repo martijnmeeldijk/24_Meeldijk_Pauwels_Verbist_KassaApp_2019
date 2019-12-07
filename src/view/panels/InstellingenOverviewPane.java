@@ -68,9 +68,6 @@ public class InstellingenOverviewPane extends GridPane {
         //creeer titel
         Label korting = new Label("Korting:");
 
-        //creeer kortingslijst
-        Label kortingen = new Label();
-
         //creeer Strings arraylist van kortingsmogelijkheden
         ArrayList<String> list = new ArrayList<>();
         for(Kortingsmogelijkheden k: Kortingsmogelijkheden.values()){
@@ -84,10 +81,10 @@ public class InstellingenOverviewPane extends GridPane {
                 );
         ComboBox<String> kortingstype = new ComboBox<>(kortingOptions);
 
-        vb.getChildren().addAll(korting,kortingen,kortingstype);
+        vb.getChildren().addAll(korting,kortingstype);
 
         //pas aan aan gekozen optie
-        Kortinglayout layout = new Kortinglayout(instellingenOverviewController,vb,kortingstype,kortingen);
+        Kortinglayout layout = new Kortinglayout(instellingenOverviewController,vb,kortingstype);
 
         kortingstype.setOnAction(actie -> {
             layout.kies(kortingstype.getValue());
