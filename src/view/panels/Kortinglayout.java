@@ -21,17 +21,15 @@ public class Kortinglayout {
     //layout
     private VBox vb;
     private ComboBox<String> kortingstype;
-    private Label kortingen;
 
     //var voor elke methode
     private TextField kortinghoeveelheid;
     private HBox kortingHb;
 
-    public Kortinglayout(InstellingenOverviewController instellingenOverviewController, VBox vb, ComboBox<String> kortingstype, Label kortingen){
+    public Kortinglayout(InstellingenOverviewController instellingenOverviewController, VBox vb, ComboBox<String> kortingstype){
         this.instellingenOverviewController=instellingenOverviewController;
         this.vb=vb;
         this.kortingstype=kortingstype;
-        this.kortingen=kortingen;
     }
 
     public void kies(String string){
@@ -63,17 +61,6 @@ public class Kortinglayout {
         vb.getChildren().remove(kortingHb);
         kortingstype.setValue("");
         kortingstype.setDisable(false);
-        schrijfKortingen();
-    }
-
-    private void schrijfKortingen(){
-        StringBuilder tekst = new StringBuilder();
-        ArrayList<Korting> list = instellingenOverviewController.getKortingen();
-        for(int i=1;i<list.size();i++){
-            if(tekst.toString().equals("")) tekst = new StringBuilder(list.get(i).toString());
-            else tekst.append("\n").append(list.get(i).toString());
-        }
-        kortingen.setText(tekst.toString());
     }
 
     private void Duurst(){
