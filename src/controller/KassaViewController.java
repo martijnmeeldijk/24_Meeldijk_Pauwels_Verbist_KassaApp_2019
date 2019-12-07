@@ -149,7 +149,8 @@ public class KassaViewController implements Observer {
             winkel.removeActiveBestelling();
             winkel.addBestelling();
             winkel.notifyObserver();
-            winkel.checkHoldBestelling();
+            boolean verlopen = winkel.checkHoldBestelling();
+            if(verlopen) kassaOverviewPane.onHoldVerlopen();
         }
     }
     private void sluitAf() {

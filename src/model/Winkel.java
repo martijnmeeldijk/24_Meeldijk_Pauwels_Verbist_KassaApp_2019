@@ -31,11 +31,12 @@ public class Winkel implements Subject{
         log.add(logObject);
     }
 
-    public void checkHoldBestelling(){
+    public boolean checkHoldBestelling(){
         if(timeheld==2){
             if(getpassiveBestelling()!=null){
                 bestellingen.remove(getpassiveBestelling());
                 timeheld=0;
+                return true;
             }
         }
         else {
@@ -46,6 +47,7 @@ public class Winkel implements Subject{
                 timeheld=0;
             }
         }
+        return false;
     }
 
     public ArrayList<LogObject> getLog() {

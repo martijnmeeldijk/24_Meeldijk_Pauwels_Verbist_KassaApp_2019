@@ -200,6 +200,9 @@ public class KassaOverviewPane extends GridPane {
         kassaViewController.zetOnHold();
         table.setItems(kassaViewController.getArtikels());
         refresh();
+
+        sluitAf.setDisable(true);
+        annuleer.setDisable(true);
     }
 
     //betalen
@@ -241,6 +244,12 @@ public class KassaOverviewPane extends GridPane {
         alert.setHeaderText("Information Alert");
         alert.setContentText(errorMessage);
         alert.show();
+    }
+
+    public void onHoldVerlopen(){
+        hold.setDisable(true);
+        hold.setText("Zet on Hold");
+        onHold = false;
     }
 }
 	
