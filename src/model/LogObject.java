@@ -17,5 +17,16 @@ public class LogObject {
         this.totaal = totaal;
         this.korting = korting;
         this.tebetalen = tebetalen;
+        System.out.println(toString());
+    }
+
+    @Override
+    public String toString() {
+        return "LogObject{" +
+                "datum en tijd=" + dateTime +
+                ", totaal prijs=" + totaal +
+                ", korting=" + korting +
+                ", te betalen=" + tebetalen +
+                '}';
     }
 }

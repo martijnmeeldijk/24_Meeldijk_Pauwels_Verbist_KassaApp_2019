@@ -3,6 +3,7 @@ package view;
 import controller.ArtikelOverviewController;
 import controller.InstellingenOverviewController;
 import controller.KassaViewController;
+import controller.LogViewController;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.BorderPane;
@@ -11,6 +12,7 @@ import model.bestelling.Bestelling;
 import view.panels.ArtikelOverviewPane;
 import view.panels.InstellingenOverviewPane;
 import view.panels.KassaOverviewPane;
+import view.panels.LogviewPane;
 
 public class
 KassaMainPane extends BorderPane {
@@ -21,6 +23,8 @@ KassaMainPane extends BorderPane {
 	    //kassa
 	    KassaViewController kassaViewController= new KassaViewController(winkel);
         KassaOverviewPane kassaOverviewPane=new KassaOverviewPane(kassaViewController);
+        LogViewController logViewController= new LogViewController(winkel);
+        LogviewPane logviewPane= new LogviewPane(logViewController);
         Tab kassaTab = new Tab("Kassa", kassaOverviewPane);
         tabPane.getTabs().add(kassaTab);
 
@@ -37,7 +41,7 @@ KassaMainPane extends BorderPane {
         tabPane.getTabs().add(instellingTab);
 
         //log
-        Tab logTab = new Tab("Log");
+        Tab logTab = new Tab("Log", logviewPane);
         tabPane.getTabs().add(logTab);
 
 	    this.setCenter(tabPane);

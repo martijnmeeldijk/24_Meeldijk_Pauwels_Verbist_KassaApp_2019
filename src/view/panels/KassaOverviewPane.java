@@ -1,11 +1,9 @@
 package view.panels;
 
 import controller.KassaViewController;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -104,7 +102,7 @@ public class KassaOverviewPane extends GridPane {
 
         private void tabel () {
             //creeer tabel
-            table = Tabel.create(kassaViewController.getArtikels());
+            table = TabelArtikels.create(kassaViewController.getArtikels());
         }
 
         private void inputCode () {

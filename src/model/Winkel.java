@@ -31,6 +31,10 @@ public class Winkel implements Subject{
         log.add(logObject);
     }
 
+    public ArrayList<LogObject> getLog() {
+        return log;
+    }
+
     public void removeActiveBestelling(){
         bestellingen.remove(getActieveBestelling());
     }

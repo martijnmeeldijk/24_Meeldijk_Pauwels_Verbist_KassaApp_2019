@@ -9,7 +9,6 @@ import model.Artikel;
 public class ArtikelOverviewPane extends GridPane {
 	private TableView<Artikel> table;
 	private ArtikelOverviewController artikelOverviewController;
-	//public static Comparator<Artikel> omschrijvingcomperator = new OmschrijvingComparable();
 
 
 	public ArtikelOverviewPane(ArtikelOverviewController artikelOverviewController) {
@@ -33,19 +32,9 @@ public class ArtikelOverviewPane extends GridPane {
 
 	private void tabel(){
 		//creeer tabel
-		table = Tabel.create(artikelOverviewController.getList());
+		table = TabelArtikels.create(artikelOverviewController.getList());
 	}
 
-	/*public void displayErrorMessage(String errorMessage){
-		Alert alert = new Alert(Alert.AlertType.INFORMATION);
-		alert.setHeaderText("Information Alert");
-		alert.setContentText(errorMessage);
-		alert.show();
-	}
-
-	public void refresh(){
-		table.refresh();
-	}*/
 }
 	
 	

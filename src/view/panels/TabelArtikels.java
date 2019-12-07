@@ -9,7 +9,7 @@ import model.Artikel;
 
 import java.util.List;
 
-public class Tabel {
+public class TabelArtikels {
     public static TableView<Artikel> create(ObservableList<Artikel> list){
         //creeer tabel
         TableView<Artikel> table = new TableView<>();
