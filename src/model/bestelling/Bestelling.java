@@ -1,5 +1,6 @@
 package model.bestelling;
 
+import controller.AantalList;
 import controller.Observer;
 import database.ArtikelDbStrat.DataInMemory;
 import javafx.collections.FXCollections;
@@ -19,9 +20,7 @@ import java.util.Properties;
 
 public class Bestelling {
     private ObservableList<Artikel> artikels;
-    private ArrayList<Observer> observers;
     private DataInMemory dataInMemory;
-
     private BestellingState actief;
     private BestellingState onHold;
     private BestellingState afgesloten;
@@ -29,7 +28,6 @@ public class Bestelling {
     private BestellingState currentState;
 
     public Bestelling() {
-        observers=new ArrayList<>();
         dataInMemory= new DataInMemory();
         artikels= FXCollections.observableArrayList();
 

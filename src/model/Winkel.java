@@ -78,7 +78,7 @@ public class Winkel implements Subject{
     }
 
     public void removeArtikel(int code){
-        getActieveBestelling().getArtikels().remove(getActieveBestelling().getDataInMemory().getArtikel(code));
+        getActieveBestelling().removeArtikel(code);
         notifyObserver();
     }
 
