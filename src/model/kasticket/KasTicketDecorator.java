@@ -1,5 +1,12 @@
 package model.kasticket;
 
-public class KasTicketDecorator extends Ticket {
+import model.Winkel;
 
+public abstract class KasTicketDecorator extends Ticket {
+    public KasTicketDecorator(Winkel winkel) {
+        super(winkel);
+    }
+
+
+    public abstract String print();
 }
