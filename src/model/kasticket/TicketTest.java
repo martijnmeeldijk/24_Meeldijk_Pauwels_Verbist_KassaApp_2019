@@ -10,7 +10,7 @@ public class TicketTest {
         winkel.addArtikel(1);
         winkel.addArtikel(1);
         winkel.addArtikel(10);
-
+        /*
         Ticket ticket = new KasTicket(winkel);
 
 
@@ -19,10 +19,13 @@ public class TicketTest {
 
         ticket = new BtwFooter(ticket,winkel);
         ticket = new KortingFooter(ticket, winkel);
-        ticket = new BoodschapFooter(ticket, winkel);
+        ticket = new BoodschapFooter(ticket, winkel);*/
 
 
+        //System.out.print(ticket.print());
+        Ticket ticket = DecoratorFactory.getInstance().decorateTicket(winkel);
         System.out.print(ticket.print());
+
 
 
     }

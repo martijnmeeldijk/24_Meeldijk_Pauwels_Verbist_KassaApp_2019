@@ -10,11 +10,16 @@ public enum Decorators {
 
 
     private String classname;
+    private String description;
 
     Decorators(String classname, String description){
         this.classname = classname;
+        this.description = description;
     }
     public String getClassname(){
         return classname;
+    }
+    public String getDescription(){
+        return description;
     }
 }

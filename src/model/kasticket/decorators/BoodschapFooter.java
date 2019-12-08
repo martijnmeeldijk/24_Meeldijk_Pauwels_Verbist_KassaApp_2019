@@ -4,15 +4,13 @@ import model.Winkel;
 import model.kasticket.KasTicketDecorator;
 import model.kasticket.Ticket;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.Properties;
 
 public class BoodschapFooter extends KasTicketDecorator {
     Ticket ticket;
     private String boodschap;
-    private String filename = "src/model/kasticket/ticket.properties";
+    private static String filename = "src/model/kasticket/message.properties";
     private Properties properties;
 
     public BoodschapFooter(Ticket ticket, Winkel winkel){
@@ -29,6 +27,8 @@ public class BoodschapFooter extends KasTicketDecorator {
 
     public void setBoodschap(String boodschap) {
         this.boodschap = boodschap;
+        properties.setProperty("FooterMessage", boodschap);
+        saveProperties();
     }
 
     private Properties loadProperties(){
@@ -39,6 +39,13 @@ public class BoodschapFooter extends KasTicketDecorator {
             ex.printStackTrace();
         }
         return prop;
+    }
+    public void saveProperties(){
+        try (OutputStream output = new FileOutputStream(filename)) {
+            properties.store(output, null);
+        } catch (IOException io) {
+            io.printStackTrace();
+        }
     }
 
 }
