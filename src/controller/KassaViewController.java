@@ -128,6 +128,7 @@ public class KassaViewController implements Observer {
         viewLabelReset();
         winkel.notifyObserver();
     }
+
     private void viewLabelReset() {
         setPrijzen();
     }

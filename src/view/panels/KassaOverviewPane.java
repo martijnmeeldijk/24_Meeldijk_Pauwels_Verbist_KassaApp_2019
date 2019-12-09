@@ -217,14 +217,18 @@ public class KassaOverviewPane extends GridPane {
                 sluitAf.setText("Sluit af");
                 betalen = false;
 
-                sluitAf.setDisable(true);
-                annuleer.setDisable(true);
+                inputCode.setDisable(false);
                 if(onHold) hold.setDisable(false);
                 else hold.setDisable(true);
+                sluitAf.setDisable(true);
+                annuleer.setDisable(true);
 
             }else{
                 sluitAf.setText("Betalen");
                 betalen = true;
+
+                inputCode.setDisable(true);
+                hold.setDisable(true);
             }
             kassaViewController.handelBestellingAf();
         });
@@ -236,10 +240,15 @@ public class KassaOverviewPane extends GridPane {
             kassaViewController.annuleer();
             table.setItems(kassaViewController.getArtikels());
 
-            annuleer.setDisable(true);
-            sluitAf.setDisable(true);
+            inputCode.setDisable(false);
             if(onHold) hold.setDisable(false);
             else hold.setDisable(true);
+            sluitAf.setDisable(true);
+            if(betalen) {
+                sluitAf.setText("Sluit af");
+                betalen=false;
+            }
+            annuleer.setDisable(true);
         });
     }
 
