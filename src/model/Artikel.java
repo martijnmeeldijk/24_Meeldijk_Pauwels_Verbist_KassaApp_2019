@@ -17,6 +17,8 @@ public class Artikel {
         setVoorraad(voorraad);
     }
 
+
+
     public static Artikel MaakArtikel(String code, String omschrijving, String artikelgroep, String verkoopprijs, String voorraad) {
         try {
             return new Artikel(Integer.parseInt(code), omschrijving, artikelgroep,
@@ -88,7 +90,7 @@ public class Artikel {
         return voorraad;
     }
 
-    private void setVoorraad(int voorraad) {
+    public void setVoorraad(int voorraad) {
         if(verkoopprijs<0){
             throw new IllegalArgumentException("voorraad mag niet 0 zijn");
         }
@@ -103,6 +105,8 @@ public class Artikel {
         }
         return false;
     }
+
+
 
 
     @Override

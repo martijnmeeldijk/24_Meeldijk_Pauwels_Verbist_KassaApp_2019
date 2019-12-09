@@ -142,10 +142,12 @@ public class KassaViewController implements Observer {
             LogObject logObject = new LogObject(getOriginalPrice(), getKorting(), (getOriginalPrice() - getKorting()));
             winkel.addLog(logObject);
             System.out.print(TicketFacade.makeTicket(winkel));
+            winkel.changeVooraadVoorAfgeslotenVooraad();
             //save vooraadd moet nog
             winkel.removeActiveBestelling();
             winkel.addBestelling();
             winkel.notifyObserver();
+
             boolean verlopen = winkel.checkHoldBestelling();
             if(verlopen) kassaOverviewPane.onHoldVerlopen();
         }
