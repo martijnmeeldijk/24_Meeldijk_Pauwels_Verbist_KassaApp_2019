@@ -143,6 +143,7 @@ public class KassaViewController implements Observer {
             winkel.addLog(logObject);
             System.out.print(TicketFacade.makeTicket(winkel));
             winkel.changeVooraadVoorAfgeslotenVooraad();
+            winkel.getActieveBestelling().getDataInMemory().saveData();
             //save vooraadd moet nog
             winkel.removeActiveBestelling();
             winkel.addBestelling();
