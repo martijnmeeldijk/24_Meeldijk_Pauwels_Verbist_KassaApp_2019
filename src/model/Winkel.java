@@ -91,6 +91,13 @@ public class Winkel implements Subject{
         return null;
     }
 
+    public void changeVooraadVoorAfgeslotenVooraad(){
+        for(Artikel artikel:getActieveBestelling().getArtikels()){
+            getActieveBestelling().getDataInMemory().getArtikel(artikel.getCode()).setVoorraad(getActieveBestelling().getDataInMemory().getArtikel(artikel.getCode()).getVoorraad()-1);
+        }
+    }
+
+
     public Bestelling getpassiveBestelling(){
         for(Bestelling bestelling:bestellingen){
             if(!bestelling.isActiefOfAfgesloten()){

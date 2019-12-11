@@ -7,6 +7,9 @@ import model.Winkel;
 import model.bestelling.Bestelling;
 import model.bestelling.state.Actief;
 import model.bestelling.state.Afgesloten;
+import model.kasticket.DecoratorFactory;
+import model.kasticket.Ticket;
+import model.kasticket.TicketFacade;
 import model.korting.Korting;
 import view.panels.KassaOverviewPane;
 
@@ -138,10 +141,14 @@ public class KassaViewController implements Observer {
             // hier moet de code voor wat er gebeurt als er op de betaal knop gedrukt wordt
             LogObject logObject = new LogObject(getOriginalPrice(), getKorting(), (getOriginalPrice() - getKorting()));
             winkel.addLog(logObject);
+            System.out.print(TicketFacade.makeTicket(winkel));
+            winkel.changeVooraadVoorAfgeslotenVooraad();
+            winkel.getActieveBestelling().getDataInMemory().saveData();
             //save vooraadd moet nog
             winkel.removeActiveBestelling();
             winkel.addBestelling();
             winkel.notifyObserver();
+
             boolean verlopen = winkel.checkHoldBestelling();
             if(verlopen) kassaOverviewPane.onHoldVerlopen();
         }
