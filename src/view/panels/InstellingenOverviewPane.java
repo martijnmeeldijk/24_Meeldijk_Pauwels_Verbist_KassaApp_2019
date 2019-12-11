@@ -12,12 +12,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import model.korting.Korting;
 import model.korting.Kortingsmogelijkheden;
 
 import java.util.ArrayList;
 
 public class InstellingenOverviewPane extends GridPane {
     private InstellingenOverviewController instellingenOverviewController;
+    private VBox vb;
 
     public InstellingenOverviewPane(InstellingenOverviewController instellingenOverviewController){
         // dit stelt voor de meegegeven controller deze view in
@@ -28,7 +30,7 @@ public class InstellingenOverviewPane extends GridPane {
         this.setPadding(new Insets(10, 10, 10, 10));
 
         //creeer box
-        VBox vb= new VBox();
+        vb= new VBox();
         vb.setSpacing(10);
         this.getChildren().add(vb);
 
@@ -64,6 +66,19 @@ public class InstellingenOverviewPane extends GridPane {
 
         //setLaadoptie
         laadknop.setOnAction(actief ->  instellingenOverviewController.setLaadoptie(LoadSaveStrategies.valueOf(laadtype.getValue()).getClassname()));
+
+
+        StringBuilder huidige = new StringBuilder("Huidige korting");
+        if(instellingenOverviewController.getKortingen().size()>1) huidige.append("en:\n");
+        else huidige.append(":\n");
+
+        for(Korting korting: instellingenOverviewController.getKortingen()){
+            huidige.append(korting.toString());
+            huidige.append("\n");
+        }
+
+        Label huidigeKorting = new Label(String.valueOf(huidige));
+        vb.getChildren().add(huidigeKorting);
 
         //creeer titel
         Label korting = new Label("Korting:");
