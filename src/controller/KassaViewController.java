@@ -70,7 +70,6 @@ public class KassaViewController implements Observer {
 
     @Override
     public void update() {
-        System.out.println("kassa update");
         if (kassaOverviewPane != null) {
             kassaOverviewPane.setArtikels(getArtikels());
             viewLabelReset();
