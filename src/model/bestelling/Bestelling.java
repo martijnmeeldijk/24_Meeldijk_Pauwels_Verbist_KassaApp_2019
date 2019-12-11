@@ -8,10 +8,7 @@ import javafx.collections.ObservableList;
 import model.Artikel;
 import model.Artikelgroep;
 import model.Subject;
-import model.bestelling.state.Actief;
-import model.bestelling.state.Afgesloten;
-import model.bestelling.state.BestellingState;
-import model.bestelling.state.OnHold;
+import model.bestelling.state.*;
 import model.korting.*;
 
 import java.io.*;
@@ -20,7 +17,9 @@ import java.util.Properties;
 
 public class Bestelling {
     private ObservableList<Artikel> artikels;
+
     private DataInMemory dataInMemory;
+
     private BestellingState actief;
     private BestellingState onHold;
     private BestellingState afgesloten;
@@ -34,13 +33,16 @@ public class Bestelling {
         actief = new Actief(this);
         onHold = new OnHold(this);
         afgesloten = new Afgesloten(this);
+        betaald = new Betaald(this);
         this.currentState = actief;
     }
 
+    public ObservableList<Artikel> getArtikels() {
+        return artikels;
+    }
     public void addArtikel(int code){
         currentState.addArtikel(code);
     }
-
     public void removeArtikel(int code){
         currentState.removeArtikel(code);
     }
@@ -48,13 +50,8 @@ public class Bestelling {
     public boolean itemBestaat(int getal){
         return dataInMemory.getArtikel(getal) != null;
     }
-
     public DataInMemory getDataInMemory() {
         return dataInMemory;
-    }
-
-    public ObservableList<Artikel> getArtikels() {
-        return artikels;
     }
 
 
@@ -73,10 +70,13 @@ public class Bestelling {
             throw new NotPossibleException("Je kan geen bestelling afsluiten met een leeg winkelmandje");
         }
     }
+    public void betaal() {
+        currentState.betaal();
+    }
+
     public BestellingState getCurrentState(){
         return currentState;
     }
-
     public void setCurrentState(BestellingState bestellingState){
         this.currentState = bestellingState;
     }
@@ -84,24 +84,17 @@ public class Bestelling {
     public BestellingState getActief() {
         return actief;
     }
-
     public BestellingState getOnHold() {
         return onHold;
+    }
+    public BestellingState getAfgesloten() {
+        return afgesloten;
+    }
+    public BestellingState getBetaald() {
+        return betaald;
     }
 
     public boolean isActiefOfAfgesloten(){
         return currentState.getClass() == Actief.class || currentState.getClass() == Afgesloten.class  ;
-    }
-
-    public BestellingState getAfgesloten() {
-        return afgesloten;
-    }
-
-    public void betaal() {
-        currentState.betaal();
-    }
-
-    public BestellingState getBetaald() {
-        return betaald;
     }
 }

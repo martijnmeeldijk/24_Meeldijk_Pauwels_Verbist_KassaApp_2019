@@ -7,6 +7,7 @@ import model.korting.KortingFactory;
 import model.korting.Kortingsmogelijkheden;
 import view.panels.InstellingenOverviewPane;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class InstellingenOverviewController implements Observer{
