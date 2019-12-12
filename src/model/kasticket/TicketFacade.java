@@ -6,55 +6,110 @@ import java.io.*;
 import java.util.Properties;
 
 public class TicketFacade {
-    private static Properties properties = loadProperties();
-    private static String filename = "src/model/kasticket/message.properties";
+    private static Properties ticketProperties = loadTicketProperties();
+    private static Properties messageProperties = loadMessageProperties();
+
+
+    private static String ticketFilename = "src/model/kasticket/ticket.properties";
+    private static String messageFilename = "src/model/kasticket/message.properties";
 
     public static String makeTicket(Winkel winkel){
         return DecoratorFactory.getInstance().decorateTicket(winkel).print();
     }
-    public static void setFilename(String filename){
-        TicketFacade.filename= filename;
+    public static void setTicketFilename(String filename){
+        TicketFacade.ticketFilename= filename;
     }
+    public static void setMessageFilename(String filename){
+        TicketFacade.messageFilename= filename;
+    }
+
+    /**
+     * Set to true to display a custom header
+     * @param bool
+     */
     public static void setHeader(boolean bool){
-        if(bool) properties.setProperty("BoodschapHeader", "true");
-        else properties.setProperty("BoodschapHeader", "false");
-        saveProperties();
+        if(bool) ticketProperties.setProperty("BoodschapHeader", "true");
+        else ticketProperties.setProperty("BoodschapHeader", "false");
+        saveTicketProperties();
     }
+    /**
+     * Set to true to display a custom footer
+     * @param bool
+     */
     public static void setFooter(boolean bool){
-        if(bool) properties.setProperty("BoodschapFooter", "true");
-        else properties.setProperty("BoodschapFooter", "false");
-        saveProperties();
+        if(bool) ticketProperties.setProperty("BoodschapFooter", "true");
+        else ticketProperties.setProperty("BoodschapFooter", "false");
+        saveTicketProperties();
     }
+    /**
+     * Set to true to display Btw footer
+     * @param bool
+     */
     public static void setBtwFooter(boolean bool){
-        if(bool) properties.setProperty("BtwFooter", "true");
-        else properties.setProperty("BtwFooter", "false");
-        saveProperties();
+        if(bool) ticketProperties.setProperty("BtwFooter", "true");
+        else ticketProperties.setProperty("BtwFooter", "false");
+        saveTicketProperties();
     }
+    /**
+     * Set to true to display the current date in a header
+     * @param bool
+     */
     public static void setDatumHeader(boolean bool){
-        if(bool) properties.setProperty("DatumHeader", "true");
-        else properties.setProperty("DatumHeader", "false");
-        saveProperties();
+        if(bool) ticketProperties.setProperty("DatumHeader", "true");
+        else ticketProperties.setProperty("DatumHeader", "false");
+        saveTicketProperties();
     }
+    /**
+     * Set to true to display 'korting' in a footer
+     * @param bool
+     */
     public static void setKortingFooter(boolean bool){
-        if(bool) properties.setProperty("KortingFooter", "true");
-        else properties.setProperty("KortingFooter", "false");
-        saveProperties();
+        if(bool) ticketProperties.setProperty("KortingFooter", "true");
+        else ticketProperties.setProperty("KortingFooter", "false");
+        saveTicketProperties();
     }
+
+    public static void setCustomHeader(String s){
+        messageProperties.setProperty("HeaderMessage", s);
+        saveMessageProperties();
+    }
+    public static void setCustomFooter(String s){
+        messageProperties.setProperty("FooterMessage", s);
+        saveMessageProperties();
+    }
+    
 
 
     
-    private static Properties loadProperties(){
+    private static Properties loadTicketProperties(){
         Properties prop = new Properties();
-        try (InputStream input = new FileInputStream(filename)) {
+        try (InputStream input = new FileInputStream(ticketFilename)) {
             prop.load(input);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
         return prop;
     }
-    public static void saveProperties(){
-        try (OutputStream output = new FileOutputStream(filename)) {
-            properties.store(output, null);
+    private static void saveTicketProperties(){
+        try (OutputStream output = new FileOutputStream(ticketFilename)) {
+            ticketProperties.store(output, null);
+        } catch (IOException io) {
+            io.printStackTrace();
+        }
+    }
+
+    private static Properties loadMessageProperties() {
+        Properties prop = new Properties();
+        try (InputStream input = new FileInputStream(messageFilename)) {
+            prop.load(input);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        return prop;
+    }
+    private static void saveMessageProperties(){
+        try (OutputStream output = new FileOutputStream(messageFilename)) {
+            ticketProperties.store(output, null);
         } catch (IOException io) {
             io.printStackTrace();
         }
