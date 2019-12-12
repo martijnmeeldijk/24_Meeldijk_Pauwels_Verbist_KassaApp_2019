@@ -16,9 +16,11 @@ public class Groepkorting implements Korting{
     @Override
     public double getKorting(ObservableList<Artikel> list) {
         double totaal=0.0;
-        for(Artikel artikel: list){
-            if(artikel.getArtikelgroep().equals(groep)){
-                totaal+=artikel.getVerkoopprijs()*(0.01*kortingspercentage)*artikel.getAantal();
+        if(list!=null){
+            for(Artikel artikel: list){
+                if(artikel.getArtikelgroep().equals(groep)){
+                    totaal+=artikel.getVerkoopprijs()*(0.01*kortingspercentage)*artikel.getAantal();
+                }
             }
         }
         return totaal;

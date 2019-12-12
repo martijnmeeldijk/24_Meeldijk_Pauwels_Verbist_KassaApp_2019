@@ -17,7 +17,7 @@ public class Duurstkorting implements Korting{
 
     @Override
     public double getKorting(ObservableList<Artikel> list) {
-        if(list.size()>0){
+        if(list!=null && list.size()>0){
             Artikel max = getMax(list);
             return max.getVerkoopprijs()*(0.01*kortingspercentage);
         }
