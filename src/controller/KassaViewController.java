@@ -101,6 +101,7 @@ public class KassaViewController implements Observer {
             if (winkel.getActieveBestelling().getArtikels().size() == 0) {
                 winkel.removeActiveBestelling();
                 winkel.getpassiveBestelling().zetActief();
+                winkel.setTimeheld(0);
                 viewLabelReset();
                 winkel.notifyObserver();
 

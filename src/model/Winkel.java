@@ -190,6 +190,10 @@ public class Winkel implements Subject {
         }
     }
 
+    public void setTimeheld(int timeheld) {
+        this.timeheld = timeheld;
+    }
+
     public ArrayList<Korting> getKortingen() {
         return kortingen;
     }
