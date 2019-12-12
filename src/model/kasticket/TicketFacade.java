@@ -92,7 +92,7 @@ public class TicketFacade {
     
     private static Properties loadTicketProperties(){
         Properties prop = new Properties();
-        try (InputStream input = new FileInputStream(ticketFilename)) {
+        try (InputStream input = new FileInputStream("src/model/kasticket/ticket.properties")) {
             prop.load(input);
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -109,7 +109,7 @@ public class TicketFacade {
 
     private static Properties loadMessageProperties() {
         Properties prop = new Properties();
-        try (InputStream input = new FileInputStream(messageFilename)) {
+        try (InputStream input = new FileInputStream("src/model/kasticket/message.properties")) {
             prop.load(input);
         } catch (IOException ex) {
             ex.printStackTrace();
