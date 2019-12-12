@@ -9,5 +9,4 @@ public class Afgesloten extends BestellingState {
     public void betaal(){
         bestelling.setCurrentState(bestelling.getBetaald());
     }
-
 }

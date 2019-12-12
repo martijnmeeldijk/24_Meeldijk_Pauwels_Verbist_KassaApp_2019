@@ -66,18 +66,8 @@ public class InstellingenOverviewPane extends GridPane {
         //setLaadoptie
         laadknop.setOnAction(actief ->  instellingenOverviewController.setLaadoptie(LoadSaveStrategies.valueOf(laadtype.getValue()).getClassname()));
 
-        //huidige opties
-        StringBuilder huidige = new StringBuilder("Huidige korting");
-        if(instellingenOverviewController.getKortingen().size()>1) huidige.append("en:\n");
-        else if(instellingenOverviewController.getKortingen().size()>0) huidige.append(":\n");
-        else huidige.append(": geen");
-
-        for(Korting korting: instellingenOverviewController.getKortingen()){
-            huidige.append(korting.toString());
-            huidige.append("\n");
-        }
-
-        Label huidigeKorting = new Label(String.valueOf(huidige));
+        //huidige kortingen
+        Label huidigeKorting = new Label(huidigeKortingenText());
         vb.getChildren().add(huidigeKorting);
 
         //creeer titel
@@ -105,7 +95,19 @@ public class InstellingenOverviewPane extends GridPane {
             layout.kies(kortingstype.getValue());
             kortingstype.setDisable(true);
         });
+    }
 
+    private String huidigeKortingenText(){
+        //huidige opties
+        StringBuilder huidige = new StringBuilder("Huidige korting");
+        if(instellingenOverviewController.getKortingen().size()>1) huidige.append("en:\n");
+        else if(instellingenOverviewController.getKortingen().size()>0) huidige.append(":\n");
+        else huidige.append(": geen");
 
+        for(Korting korting: instellingenOverviewController.getKortingen()){
+            huidige.append(korting.toString());
+            huidige.append("\n");
+        }
+        return String.valueOf(huidige);
     }
 }
