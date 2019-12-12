@@ -1,7 +1,6 @@
 package database.LoadSaveStrat;
 
-import database.LoadSaveStrat.LoadSaveStrategy;
-import model.Artikel;
+import model.artikel.Artikel;
 
 import java.util.HashMap;
 

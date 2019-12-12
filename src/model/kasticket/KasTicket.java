@@ -1,16 +1,10 @@
 package model.kasticket;
 
 import controller.AantalList;
-import javafx.collections.ObservableList;
-import model.Artikel;
+import model.artikel.Artikel;
 import model.Winkel;
-import model.bestelling.Bestelling;
 
-import javax.swing.*;
-import java.util.ArrayList;
-import java.util.Formatter;
 import java.util.List;
-import java.util.Observable;
 
 public class KasTicket extends Ticket {
 

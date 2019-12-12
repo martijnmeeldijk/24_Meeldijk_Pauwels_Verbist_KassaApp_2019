@@ -2,7 +2,7 @@ package controller;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import model.Artikel;
+import model.artikel.Artikel;
 import model.Winkel;
 
 public class AantalList {

@@ -1,4 +1,4 @@
-package model;
+package model.artikel;
 
 public class Artikel {
     private int code;

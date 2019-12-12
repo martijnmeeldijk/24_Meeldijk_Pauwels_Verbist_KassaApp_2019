@@ -1,9 +1,8 @@
 package database.LoadSaveStrat;
-import database.LoadSaveStrat.LoadSaveStrategy;
 import excel.ExcelPlugin;
 import jxl.read.biff.BiffException;
 import jxl.write.WriteException;
-import model.Artikel;
+import model.artikel.Artikel;
 
 import java.io.File;
 import java.io.IOException;

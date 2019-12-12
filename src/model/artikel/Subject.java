@@ -1,4 +1,4 @@
-package model;
+package model.artikel;
 
 import controller.Observer;
 

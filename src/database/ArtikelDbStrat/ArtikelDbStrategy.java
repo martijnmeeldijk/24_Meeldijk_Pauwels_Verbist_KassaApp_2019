@@ -1,8 +1,7 @@
 package database.ArtikelDbStrat;
 
-import model.Artikel;
+import model.artikel.Artikel;
 
-import java.io.FileNotFoundException;
 import java.util.HashMap;
 
 public interface ArtikelDbStrategy {

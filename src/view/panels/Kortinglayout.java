@@ -9,7 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import controller.InstellingenOverviewController;
 import javafx.scene.layout.VBox;
-import model.Artikelgroep;
+import model.artikel.Artikelgroep;
 import model.korting.*;
 
 import java.util.ArrayList;

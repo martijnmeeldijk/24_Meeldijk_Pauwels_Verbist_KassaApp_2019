@@ -2,7 +2,7 @@ package database.ArtikelDbStrat;
 
 import database.Factory.LoadSaveStrategyFactory;
 import database.LoadSaveStrat.LoadSaveStrategy;
-import model.Artikel;
+import model.artikel.Artikel;
 
 import java.io.*;
 import java.util.HashMap;

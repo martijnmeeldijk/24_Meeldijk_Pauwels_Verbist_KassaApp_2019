@@ -1,7 +1,6 @@
 package database.ArtikelDbStrat;
 
-import database.ArtikelDbStrat.ArtikelDbContext;
-import model.Artikel;
+import model.artikel.Artikel;
 
 import java.util.HashMap;
 

@@ -1,7 +1,7 @@
 package model.korting;
 
 import javafx.collections.ObservableList;
-import model.Artikel;
+import model.artikel.Artikel;
 
 public class Drempelkorting implements Korting {
     private Kortingsmogelijkheden korting = Kortingsmogelijkheden.Drempel;

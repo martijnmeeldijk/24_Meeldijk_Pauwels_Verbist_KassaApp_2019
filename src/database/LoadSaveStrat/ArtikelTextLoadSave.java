@@ -1,8 +1,8 @@
 package database.LoadSaveStrat;
 
 //import com.sun.tools.jdeprscan.scan.Scan;
-import model.Artikel;
-import model.Artikelgroep;
+import model.artikel.Artikel;
+import model.artikel.Artikelgroep;
 
 import java.io.*;
 import java.util.HashMap;

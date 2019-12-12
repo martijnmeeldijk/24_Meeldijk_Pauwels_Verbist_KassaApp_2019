@@ -1,17 +1,11 @@
 package model.kasticket.decorators;
 
 import controller.AantalList;
-import model.Artikel;
+import model.artikel.Artikel;
 import model.Winkel;
 import model.kasticket.KasTicketDecorator;
 import model.kasticket.Ticket;
 import model.korting.Korting;
-
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.List;
-import java.util.Properties;
 
 public class KortingFooter extends KasTicketDecorator {
     Ticket ticket;

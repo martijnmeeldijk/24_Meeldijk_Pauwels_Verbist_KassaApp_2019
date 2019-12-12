@@ -2,12 +2,9 @@ package controller;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import model.Artikel;
-import model.LogObject;
+import model.artikel.LogObject;
 import model.Winkel;
 import view.panels.LogviewPane;
-
-import java.util.HashMap;
 
 public class LogViewController implements Observer {
     private LogviewPane logviewPane;

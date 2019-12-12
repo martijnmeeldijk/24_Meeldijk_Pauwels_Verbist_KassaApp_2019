@@ -1,7 +1,7 @@
 package model.kasticket.decorators;
 
 import controller.AantalList;
-import model.Artikel;
+import model.artikel.Artikel;
 import model.Winkel;
 import model.kasticket.KasTicketDecorator;
 import model.kasticket.Ticket;

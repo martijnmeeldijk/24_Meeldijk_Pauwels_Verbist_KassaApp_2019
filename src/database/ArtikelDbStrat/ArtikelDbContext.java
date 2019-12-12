@@ -1,8 +1,7 @@
 package database.ArtikelDbStrat;
 
-import database.ArtikelDbStrat.ArtikelDbStrategy;
 import database.Factory.ArtikelDbStrategyFactory;
-import model.Artikel;
+import model.artikel.Artikel;
 
 import java.io.*;
 import java.util.HashMap;

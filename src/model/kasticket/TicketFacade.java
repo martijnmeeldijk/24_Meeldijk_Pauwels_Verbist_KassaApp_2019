@@ -1,6 +1,7 @@
 package model.kasticket;
 
 import model.Winkel;
+import model.korting.KortingFactory;
 
 import java.io.*;
 import java.util.Properties;
@@ -8,10 +9,10 @@ import java.util.Properties;
 public class TicketFacade {
     private static Properties ticketProperties = loadTicketProperties();
     private static Properties messageProperties = loadMessageProperties();
-
-
     private static String ticketFilename = "src/model/kasticket/ticket.properties";
     private static String messageFilename = "src/model/kasticket/message.properties";
+
+    private TicketFacade(){}
 
     public static String makeTicket(Winkel winkel){
         return DecoratorFactory.getInstance().decorateTicket(winkel).print();
@@ -69,10 +70,18 @@ public class TicketFacade {
         saveTicketProperties();
     }
 
+    /**
+     * Set a custom message as header
+     * @param s
+     */
     public static void setCustomHeader(String s){
         messageProperties.setProperty("HeaderMessage", s);
         saveMessageProperties();
     }
+    /**
+     * Set a custom message as footer
+     * @param s
+     */
     public static void setCustomFooter(String s){
         messageProperties.setProperty("FooterMessage", s);
         saveMessageProperties();

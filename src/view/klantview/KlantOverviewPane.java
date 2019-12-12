@@ -11,8 +11,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-import model.Artikel;
-import model.OmschrijvingComparable;
+import model.artikel.Artikel;
+import model.artikel.OmschrijvingComparable;
 import controller.AantalList;
 
 import java.util.Comparator;

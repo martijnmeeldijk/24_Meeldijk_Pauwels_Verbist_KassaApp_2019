@@ -4,8 +4,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import model.Artikel;
-import model.LogObject;
+import model.artikel.LogObject;
 
 import java.util.Date;
 

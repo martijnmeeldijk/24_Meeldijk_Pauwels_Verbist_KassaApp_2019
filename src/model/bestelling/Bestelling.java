@@ -1,19 +1,10 @@
 package model.bestelling;
 
-import controller.AantalList;
-import controller.Observer;
 import database.ArtikelDbStrat.DataInMemory;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import model.Artikel;
-import model.Artikelgroep;
-import model.Subject;
+import model.artikel.Artikel;
 import model.bestelling.state.*;
-import model.korting.*;
-
-import java.io.*;
-import java.util.ArrayList;
-import java.util.Properties;
 
 public class Bestelling {
     private ObservableList<Artikel> artikels;

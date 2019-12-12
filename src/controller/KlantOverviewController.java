@@ -1,6 +1,6 @@
 package controller;
 
-import model.Artikel;
+import model.artikel.Artikel;
 import model.Winkel;
 import model.korting.Korting;
 import view.klantview.KlantOverviewPane;

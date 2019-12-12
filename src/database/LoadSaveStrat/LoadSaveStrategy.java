@@ -1,9 +1,7 @@
 package database.LoadSaveStrat;
 
-import model.Artikel;
+import model.artikel.Artikel;
 
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public interface LoadSaveStrategy {

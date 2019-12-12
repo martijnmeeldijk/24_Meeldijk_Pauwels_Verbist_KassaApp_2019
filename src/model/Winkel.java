@@ -1,6 +1,10 @@
 package model;
 
 import controller.Observer;
+import model.artikel.Artikel;
+import model.artikel.Artikelgroep;
+import model.artikel.LogObject;
+import model.artikel.Subject;
 import model.bestelling.Bestelling;
 import model.korting.*;
 
@@ -8,7 +12,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Properties;
 
-public class Winkel implements Subject{
+public class Winkel implements Subject {
     private ArrayList<Observer> observers;
     private ArrayList<LogObject>log;
     private ArrayList<Bestelling> bestellingen;

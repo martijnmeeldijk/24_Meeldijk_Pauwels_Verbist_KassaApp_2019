@@ -1,14 +1,12 @@
 package controller;
 
 import javafx.collections.ObservableList;
-import model.Artikel;
-import model.LogObject;
+import model.artikel.Artikel;
+import model.artikel.LogObject;
 import model.Winkel;
 import model.bestelling.Bestelling;
 import model.bestelling.state.Actief;
 import model.bestelling.state.Afgesloten;
-import model.kasticket.DecoratorFactory;
-import model.kasticket.Ticket;
 import model.kasticket.TicketFacade;
 import model.korting.Korting;
 import view.panels.KassaOverviewPane;

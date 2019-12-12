@@ -4,7 +4,7 @@ import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
-import model.Artikel;
+import model.artikel.Artikel;
 
 public class ArtikelOverviewPane extends GridPane {
 	private TableView<Artikel> table;

@@ -1,4 +1,4 @@
-package model;
+package model.artikel;
 
 import java.util.Comparator;
 

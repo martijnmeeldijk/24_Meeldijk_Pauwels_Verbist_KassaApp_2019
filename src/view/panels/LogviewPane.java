@@ -8,7 +8,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-import model.LogObject;
+import model.artikel.LogObject;
 
 public class LogviewPane extends GridPane {
     private LogViewController logViewController;

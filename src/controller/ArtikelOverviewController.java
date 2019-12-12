@@ -2,10 +2,10 @@ package controller;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import model.Artikel;
+import model.artikel.Artikel;
 import model.Winkel;
 import model.bestelling.Bestelling;
-import model.OmschrijvingComparable;
+import model.artikel.OmschrijvingComparable;
 import view.panels.ArtikelOverviewPane;
 
 import java.util.Comparator;

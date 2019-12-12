@@ -1,8 +1,8 @@
 package model.korting;
 
 import javafx.collections.ObservableList;
-import model.Artikel;
-import model.Artikelgroep;
+import model.artikel.Artikel;
+import model.artikel.Artikelgroep;
 
 public class Groepkorting implements Korting{
     private Kortingsmogelijkheden korting = Kortingsmogelijkheden.Groep;

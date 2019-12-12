@@ -1,4 +1,4 @@
-package model;
+package model.artikel;
 
 import jxl.write.DateTime;
 import model.bestelling.Bestelling;
