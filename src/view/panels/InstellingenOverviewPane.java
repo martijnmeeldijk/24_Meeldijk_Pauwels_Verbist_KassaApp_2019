@@ -19,7 +19,6 @@ import java.util.ArrayList;
 
 public class InstellingenOverviewPane extends GridPane {
     private InstellingenOverviewController instellingenOverviewController;
-    private VBox vb;
 
     public InstellingenOverviewPane(InstellingenOverviewController instellingenOverviewController){
         // dit stelt voor de meegegeven controller deze view in
@@ -30,7 +29,7 @@ public class InstellingenOverviewPane extends GridPane {
         this.setPadding(new Insets(10, 10, 10, 10));
 
         //creeer box
-        vb= new VBox();
+        VBox vb= new VBox();
         vb.setSpacing(10);
         this.getChildren().add(vb);
 
@@ -67,10 +66,11 @@ public class InstellingenOverviewPane extends GridPane {
         //setLaadoptie
         laadknop.setOnAction(actief ->  instellingenOverviewController.setLaadoptie(LoadSaveStrategies.valueOf(laadtype.getValue()).getClassname()));
 
-
+        //huidige opties
         StringBuilder huidige = new StringBuilder("Huidige korting");
         if(instellingenOverviewController.getKortingen().size()>1) huidige.append("en:\n");
-        else huidige.append(":\n");
+        else if(instellingenOverviewController.getKortingen().size()>0) huidige.append(":\n");
+        else huidige.append(": geen");
 
         for(Korting korting: instellingenOverviewController.getKortingen()){
             huidige.append(korting.toString());
@@ -105,5 +105,7 @@ public class InstellingenOverviewPane extends GridPane {
             layout.kies(kortingstype.getValue());
             kortingstype.setDisable(true);
         });
+
+
     }
 }

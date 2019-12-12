@@ -26,6 +26,7 @@ public class Kortinglayout {
     private TextField kortinghoeveelheid;
     private HBox kortingHb;
 
+
     public Kortinglayout(InstellingenOverviewController instellingenOverviewController, VBox vb, ComboBox<String> kortingstype){
         this.instellingenOverviewController=instellingenOverviewController;
         this.vb=vb;
