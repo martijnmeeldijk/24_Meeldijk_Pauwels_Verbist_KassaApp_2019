@@ -25,6 +25,7 @@ public class KassaOverviewPane extends GridPane {
     private Label prijswaarde;
     private Label kortingwaarde;
     private Label betaalwaarde;
+    private Label dubbelklik= new Label("Dubbelklik om te verwijderen");
 
     //on hold
     private boolean onHold = false;
@@ -87,7 +88,7 @@ public class KassaOverviewPane extends GridPane {
 
         tabel();
 
-        vb.getChildren().addAll(lblHeading, table);
+        vb.getChildren().addAll(dubbelklik,lblHeading, table);
 
         // zet on hold-, betaal- en anulleer-knoppen en voeg ze toe
         HBox knoppenBox = new HBox();
