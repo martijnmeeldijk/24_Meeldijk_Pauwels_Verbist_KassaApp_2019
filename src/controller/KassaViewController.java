@@ -143,7 +143,7 @@ public class KassaViewController implements Observer {
             System.out.print(TicketFacade.makeTicket(winkel));
             winkel.changeVooraadVoorAfgeslotenVooraad();
             winkel.getActieveBestelling().getDataInMemory().saveData();
-            //save vooraadd moet nog
+            //alle on hold bestellingen moeten hun data nu nog refreshen!!
             winkel.removeActiveBestelling();
             winkel.addBestelling();
             winkel.notifyObserver();
