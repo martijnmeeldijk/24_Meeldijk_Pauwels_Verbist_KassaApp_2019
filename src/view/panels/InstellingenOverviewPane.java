@@ -10,6 +10,7 @@ import javafx.scene.control.cell.CheckBoxListCell;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import model.kasticket.TicketFacade;
 import model.korting.Korting;
 import model.korting.Kortingsmogelijkheden;
 
@@ -64,28 +65,39 @@ public class InstellingenOverviewPane extends GridPane {
         //setLaadoptie
         laadknop.setOnAction(actief ->  instellingenOverviewController.setLaadoptie(LoadSaveStrategies.valueOf(laadtype.getValue()).getClassname()));
 
-        // KASTICKET
+        // --- KASTICKET ---
+
+        //header
         Label kasticket = new Label("Eigenschappen Kasticket");
         CheckBox customHeader = new CheckBox("Custom header");
         customHeader.setOnAction(doe -> {
             instellingenOverviewController.setHeader(customHeader.isSelected());
         });
 
-        TextField customHeaderText = new TextField("Custom header text");
+        TextField customHeaderText = new TextField(TicketFacade.getCustomHeader());
         Button customHeaderTextButton = new Button("Stel in");
         customHeaderTextButton.setOnAction(lambda ->{
-
+            instellingenOverviewController.setCustomHeader(customHeaderText.getText());
         });
         customHeaderText.setDisable(!customHeader.isSelected());
 
+        vb.getChildren().addAll(kasticket, customHeader, customHeaderText, customHeaderTextButton);
+
+        // footer
         CheckBox customFooter = new CheckBox("Custom Footer");
         customHeader.setOnAction(doe -> {
             instellingenOverviewController.setFooter(customFooter.isSelected());
         });
+        TextField customFooterText = new TextField(TicketFacade.getCustomHeader());
+        Button customFooterTextButton = new Button("Stel in");
+        customHeaderTextButton.setOnAction(lambda ->{
+            instellingenOverviewController.setCustomFooter(customHeaderText.getText());
+        });
+        customHeaderText.setDisable(!customHeader.isSelected());
+
+        vb.getChildren().addAll(customFooter,customFooterText, customFooterTextButton);
 
 
-
-        vb.getChildren().addAll(kasticket, customHeader, customHeaderText);
 
 
 

@@ -51,4 +51,11 @@ public class InstellingenOverviewController implements Observer{
         TicketFacade.setFooter(selected);
 
     }
+
+    public void setCustomHeader(String text) {
+        TicketFacade.setCustomHeader(text);
+    }
+    public void setCustomFooter(String text){
+        TicketFacade.setCustomFooter(text);
+    }
 }
