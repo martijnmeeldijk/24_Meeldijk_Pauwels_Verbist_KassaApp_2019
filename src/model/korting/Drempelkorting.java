@@ -16,10 +16,6 @@ public class Drempelkorting implements Korting {
         return totaal;
     }
 
-    public double getDrempel() {
-        return drempel;
-    }
-
     public void setDrempel(double drempel) {
         this.drempel = drempel;
     }

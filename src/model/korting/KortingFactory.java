@@ -5,8 +5,8 @@ import java.lang.reflect.InvocationTargetException;
 public class KortingFactory {
     //singleton
     private static KortingFactory unique = new KortingFactory();
-    private KortingFactory(){}
 
+    private KortingFactory(){}
     public static KortingFactory getInstance(){
         return unique;
     }
