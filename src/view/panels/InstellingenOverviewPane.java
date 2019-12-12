@@ -5,10 +5,8 @@ import database.LoadSaveStrat.LoadSaveStrategies;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.CheckBoxListCell;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -66,8 +64,43 @@ public class InstellingenOverviewPane extends GridPane {
         //setLaadoptie
         laadknop.setOnAction(actief ->  instellingenOverviewController.setLaadoptie(LoadSaveStrategies.valueOf(laadtype.getValue()).getClassname()));
 
-        //huidige kortingen
-        Label huidigeKorting = new Label(huidigeKortingenText());
+        // KASTICKET
+        Label kasticket = new Label("Eigenschappen Kasticket");
+        CheckBox customHeader = new CheckBox("Custom header");
+        customHeader.setOnAction(doe -> {
+            instellingenOverviewController.setHeader(customHeader.isSelected());
+        });
+
+        TextField customHeaderText = new TextField("Custom header text");
+        Button customHeaderTextButton = new Button("Stel in");
+        customHeaderTextButton.setOnAction(lambda ->{
+
+        });
+        customHeaderText.setDisable(!customHeader.isSelected());
+
+        CheckBox customFooter = new CheckBox("Custom Footer");
+        customHeader.setOnAction(doe -> {
+            instellingenOverviewController.setFooter(customFooter.isSelected());
+        });
+
+
+
+        vb.getChildren().addAll(kasticket, customHeader, customHeaderText);
+
+
+
+        //huidige opties
+        StringBuilder huidige = new StringBuilder("Huidige korting");
+        if(instellingenOverviewController.getKortingen().size()>1) huidige.append("en:\n");
+        else if(instellingenOverviewController.getKortingen().size()>0) huidige.append(":\n");
+        else huidige.append(": geen");
+
+        for(Korting korting: instellingenOverviewController.getKortingen()){
+            huidige.append(korting.toString());
+            huidige.append("\n");
+        }
+
+        Label huidigeKorting = new Label(String.valueOf(huidige));
         vb.getChildren().add(huidigeKorting);
 
         //creeer titel
@@ -95,19 +128,9 @@ public class InstellingenOverviewPane extends GridPane {
             layout.kies(kortingstype.getValue());
             kortingstype.setDisable(true);
         });
-    }
 
-    private String huidigeKortingenText(){
-        //huidige opties
-        StringBuilder huidige = new StringBuilder("Huidige korting");
-        if(instellingenOverviewController.getKortingen().size()>1) huidige.append("en:\n");
-        else if(instellingenOverviewController.getKortingen().size()>0) huidige.append(":\n");
-        else huidige.append(": geen");
 
-        for(Korting korting: instellingenOverviewController.getKortingen()){
-            huidige.append(korting.toString());
-            huidige.append("\n");
-        }
-        return String.valueOf(huidige);
+
+
     }
 }

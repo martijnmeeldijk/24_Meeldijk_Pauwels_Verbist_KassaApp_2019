@@ -17,7 +17,6 @@ public class LogObject {
         this.totaal = totaal;
         this.korting = korting;
         this.tebetalen = tebetalen;
-        System.out.println(toString());
     }
 
     @Override
