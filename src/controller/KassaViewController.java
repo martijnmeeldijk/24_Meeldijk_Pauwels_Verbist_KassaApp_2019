@@ -101,6 +101,7 @@ public class KassaViewController implements Observer {
             if (winkel.getActieveBestelling().getArtikels().size() == 0) {
                 winkel.removeActiveBestelling();
                 winkel.getpassiveBestelling().zetActief();
+                winkel.setTimeheld(0);
                 viewLabelReset();
                 winkel.notifyObserver();
 
@@ -142,10 +143,12 @@ public class KassaViewController implements Observer {
             winkel.changeVooraadVoorAfgeslotenVooraad();
             winkel.getActieveBestelling().getDataInMemory().saveData();
             //alle on hold bestellingen moeten hun data nu nog refreshen!!
+            if(winkel.getpassiveBestelling()!=null){
+                winkel.getpassiveBestelling().getDataInMemory().loadData();
+            }
             winkel.removeActiveBestelling();
             winkel.addBestelling();
             winkel.notifyObserver();
-
             boolean verlopen = winkel.checkHoldBestelling();
             if(verlopen) kassaOverviewPane.onHoldVerlopen();
         }
