@@ -6,6 +6,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.CheckBoxListCell;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -66,8 +67,24 @@ public class InstellingenOverviewPane extends GridPane {
         // KASTICKET
         Label kasticket = new Label("Eigenschappen Kasticket");
         CheckBox customHeader = new CheckBox("Custom header");
-        customHeader.isSelected();
+        customHeader.setOnAction(doe -> {
+            instellingenOverviewController.setHeader(customHeader.isSelected());
+        });
+
         TextField customHeaderText = new TextField("Custom header text");
+        Button customHeaderTextButton = new Button("Stel in");
+        customHeaderTextButton.setOnAction(lambda ->{
+
+        });
+        customHeaderText.setDisable(!customHeader.isSelected());
+
+        CheckBox customFooter = new CheckBox("Custom Footer");
+        customHeader.setOnAction(doe -> {
+            instellingenOverviewController.setFooter(customFooter.isSelected());
+        });
+
+
+
         vb.getChildren().addAll(kasticket, customHeader, customHeaderText);
 
 

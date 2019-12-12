@@ -86,6 +86,13 @@ public class TicketFacade {
         messageProperties.setProperty("FooterMessage", s);
         saveMessageProperties();
     }
+    public static String getCustomFooter(){
+        return messageProperties.getProperty("FooterMessage");
+    }
+    public static String getCustomHeader(){
+        return messageProperties.getProperty("FooterMessage");
+    }
+
     
 
 
@@ -123,5 +130,6 @@ public class TicketFacade {
             io.printStackTrace();
         }
     }
+
 
 }

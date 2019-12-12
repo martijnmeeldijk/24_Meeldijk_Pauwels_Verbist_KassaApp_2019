@@ -2,6 +2,7 @@ package controller;
 
 import model.Winkel;
 import model.bestelling.Bestelling;
+import model.kasticket.TicketFacade;
 import model.korting.Korting;
 import model.korting.KortingFactory;
 import model.korting.Kortingsmogelijkheden;
@@ -35,8 +36,19 @@ public class InstellingenOverviewController implements Observer{
         winkel.getActieveBestelling().getDataInMemory().getArtikelDbContext().saveProperties(laadoptie);
     }
 
+
+
     @Override
     public void update() {
+
+    }
+
+    public void setHeader(boolean selected) {
+        TicketFacade.setHeader(selected);
+    }
+
+    public void setFooter(boolean selected) {
+        TicketFacade.setFooter(selected);
 
     }
 }
