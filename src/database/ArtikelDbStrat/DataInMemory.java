@@ -17,6 +17,11 @@ public class DataInMemory {
         artikels = artikelDbContext.load();
     }
 
+    public void loadData(){
+        artikels = artikelDbContext.load();
+    }
+
+
     public void saveData(){
         artikelDbContext.save(artikels);
     }
