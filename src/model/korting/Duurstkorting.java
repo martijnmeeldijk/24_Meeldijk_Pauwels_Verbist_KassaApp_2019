@@ -26,6 +26,7 @@ public class Duurstkorting implements Korting{
 
     @Override
     public void setKortingspercentage(int korting) {
+        if(korting>100 || korting<0) throw new IllegalArgumentException();
         this.kortingspercentage=korting;
     }
 

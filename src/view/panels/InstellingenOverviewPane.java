@@ -232,13 +232,17 @@ public class InstellingenOverviewPane extends GridPane {
 
         //setKorting
         kortingknop.setOnAction(actief -> {
-            Duurstkorting korting = (Duurstkorting) KortingFactory.getInstance().createKorting(Kortingsmogelijkheden.Duurst);
-            korting.setKortingspercentage(Integer.parseInt(kortinghoeveelheid.getText()));
-            instellingenOverviewController.addKorting(korting);
+            try {
+                Duurstkorting korting = (Duurstkorting) KortingFactory.getInstance().createKorting(Kortingsmogelijkheden.Duurst);
+                korting.setKortingspercentage(Integer.parseInt(kortinghoeveelheid.getText()));
+                instellingenOverviewController.addKorting(korting);
 
-            algemeneWeiziging();
-            vb.getChildren().remove(kortingknop);
-            nieuwekortingText(korting.toString());
+                algemeneWeiziging();
+                vb.getChildren().remove(kortingknop);
+                nieuwekortingText(korting.toString());
+            } catch (Exception e) {
+                displayErrorMessage("korting niet geldig");
+            }
         });
     }
     private void Drempel(){
@@ -262,14 +266,18 @@ public class InstellingenOverviewPane extends GridPane {
         //setKorting
         kortingknop.setOnAction(actief ->
         {
-            Drempelkorting korting = (Drempelkorting) KortingFactory.getInstance().createKorting(Kortingsmogelijkheden.Drempel);
-            korting.setKortingspercentage(Integer.parseInt(kortinghoeveelheid.getText()));
-            korting.setDrempel(Double.parseDouble(drempelInputhoeveelheid.getText()));
-            instellingenOverviewController.addKorting(korting);
+            try {
+                Drempelkorting korting = (Drempelkorting) KortingFactory.getInstance().createKorting(Kortingsmogelijkheden.Drempel);
+                korting.setKortingspercentage(Integer.parseInt(kortinghoeveelheid.getText()));
+                korting.setDrempel(Double.parseDouble(drempelInputhoeveelheid.getText()));
+                instellingenOverviewController.addKorting(korting);
 
-            algemeneWeiziging();
-            vb.getChildren().removeAll(drempelHb,kortingknop);
-            nieuwekortingText(korting.toString());
+                algemeneWeiziging();
+                vb.getChildren().removeAll(drempelHb, kortingknop);
+                nieuwekortingText(korting.toString());
+            }catch (Exception e){
+                displayErrorMessage("korting niet geldig");
+            }
         });
     }
     private void Groep(){
@@ -306,14 +314,18 @@ public class InstellingenOverviewPane extends GridPane {
         //setKorting
         kortingknop.setOnAction(actief ->
         {
-            Groepkorting korting = (Groepkorting)  KortingFactory.getInstance().createKorting(Kortingsmogelijkheden.Groep);
-            korting.setKortingspercentage(Integer.parseInt(kortinghoeveelheid.getText()));
-            korting.setGroep(Artikelgroep.valueOf(groepstype.getValue()));
-            instellingenOverviewController.addKorting(korting);
+            try {
+                Groepkorting korting = (Groepkorting) KortingFactory.getInstance().createKorting(Kortingsmogelijkheden.Groep);
+                korting.setKortingspercentage(Integer.parseInt(kortinghoeveelheid.getText()));
+                korting.setGroep(Artikelgroep.valueOf(groepstype.getValue()));
+                instellingenOverviewController.addKorting(korting);
 
-            algemeneWeiziging();
-            vb.getChildren().removeAll(groepHb,kortingknop);
-            nieuwekortingText(korting.toString());
+                algemeneWeiziging();
+                vb.getChildren().removeAll(groepHb, kortingknop);
+                nieuwekortingText(korting.toString());
+            }catch (Exception e){
+                displayErrorMessage("korting niet geldig");
+            }
         });
     }
     private void kortingHoeveelheid(String standaart){
@@ -333,5 +345,13 @@ public class InstellingenOverviewPane extends GridPane {
         vb.getChildren().remove(kortingHb);
         kortingstype.setValue("");
         kortingstype.setDisable(false);
+    }
+
+    //error tonen
+    private void displayErrorMessage (String errorMessage){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText("Information Alert");
+        alert.setContentText(errorMessage);
+        alert.show();
     }
 }

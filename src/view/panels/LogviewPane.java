@@ -15,9 +15,6 @@ public class LogviewPane extends GridPane {
     private TableView<LogObject> table;
     private Label logs;
 
-
-
-
     public LogviewPane(LogViewController logViewController) {
         logs =new Label("");
         VBox vb= new VBox();
