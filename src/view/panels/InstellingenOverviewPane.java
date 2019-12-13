@@ -174,7 +174,7 @@ public class InstellingenOverviewPane extends GridPane {
         vb.getChildren().add(nieuweKorting);
 
         //creeer titel
-        Label korting = new Label("Nieuwe kortingen toevoegen:");
+        Label korting = new Label("Nieuwe korting toevoegen:");
 
         //creeer Strings arraylist van kortingsmogelijkheden
         ArrayList<String> list = new ArrayList<>();
