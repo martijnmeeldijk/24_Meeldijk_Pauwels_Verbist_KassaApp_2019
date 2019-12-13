@@ -19,48 +19,18 @@ import java.util.ArrayList;
 public class InstellingenOverviewPane extends GridPane {
     private InstellingenOverviewController instellingenOverviewController;
 
+    private VBox vb;
+    private Button laadknop;
+    private ComboBox<String> laadtype;
+
+    private ComboBox<String> kortingstype;
+
     public InstellingenOverviewPane(InstellingenOverviewController instellingenOverviewController){
         // dit stelt voor de meegegeven controller deze view in
         this.instellingenOverviewController=instellingenOverviewController;
         this.instellingenOverviewController.setInstellingenOverviewPane(this);
 
-        //layout
-        this.setPadding(new Insets(10, 10, 10, 10));
-
-        //creeer box
-        VBox vb= new VBox();
-        vb.setSpacing(10);
-        this.getChildren().add(vb);
-
-        //creeer Hbox
-        HBox laadHb= new HBox();
-        laadHb.setSpacing(10);
-
-        //creeer titel
-        Label tabelDb = new Label("Hoe tabel inladen:");
-
-        //creeer Strings arraylist van laadmogelijkheden
-        ArrayList<String> laad = new ArrayList<>();
-        for(LoadSaveStrategies s: LoadSaveStrategies.values()){
-            laad.add(s.toString());
-        }
-
-        //in combobox
-        ObservableList<String> laadOptions =
-                FXCollections.observableArrayList(
-                        laad
-                );
-        ComboBox<String> laadtype = new ComboBox<>(laadOptions);
-        laadtype.setValue(LoadSaveStrategies.EXCEL.toString());
-
-        //creeer knop
-        Button laadknop = new Button("Zet laadoptie");
-
-        //plaats combobox en knop in Hbox
-        laadHb.getChildren().addAll(laadtype,laadknop);
-
-        //voeg titel en Hbox toe
-        vb.getChildren().addAll(tabelDb,laadHb);
+        elementen();
 
         //setLaadoptie
         laadknop.setOnAction(actief ->  instellingenOverviewController.setLaadoptie(LoadSaveStrategies.valueOf(laadtype.getValue()).getClassname()));
@@ -110,19 +80,60 @@ public class InstellingenOverviewPane extends GridPane {
 
         ticket.getChildren().addAll(btwFooter, datumHeader, kortingFooter);
 
+        
+        //pas aan aan gekozen optie
+        Kortinglayout layout = new Kortinglayout(instellingenOverviewController,vb,kortingstype);
 
-        //huidige opties
-        StringBuilder huidige = new StringBuilder("Huidige korting");
-        if(instellingenOverviewController.getKortingen().size()>1) huidige.append("en:\n");
-        else if(instellingenOverviewController.getKortingen().size()>0) huidige.append(":\n");
-        else huidige.append(": geen");
+        kortingstype.setOnAction(actie -> {
+            layout.kies(kortingstype.getValue());
+            kortingstype.setDisable(true);
+        });
+    }
 
-        for(Korting korting: instellingenOverviewController.getKortingen()){
-            huidige.append(korting.toString());
-            huidige.append("\n");
+    private void elementen(){
+        //layout
+        this.setPadding(new Insets(10, 10, 10, 10));
+
+        //creeer hoofdbox
+        vb= new VBox();
+        vb.setSpacing(10);
+        this.getChildren().add(vb);
+
+        // --- Laadoptie ---
+        //creeer Hbox
+        HBox laadHb= new HBox();
+        laadHb.setSpacing(10);
+
+        //creeer titel
+        Label tabelDb = new Label("Hoe tabel inladen:");
+
+        //creeer Strings arraylist van laadmogelijkheden
+        ArrayList<String> laad = new ArrayList<>();
+        for(LoadSaveStrategies s: LoadSaveStrategies.values()){
+            laad.add(s.toString());
         }
 
-        Label huidigeKorting = new Label(String.valueOf(huidige));
+        //in combobox
+        ObservableList<String> laadOptions =
+                FXCollections.observableArrayList(
+                        laad
+                );
+        laadtype = new ComboBox<>(laadOptions);
+        laadtype.setValue(LoadSaveStrategies.EXCEL.toString());
+
+        //creeer knop
+        laadknop = new Button("Zet laadoptie");
+
+        //plaats combobox en knop in Hbox
+        laadHb.getChildren().addAll(laadtype,laadknop);
+
+        //voeg titel en Hbox toe
+        vb.getChildren().addAll(tabelDb,laadHb);
+
+
+        // --- kortingen ---
+        //huidige kortingen
+        Label huidigeKorting = new Label(huidigekortingText());
         vb.getChildren().add(huidigeKorting);
 
         //creeer titel
@@ -137,22 +148,25 @@ public class InstellingenOverviewPane extends GridPane {
         //in combobox
         ObservableList<String> kortingOptions =
                 FXCollections.observableArrayList(
-                     list
+                        list
                 );
-        ComboBox<String> kortingstype = new ComboBox<>(kortingOptions);
+        kortingstype = new ComboBox<>(kortingOptions);
 
+        //voeg titel en combobox toe
         vb.getChildren().addAll(korting,kortingstype);
+    }
 
-        //pas aan aan gekozen optie
-        Kortinglayout layout = new Kortinglayout(instellingenOverviewController,vb,kortingstype);
+    private String huidigekortingText(){
+        //huidige opties
+        StringBuilder huidige = new StringBuilder("Huidige korting");
+        if(instellingenOverviewController.getKortingen().size()>1) huidige.append("en:\n");
+        else if(instellingenOverviewController.getKortingen().size()>0) huidige.append(":\n");
+        else huidige.append(": geen");
 
-        kortingstype.setOnAction(actie -> {
-            layout.kies(kortingstype.getValue());
-            kortingstype.setDisable(true);
-        });
-
-
-
-
+        for(Korting korting: instellingenOverviewController.getKortingen()){
+            huidige.append(korting.toString());
+            huidige.append("\n");
+        }
+        return String.valueOf(huidige);
     }
 }
