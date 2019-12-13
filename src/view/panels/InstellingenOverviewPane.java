@@ -66,39 +66,49 @@ public class InstellingenOverviewPane extends GridPane {
         laadknop.setOnAction(actief ->  instellingenOverviewController.setLaadoptie(LoadSaveStrategies.valueOf(laadtype.getValue()).getClassname()));
 
         // --- KASTICKET ---
+        VBox ticket = new VBox();
+        ticket.setPadding(new Insets(0, 0, 0, 350));
+        ticket.setSpacing(10);
+        this.getChildren().add(ticket);
 
-        //header
         Label kasticket = new Label("Eigenschappen Kasticket");
+
+        // header
         CheckBox customHeader = new CheckBox("Custom header");
-        customHeader.setOnAction(doe -> {
-            instellingenOverviewController.setHeader(customHeader.isSelected());
-        });
-
-        TextField customHeaderText = new TextField(TicketFacade.getCustomHeader());
+        customHeader.setSelected(instellingenOverviewController.getCustomHeader());
+        customHeader.setOnAction(doe -> instellingenOverviewController.setHeader(customHeader.isSelected()));
+        TextField customHeaderText = new TextField(instellingenOverviewController.getCustomHeaderText());
         Button customHeaderTextButton = new Button("Stel in");
-        customHeaderTextButton.setOnAction(lambda ->{
-            instellingenOverviewController.setCustomHeader(customHeaderText.getText());
-        });
-        customHeaderText.setDisable(!customHeader.isSelected());
+        customHeaderTextButton.setOnAction(lambda -> instellingenOverviewController.setCustomHeader(customHeaderText.getText()));
 
-        vb.getChildren().addAll(kasticket, customHeader, customHeaderText, customHeaderTextButton);
+        ticket.getChildren().addAll(kasticket, customHeader, customHeaderText, customHeaderTextButton);
 
         // footer
         CheckBox customFooter = new CheckBox("Custom Footer");
-        customHeader.setOnAction(doe -> {
-            instellingenOverviewController.setFooter(customFooter.isSelected());
-        });
-        TextField customFooterText = new TextField(TicketFacade.getCustomHeader());
+        customFooter.setSelected(instellingenOverviewController.getCustomFooter());
+        customFooter.setOnAction(doe -> instellingenOverviewController.setFooter(customFooter.isSelected()));
+        TextField customFooterText = new TextField(instellingenOverviewController.getCustomFooterText());
         Button customFooterTextButton = new Button("Stel in");
-        customHeaderTextButton.setOnAction(lambda ->{
-            instellingenOverviewController.setCustomFooter(customHeaderText.getText());
-        });
-        customHeaderText.setDisable(!customHeader.isSelected());
+        customFooterTextButton.setOnAction(lambda -> instellingenOverviewController.setCustomFooter(customFooterText.getText()));
 
-        vb.getChildren().addAll(customFooter,customFooterText, customFooterTextButton);
+        ticket.getChildren().addAll(customFooter,customFooterText, customFooterTextButton);
 
+        //btw footer
+        CheckBox btwFooter = new CheckBox("Btw Footer");
+        btwFooter.setSelected(instellingenOverviewController.getBtwFooter());
+        btwFooter.setOnAction(doe -> instellingenOverviewController.setBtwFooter(btwFooter.isSelected()));
 
+        //datum header
+        CheckBox datumHeader = new CheckBox("Datum header");
+        datumHeader.setSelected(instellingenOverviewController.getDatumHeader());
+        datumHeader.setOnAction(doe -> instellingenOverviewController.setDatumHeader(datumHeader.isSelected()));
 
+        //korting footer
+        CheckBox kortingFooter = new CheckBox("Korting Footer");
+        kortingFooter.setSelected(instellingenOverviewController.getKortingFooter());
+        kortingFooter.setOnAction(doe -> instellingenOverviewController.setKortingFooter(kortingFooter.isSelected()));
+
+        ticket.getChildren().addAll(btwFooter, datumHeader, kortingFooter);
 
 
         //huidige opties

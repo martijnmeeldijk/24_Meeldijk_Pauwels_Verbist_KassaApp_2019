@@ -1,5 +1,6 @@
 package model.kasticket;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import model.Winkel;
 import model.korting.KortingFactory;
 
@@ -86,12 +87,39 @@ public class TicketFacade {
         messageProperties.setProperty("FooterMessage", s);
         saveMessageProperties();
     }
+
+    /**
+     *
+     * @return The footer message
+     */
     public static String getCustomFooter(){
         return messageProperties.getProperty("FooterMessage");
     }
+
+    /**
+     *
+     * @return The header message
+     */
     public static String getCustomHeader(){
-        return messageProperties.getProperty("FooterMessage");
+        return messageProperties.getProperty("HeaderMessage");
     }
+
+    public static boolean getHeader(){
+        return Boolean.parseBoolean(ticketProperties.getProperty("BoodschapHeader"));
+    }
+    public static boolean getFooter(){
+        return Boolean.parseBoolean(ticketProperties.getProperty("BoodschapFooter"));
+    }
+    public static boolean getBtwFooter(){
+        return Boolean.parseBoolean(ticketProperties.getProperty("BtwFooter"));
+    }
+    public static boolean getDatumHeader(){
+        return Boolean.parseBoolean(ticketProperties.getProperty("DatumHeader"));
+    }
+    public static boolean getKortingFooter(){
+        return Boolean.parseBoolean(ticketProperties.getProperty("KortingFooter"));
+    }
+
 
     
 
@@ -125,7 +153,7 @@ public class TicketFacade {
     }
     private static void saveMessageProperties(){
         try (OutputStream output = new FileOutputStream(messageFilename)) {
-            ticketProperties.store(output, null);
+            messageProperties.store(output, null);
         } catch (IOException io) {
             io.printStackTrace();
         }

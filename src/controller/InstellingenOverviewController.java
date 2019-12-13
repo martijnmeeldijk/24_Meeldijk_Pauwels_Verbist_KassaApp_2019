@@ -58,4 +58,44 @@ public class InstellingenOverviewController implements Observer{
     public void setCustomFooter(String text){
         TicketFacade.setCustomFooter(text);
     }
+
+    public void setBtwFooter(boolean selected) {
+        TicketFacade.setBtwFooter(selected);
+    }
+
+    public void setDatumHeader(boolean selected) {
+        TicketFacade.setDatumHeader(selected);
+    }
+
+    public void setKortingFooter(boolean selected) {
+        TicketFacade.setKortingFooter(selected);
+    }
+
+    //TICKET GETTERS
+    public boolean getCustomHeader() {
+        return TicketFacade.getHeader();
+    }
+    public boolean getCustomFooter(){
+        return TicketFacade.getFooter();
+    }
+
+    public boolean getBtwFooter() {
+        return TicketFacade.getBtwFooter();
+    }
+
+    public boolean getDatumHeader() {
+        return TicketFacade.getDatumHeader();
+    }
+
+    public boolean getKortingFooter() {
+        return TicketFacade.getKortingFooter();
+    }
+
+    public String getCustomHeaderText() {
+        return TicketFacade.getCustomHeader();
+    }
+    public String getCustomFooterText(){
+        return TicketFacade.getCustomFooter();
+    }
+    
 }
