@@ -71,7 +71,7 @@ public class KassaOverviewPane extends GridPane {
         //layout
         this.setPadding(new Insets(10, 10, 10, 10));
 
-        //creeer hoofdbox
+        //creeer box
         VBox vb = new VBox();
         vb.setSpacing(10);
         this.getChildren().add(vb);
