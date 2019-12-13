@@ -10,20 +10,33 @@ import javafx.scene.control.cell.CheckBoxListCell;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import model.artikel.Artikelgroep;
 import model.kasticket.TicketFacade;
-import model.korting.Korting;
-import model.korting.Kortingsmogelijkheden;
+import model.korting.*;
 
 import java.util.ArrayList;
 
 public class InstellingenOverviewPane extends GridPane {
     private InstellingenOverviewController instellingenOverviewController;
 
+    private HBox hb;
     private VBox vb;
     private Button laadknop;
     private ComboBox<String> laadtype;
 
+    private CheckBox customHeader;
+    private TextField customHeaderText;
+    private Button customHeaderTextButton;
+    private CheckBox customFooter;
+    private TextField customFooterText;
+    private Button customFooterTextButton;
+    private CheckBox btwFooter;
+    private CheckBox datumHeader;
+    private CheckBox kortingFooter;
+
     private ComboBox<String> kortingstype;
+    private TextField kortinghoeveelheid;
+    private HBox kortingHb;
 
     public InstellingenOverviewPane(InstellingenOverviewController instellingenOverviewController){
         // dit stelt voor de meegegeven controller deze view in
@@ -32,60 +45,28 @@ public class InstellingenOverviewPane extends GridPane {
 
         elementen();
 
-        //setLaadoptie
+        // --- laadoptie ---
+        //kies laadoptie
         laadknop.setOnAction(actief ->  instellingenOverviewController.setLaadoptie(LoadSaveStrategies.valueOf(laadtype.getValue()).getClassname()));
 
-        // --- KASTICKET ---
-        VBox ticket = new VBox();
-        ticket.setPadding(new Insets(0, 0, 0, 350));
-        ticket.setSpacing(10);
-        this.getChildren().add(ticket);
-
-        Label kasticket = new Label("Eigenschappen Kasticket");
-
-        // header
-        CheckBox customHeader = new CheckBox("Custom header");
-        customHeader.setSelected(instellingenOverviewController.getCustomHeader());
+        // --- kasticket ---
         customHeader.setOnAction(doe -> instellingenOverviewController.setHeader(customHeader.isSelected()));
-        TextField customHeaderText = new TextField(instellingenOverviewController.getCustomHeaderText());
-        Button customHeaderTextButton = new Button("Stel in");
         customHeaderTextButton.setOnAction(lambda -> instellingenOverviewController.setCustomHeader(customHeaderText.getText()));
 
-        ticket.getChildren().addAll(kasticket, customHeader, customHeaderText, customHeaderTextButton);
-
-        // footer
-        CheckBox customFooter = new CheckBox("Custom Footer");
-        customFooter.setSelected(instellingenOverviewController.getCustomFooter());
         customFooter.setOnAction(doe -> instellingenOverviewController.setFooter(customFooter.isSelected()));
-        TextField customFooterText = new TextField(instellingenOverviewController.getCustomFooterText());
-        Button customFooterTextButton = new Button("Stel in");
         customFooterTextButton.setOnAction(lambda -> instellingenOverviewController.setCustomFooter(customFooterText.getText()));
 
-        ticket.getChildren().addAll(customFooter,customFooterText, customFooterTextButton);
-
-        //btw footer
-        CheckBox btwFooter = new CheckBox("Btw Footer");
-        btwFooter.setSelected(instellingenOverviewController.getBtwFooter());
         btwFooter.setOnAction(doe -> instellingenOverviewController.setBtwFooter(btwFooter.isSelected()));
 
-        //datum header
-        CheckBox datumHeader = new CheckBox("Datum header");
-        datumHeader.setSelected(instellingenOverviewController.getDatumHeader());
         datumHeader.setOnAction(doe -> instellingenOverviewController.setDatumHeader(datumHeader.isSelected()));
 
-        //korting footer
-        CheckBox kortingFooter = new CheckBox("Korting Footer");
-        kortingFooter.setSelected(instellingenOverviewController.getKortingFooter());
         kortingFooter.setOnAction(doe -> instellingenOverviewController.setKortingFooter(kortingFooter.isSelected()));
 
-        ticket.getChildren().addAll(btwFooter, datumHeader, kortingFooter);
 
-        
+        // --- korting ---
         //pas aan aan gekozen optie
-        Kortinglayout layout = new Kortinglayout(instellingenOverviewController,vb,kortingstype);
-
         kortingstype.setOnAction(actie -> {
-            layout.kies(kortingstype.getValue());
+            kiesKorting(kortingstype.getValue());
             kortingstype.setDisable(true);
         });
     }
@@ -95,10 +76,19 @@ public class InstellingenOverviewPane extends GridPane {
         this.setPadding(new Insets(10, 10, 10, 10));
 
         //creeer hoofdbox
+        hb= new HBox();
+        hb.setSpacing(20);
+        this.getChildren().add(hb);
+
         vb= new VBox();
         vb.setSpacing(10);
-        this.getChildren().add(vb);
+        hb.getChildren().add(vb);
 
+        laadelementen();
+        kasticketelementen();
+        kortingelementen();
+    }
+    private void laadelementen(){
         // --- Laadoptie ---
         //creeer Hbox
         HBox laadHb= new HBox();
@@ -129,15 +119,57 @@ public class InstellingenOverviewPane extends GridPane {
 
         //voeg titel en Hbox toe
         vb.getChildren().addAll(tabelDb,laadHb);
+    }
+    private void kasticketelementen(){
+        // --- kasticket ---
+        VBox ticket = new VBox();
+        ticket.setSpacing(10);
+        this.getChildren().add(ticket);
 
+        Label kasticket = new Label("Eigenschappen Kasticket");
+        ticket.getChildren().add(kasticket);
 
+        // header
+        customHeader = new CheckBox("Custom header");
+        customHeader.setSelected(instellingenOverviewController.getCustomHeader());
+
+        customHeaderText = new TextField(instellingenOverviewController.getCustomHeaderText());
+        customHeaderTextButton = new Button("Stel in");
+
+        ticket.getChildren().addAll(customHeader, customHeaderText, customHeaderTextButton);
+
+        // footer
+        customFooter = new CheckBox("Custom Footer");
+        customFooter.setSelected(instellingenOverviewController.getCustomFooter());
+
+        customFooterText = new TextField(instellingenOverviewController.getCustomFooterText());
+        customFooterTextButton = new Button("Stel in");
+
+        ticket.getChildren().addAll(customFooter,customFooterText, customFooterTextButton);
+
+        //btw footer
+        btwFooter = new CheckBox("Btw Footer");
+        btwFooter.setSelected(instellingenOverviewController.getBtwFooter());
+
+        //datum header
+        datumHeader = new CheckBox("Datum header");
+        datumHeader.setSelected(instellingenOverviewController.getDatumHeader());
+
+        //korting footer
+        kortingFooter = new CheckBox("Korting Footer");
+        kortingFooter.setSelected(instellingenOverviewController.getKortingFooter());
+
+        ticket.getChildren().addAll(btwFooter, datumHeader, kortingFooter);
+        hb.getChildren().add(ticket);
+    }
+    private void kortingelementen(){
         // --- kortingen ---
         //huidige kortingen
         Label huidigeKorting = new Label(huidigekortingText());
         vb.getChildren().add(huidigeKorting);
 
         //creeer titel
-        Label korting = new Label("Korting:");
+        Label korting = new Label("Nieuwe kortingen toevoegen:");
 
         //creeer Strings arraylist van kortingsmogelijkheden
         ArrayList<String> list = new ArrayList<>();
@@ -168,5 +200,124 @@ public class InstellingenOverviewPane extends GridPane {
             huidige.append("\n");
         }
         return String.valueOf(huidige);
+    }
+
+    private void kiesKorting(String string){
+        switch (string){
+            case "Groep": Groep();
+                break;
+            case "Drempel": Drempel();
+                break;
+            case "Duurst": Duurst();
+                break;
+        }
+    }
+    private void Duurst(){
+        kortingHoeveelheid("25");
+
+        //creeer knop
+        Button kortingknop = new Button("Zet korting");
+        vb.getChildren().add(kortingknop);
+
+        //setKorting
+        kortingknop.setOnAction(actief -> {
+            Duurstkorting korting = (Duurstkorting) KortingFactory.getInstance().createKorting(Kortingsmogelijkheden.Duurst);
+            korting.setKortingspercentage(Integer.parseInt(kortinghoeveelheid.getText()));
+            instellingenOverviewController.addKorting(korting);
+
+            algemeneWeiziging();
+            vb.getChildren().remove(kortingknop);
+        });
+    }
+    private void Drempel(){
+        kortingHoeveelheid("5");
+        //creeer Hbox
+        HBox drempelHb= new HBox();
+        drempelHb.setSpacing(10);
+
+        //creeer drempelInput
+        Label drempelInputText = new Label("drempelwaarde");
+        TextField drempelInputhoeveelheid = new TextField("100");
+
+        //plaats drempelInput in Hbox
+        drempelHb.getChildren().addAll(drempelInputText,drempelInputhoeveelheid);
+
+        //creeer knop
+        Button kortingknop = new Button("Zet korting");
+
+        vb.getChildren().addAll(drempelHb,kortingknop);
+
+        //setKorting
+        kortingknop.setOnAction(actief ->
+        {
+            Drempelkorting korting = (Drempelkorting) KortingFactory.getInstance().createKorting(Kortingsmogelijkheden.Drempel);
+            korting.setKortingspercentage(Integer.parseInt(kortinghoeveelheid.getText()));
+            korting.setDrempel(Double.parseDouble(drempelInputhoeveelheid.getText()));
+            instellingenOverviewController.addKorting(korting);
+
+            algemeneWeiziging();
+            vb.getChildren().removeAll(drempelHb,kortingknop);
+        });
+    }
+    private void Groep(){
+        kortingHoeveelheid("5");
+        //creeer Hbox
+        HBox groepHb= new HBox();
+        groepHb.setSpacing(10);
+
+        //creeer groepInput
+        Label groepInputText = new Label("groep:");
+
+        //creeer Strings arraylist van kortingsmogelijkheden
+        ArrayList<String> list = new ArrayList<>();
+        for(Artikelgroep a: Artikelgroep.values()){
+            list.add(a.toString());
+        }
+
+        //in combobox
+        ObservableList<String> groepOptions =
+                FXCollections.observableArrayList(
+                        list
+                );
+        ComboBox<String> groepstype = new ComboBox<>(groepOptions);
+        groepstype.setValue("gr1");
+
+        //plaats groepInput in Hbox
+        groepHb.getChildren().addAll(groepInputText,groepstype);
+
+        //creeer knop
+        Button kortingknop = new Button("Zet korting");
+
+        vb.getChildren().addAll(groepHb,kortingknop);
+
+        //setKorting
+        kortingknop.setOnAction(actief ->
+        {
+            Groepkorting korting = (Groepkorting)  KortingFactory.getInstance().createKorting(Kortingsmogelijkheden.Groep);
+            korting.setKortingspercentage(Integer.parseInt(kortinghoeveelheid.getText()));
+            korting.setGroep(Artikelgroep.valueOf(groepstype.getValue()));
+            instellingenOverviewController.addKorting(korting);
+
+            algemeneWeiziging();
+            vb.getChildren().removeAll(groepHb,kortingknop);
+        });
+    }
+    private void kortingHoeveelheid(String standaart){
+        //creeer Hbox
+        kortingHb= new HBox();
+        kortingHb.setSpacing(10);
+
+        //creeer kortingInput
+        Label kortingInputText = new Label("korting:");
+        kortinghoeveelheid = new TextField(standaart);
+
+        //plaats kortingsInput in Hbox
+        kortingHb.getChildren().addAll(kortingInputText,kortinghoeveelheid);
+        vb.getChildren().add(kortingHb);
+    }
+    private void algemeneWeiziging(){
+        vb.getChildren().remove(kortingHb);
+        kortingstype.setValue("");
+        kortingstype.setDisable(false);
     }
 }
