@@ -27,8 +27,6 @@ public class ExcelAdapter implements LoadSaveStrategy {
                 Integer code = Integer.parseInt(artikel.get(0));
                 Artikel artikel1 = Artikel.MaakArtikel(artikel.get(0), artikel.get(1), artikel.get(2), artikel.get(3), artikel.get(4));
                 artikels.put(code, artikel1);
-
-
             }
 
         } catch (BiffException | IOException e) {

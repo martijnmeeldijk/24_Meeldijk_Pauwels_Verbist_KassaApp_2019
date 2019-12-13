@@ -37,6 +37,7 @@ public class InstellingenOverviewPane extends GridPane {
     private ComboBox<String> kortingstype;
     private TextField kortinghoeveelheid;
     private HBox kortingHb;
+    private Label nieuweKorting;
 
     public InstellingenOverviewPane(InstellingenOverviewController instellingenOverviewController){
         // dit stelt voor de meegegeven controller deze view in
@@ -168,6 +169,10 @@ public class InstellingenOverviewPane extends GridPane {
         Label huidigeKorting = new Label(huidigekortingText());
         vb.getChildren().add(huidigeKorting);
 
+        //nieuwe kortingen
+        nieuweKorting = new Label("");
+        vb.getChildren().add(nieuweKorting);
+
         //creeer titel
         Label korting = new Label("Nieuwe kortingen toevoegen:");
 
@@ -201,6 +206,12 @@ public class InstellingenOverviewPane extends GridPane {
         }
         return String.valueOf(huidige);
     }
+    private void nieuwekortingText(String korting){
+        String current = nieuweKorting.getText();
+        if(current.equals("")) nieuweKorting.setText("Nieuwe korting:\n"+korting);
+        else if(current.contains("Nieuwe korting:")) nieuweKorting.setText(current.replace("Nieuwe korting:","Nieuwe kortingen:")+"\n"+korting);
+        else nieuweKorting.setText(current+"\n"+korting);
+    }
 
     private void kiesKorting(String string){
         switch (string){
@@ -227,6 +238,7 @@ public class InstellingenOverviewPane extends GridPane {
 
             algemeneWeiziging();
             vb.getChildren().remove(kortingknop);
+            nieuwekortingText(korting.toString());
         });
     }
     private void Drempel(){
@@ -257,6 +269,7 @@ public class InstellingenOverviewPane extends GridPane {
 
             algemeneWeiziging();
             vb.getChildren().removeAll(drempelHb,kortingknop);
+            nieuwekortingText(korting.toString());
         });
     }
     private void Groep(){
@@ -300,6 +313,7 @@ public class InstellingenOverviewPane extends GridPane {
 
             algemeneWeiziging();
             vb.getChildren().removeAll(groepHb,kortingknop);
+            nieuwekortingText(korting.toString());
         });
     }
     private void kortingHoeveelheid(String standaart){
