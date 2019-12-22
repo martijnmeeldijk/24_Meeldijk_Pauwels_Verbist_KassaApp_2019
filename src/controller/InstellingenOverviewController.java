@@ -28,6 +28,8 @@ public class InstellingenOverviewController implements Observer{
         winkel.addKorting(korting);
     }
 
+    public void geenKorting(){winkel.geenKorting();}
+
     public ArrayList<Korting> getKortingen(){
         return winkel.getKortingen();
     }

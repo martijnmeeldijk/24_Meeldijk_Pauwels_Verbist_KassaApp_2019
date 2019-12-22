@@ -166,6 +166,15 @@ public class Winkel implements Subject {
         }
     }
 
+    public void geenKorting(){
+        try (OutputStream output = new FileOutputStream("src/model/korting/korting.properties")) {
+            properties = new Properties();
+            properties.store(output, null);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void addKorting(Korting korting) {
         try (OutputStream output = new FileOutputStream("src/model/korting/korting.properties")) {
             int aantal=0;

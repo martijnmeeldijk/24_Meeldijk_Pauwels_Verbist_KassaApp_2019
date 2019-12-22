@@ -174,7 +174,7 @@ public class InstellingenOverviewPane extends GridPane {
         vb.getChildren().add(nieuweKorting);
 
         //creeer titel
-        Label korting = new Label("Nieuwe korting toevoegen:\nKortingen worden opgeteld");
+        Label korting = new Label("Nieuwe korting toevoegen:\n(kortingen worden samengeteld)");
 
 
         //creeer Strings arraylist van kortingsmogelijkheden
@@ -183,7 +183,7 @@ public class InstellingenOverviewPane extends GridPane {
             list.add(k.toString());
         }
 
-        list.add("geen kortingen");
+        list.add("Geen korting");
 
         //in combobox
         ObservableList<String> kortingOptions =
@@ -224,6 +224,7 @@ public class InstellingenOverviewPane extends GridPane {
                 break;
             case "Duurst": Duurst();
                 break;
+            case "Geen korting": Geen();
         }
     }
     private void Duurst(){
@@ -329,6 +330,21 @@ public class InstellingenOverviewPane extends GridPane {
             }catch (Exception e){
                 displayErrorMessage("korting niet geldig");
             }
+        });
+    }
+    private void Geen(){
+        //creeer knop
+        Button kortingknop = new Button("Geen korting");
+        vb.getChildren().add(kortingknop);
+
+        //setKorting
+        kortingknop.setOnAction(actief -> {
+            instellingenOverviewController.geenKorting();
+
+            vb.getChildren().remove(kortingknop);
+            nieuwekortingText("Geen korting");
+
+            kortingstype.setDisable(true);
         });
     }
     private void kortingHoeveelheid(String standaart){
