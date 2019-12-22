@@ -25,7 +25,7 @@ public class KassaOverviewPane extends GridPane {
     private Label prijswaarde;
     private Label kortingwaarde;
     private Label betaalwaarde;
-    private Label dubbelklik= new Label("Dubbelklik om te verwijderen (hover over tabel voor tooltip)");
+    private Label dubbelklik= new Label("Dubbelklik om te verwijderen (hover muis 2 seconden over tabel voor tooltip)");
 
     //on hold
     private boolean onHold = false;
