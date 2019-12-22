@@ -34,7 +34,8 @@ public class ArtikelDbContext {
 
     private Properties loadProperties(){
         Properties prop = new Properties();
-        try (InputStream input = new FileInputStream(pad)) {
+        try (InputStream input =  //this.getClass().getClassLoader().getResourceAsStream("database.properties")){
+                     new FileInputStream("src/database/database.properties")) {
             prop.load(input);
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -44,7 +45,6 @@ public class ArtikelDbContext {
 
     public void saveProperties(String loadSaveStrategy){
         try (OutputStream output = new FileOutputStream(pad)) {
-
             Properties prop = new Properties();
 
             // set the properties value

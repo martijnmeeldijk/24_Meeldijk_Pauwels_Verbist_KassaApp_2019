@@ -174,13 +174,16 @@ public class InstellingenOverviewPane extends GridPane {
         vb.getChildren().add(nieuweKorting);
 
         //creeer titel
-        Label korting = new Label("Nieuwe korting toevoegen:");
+        Label korting = new Label("Nieuwe korting toevoegen:\nKortingen worden opgeteld");
+
 
         //creeer Strings arraylist van kortingsmogelijkheden
         ArrayList<String> list = new ArrayList<>();
         for(Kortingsmogelijkheden k: Kortingsmogelijkheden.values()){
             list.add(k.toString());
         }
+
+        list.add("geen kortingen");
 
         //in combobox
         ObservableList<String> kortingOptions =

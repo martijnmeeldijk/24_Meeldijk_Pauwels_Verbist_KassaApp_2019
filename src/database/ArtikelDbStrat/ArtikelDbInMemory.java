@@ -37,30 +37,12 @@ public class ArtikelDbInMemory implements ArtikelDbStrategy {
 
     private Properties loadProperties(){
         Properties prop = new Properties();
-        try (InputStream input = new FileInputStream(filename)) {
+        try (InputStream input = //this.getClass().getClassLoader().getResourceAsStream(filename)){
+                     new FileInputStream(filename)) {
             prop.load(input);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
         return prop;
     }
-
-    /*private void saveProperties(Properties prop){
-        try (OutputStream output = new FileOutputStream(filename)) {
-
-            // save properties to project root folder
-            prop.store(output, null);
-
-        } catch (IOException io) {
-            io.printStackTrace();
-        }
-    }
-
-    public void setFilename(String filename) {
-        this.filename = filename;
-    }
-
-    public String getFilename() {
-        return filename;
-    }*/
 }

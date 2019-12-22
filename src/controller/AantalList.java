@@ -19,6 +19,5 @@ public class AantalList {
             }
         }
         return tijdelijk;
-
     }
 }
