@@ -34,7 +34,8 @@ public class TicketFactory {
 
     private Properties loadProperties(){
         Properties prop = new Properties();
-        try (InputStream input = new FileInputStream(filename)) {
+        try (InputStream input = this.getClass().getClassLoader().getResourceAsStream("props/ticket.properties")){
+                     //new FileInputStream(filename)) {
             prop.load(input);
         } catch (IOException ex) {
             ex.printStackTrace();

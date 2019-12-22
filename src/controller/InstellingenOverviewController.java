@@ -38,8 +38,6 @@ public class InstellingenOverviewController implements Observer{
         winkel.getActieveBestelling().getDataInMemory().getArtikelDbContext().saveProperties(laadoptie);
     }
 
-
-
     @Override
     public void update() {
 
@@ -51,7 +49,6 @@ public class InstellingenOverviewController implements Observer{
 
     public void setFooter(boolean selected) {
         TicketFacade.setFooter(selected);
-
     }
 
     public void setCustomHeader(String text) {

@@ -37,8 +37,8 @@ public class ArtikelDbInMemory implements ArtikelDbStrategy {
 
     private Properties loadProperties(){
         Properties prop = new Properties();
-        try (InputStream input = //this.getClass().getClassLoader().getResourceAsStream(filename)){
-                     new FileInputStream(filename)) {
+        try (InputStream input = this.getClass().getClassLoader().getResourceAsStream("props/database.properties")){
+                     //new FileInputStream(filename)) {
             prop.load(input);
         } catch (IOException ex) {
             ex.printStackTrace();

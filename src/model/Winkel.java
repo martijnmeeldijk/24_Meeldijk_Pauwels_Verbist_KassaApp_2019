@@ -132,8 +132,8 @@ public class Winkel implements Subject {
 
     private Properties loadProperties(){
         Properties prop = new Properties();
-        try (InputStream input = //this.getClass().getClassLoader().getResourceAsStream("src/model/korting/korting.properties")){
-                     new FileInputStream("src/model/korting/korting.properties")) {
+        try (InputStream input = this.getClass().getClassLoader().getResourceAsStream("props/korting.properties")){
+                     //new FileInputStream("src/model/korting/korting.properties")) {
             prop.load(input);
         } catch (IOException ex) {
             ex.printStackTrace();
