@@ -7,6 +7,5 @@ public abstract class KasTicketDecorator extends Ticket {
         super(winkel);
     }
 
-
     public abstract String print();
 }

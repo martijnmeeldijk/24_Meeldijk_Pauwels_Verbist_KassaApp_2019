@@ -43,7 +43,7 @@ public class DecoratorFactory {
 
     private Properties loadProperties(){
         Properties prop = new Properties();
-        try (InputStream input = this.getClass().getClassLoader().getResourceAsStream("props/ticket.properties")) {
+        try (InputStream input = this.getClass().getClassLoader().getResourceAsStream("model/kasticket/ticket.properties")) {
                 //new FileInputStream(filename)) {
             prop.load(input);
         } catch (IOException ex) {

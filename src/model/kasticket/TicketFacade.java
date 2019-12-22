@@ -122,8 +122,8 @@ public class TicketFacade {
 
     private static Properties loadTicketProperties(){
         Properties prop = new Properties();
-        try (InputStream input = //TicketFacade.class.getClassLoader().getResourceAsStream("props/ticket.properties")){
-                     new FileInputStream("src/model/kasticket/ticket.properties")) {
+        try(InputStream input = TicketFacade.class.getClassLoader().getResourceAsStream("model/kasticket/ticket.properties")){
+                    //new FileInputStream("src/model/kasticket/ticket.properties")) {
             prop.load(input);
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -140,8 +140,8 @@ public class TicketFacade {
 
     private static Properties loadMessageProperties() {
         Properties prop = new Properties();
-        try (InputStream input = //TicketFacade.class.getClassLoader().getResourceAsStream("props/message.properties")){
-                     new FileInputStream("src/model/kasticket/message.properties")) {
+        try (InputStream input = TicketFacade.class.getClassLoader().getResourceAsStream("model/kasticket/message.properties")){
+                     //new FileInputStream("model/kasticket/message.properties")) {
             prop.load(input);
         } catch (IOException ex) {
             ex.printStackTrace();
