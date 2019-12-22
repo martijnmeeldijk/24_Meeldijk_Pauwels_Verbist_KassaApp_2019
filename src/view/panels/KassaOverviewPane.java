@@ -25,7 +25,7 @@ public class KassaOverviewPane extends GridPane {
     private Label prijswaarde;
     private Label kortingwaarde;
     private Label betaalwaarde;
-    private Label dubbelklik= new Label("Dubbelklik om te verwijderen");
+    private Label dubbelklik= new Label("Dubbelklik om te verwijderen (hover over tabel voor tooltip)");
 
     //on hold
     private boolean onHold = false;
@@ -87,6 +87,10 @@ public class KassaOverviewPane extends GridPane {
         lblHeading.setFont(new Font("Arial", 20));
 
         tabel();
+        table.setTooltip(
+                new Tooltip("Dubbelklik om te verwijderen")
+        );
+
 
         vb.getChildren().addAll(dubbelklik,lblHeading, table);
 
